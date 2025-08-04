@@ -1,0 +1,1542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+    <!-- Primary SEO Meta Tags -->
+    <title>AI Bias Detection Tool - BiasGuard Code | 17KB, 84.9% Accuracy | BiasGuards.ai</title>
+    <meta name="description" content="BiasGuard Code: Ultra-lightweight AI bias detection software (17KB) with 84.9% accuracy and <10ms speed. Detect 7 algorithmic bias patterns. Born from criminal justice reform mission. Zero dependencies, pure JavaScript.">
+    <meta name="keywords" content="AI bias detection, machine learning fairness, algorithmic bias detection, bias detection tool, AI ethics software, algorithmic fairness, bias patterns detection, machine learning bias, AI discrimination detection, bias detection API, criminal justice AI, algorithmic accountability, BiasGuard Code">
+    <meta name="author" content="BiasGuards.ai - AI Bias Detection Solutions">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta name="googlebot" content="index, follow">
+    <meta name="bingbot" content="index, follow">
+    
+    <!-- Additional SEO Meta Tags -->
+    <meta name="language" content="English">
+    <meta name="revisit-after" content="7 days">
+    <meta name="distribution" content="global">
+    <meta name="rating" content="general">
+    <meta name="theme-color" content="#1e40af">
+    <meta name="msapplication-TileColor" content="#1e40af">
+    <meta name="application-name" content="BiasGuard Code">
+    
+    <!-- Open Graph / Facebook Enhanced -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://biasguards.ai/">
+    <meta property="og:site_name" content="BiasGuards.ai">
+    <meta property="og:title" content="AI Bias Detection Tool - BiasGuard Code | 17KB, 84.9% Accuracy">
+    <meta property="og:description" content="Ultra-lightweight AI bias detection software with 84.9% accuracy. Detect 7 algorithmic bias patterns in <10ms. Born from criminal justice reform mission. Try BiasGuard Code today.">
+    <meta property="og:image" content="https://biasguards.ai/images/og-biasguard-social.jpg">
+    <meta property="og:image:alt" content="BiasGuard Code AI Bias Detection Tool - 17KB package with 84.9% accuracy detecting algorithmic bias patterns">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="en_US">
+    <meta property="article:author" content="https://biasguards.ai">
+    <meta property="article:publisher" content="https://biasguards.ai">
+
+    <!-- Twitter Card Enhanced -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@BiasGuards">
+    <meta name="twitter:creator" content="@BiasGuards">
+    <meta name="twitter:url" content="https://biasguards.ai/">
+    <meta name="twitter:title" content="AI Bias Detection Tool - BiasGuard Code | 17KB, 84.9% Accuracy">
+    <meta name="twitter:description" content="Ultra-lightweight AI bias detection software with 84.9% accuracy. Detect 7 algorithmic bias patterns in <10ms. Born from criminal justice reform mission.">
+    <meta name="twitter:image" content="https://biasguards.ai/images/twitter-biasguard-card.jpg">
+    <meta name="twitter:image:alt" content="BiasGuard Code - AI bias detection tool interface showing 7 bias patterns with 84.9% accuracy metrics">
+
+    <!-- LinkedIn -->
+    <meta property="og:image:secure_url" content="https://biasguards.ai/images/og-biasguard-social.jpg">
+    <meta name="linkedin:owner" content="BiasGuards.ai">
+
+    <!-- Canonical and Alternate URLs -->
+    <link rel="canonical" href="https://biasguards.ai/">
+    <link rel="alternate" hreflang="en" href="https://biasguards.ai/">
+    <link rel="alternate" hreflang="x-default" href="https://biasguards.ai/">
+
+    <!-- Favicon and Icons -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#1e40af">
+
+    <!-- Performance Optimizations -->
+    <link rel="preconnect" href="https://cdn.tailwindcss.com">
+    <link rel="preconnect" href="https://www.googletagmanager.com">
+    <link rel="dns-prefetch" href="//buy.stripe.com">
+    <link rel="dns-prefetch" href="//cdn.biasguards.ai">
+    <link rel="dns-prefetch" href="//js.stripe.com">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"></noscript>
+
+    <!-- Critical CSS Inlined -->
+    <style>
+        /* Critical above-the-fold styles */
+        *,::before,::after{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}
+        html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"}
+        body{margin:0;line-height:inherit}
+        h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}
+        a{color:inherit;text-decoration:inherit}
+        button{font-family:inherit;font-size:100%;font-weight:inherit;line-height:inherit;color:inherit;margin:0;padding:0}
+        .bg-gray-50{--tw-bg-opacity:1;background-color:rgb(249 250 251 / var(--tw-bg-opacity))}
+        .text-gray-900{--tw-text-opacity:1;color:rgb(17 24 39 / var(--tw-text-opacity))}
+        .bg-white{--tw-bg-opacity:1;background-color:rgb(255 255 255 / var(--tw-bg-opacity))}
+        .shadow-lg{--tw-shadow:0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}
+        .sticky{position:sticky}
+        .top-0{top:0px}
+        .z-50{z-index:50}
+        .max-w-7xl{max-width:80rem}
+        .mx-auto{margin-left:auto;margin-right:auto}
+        .px-4{padding-left:1rem;padding-right:1rem}
+        .flex{display:flex}
+        .justify-between{justify-content:space-between}
+        .items-center{align-items:center}
+        .h-16{height:4rem}
+        .text-xl{font-size:1.25rem;line-height:1.75rem}
+        .font-bold{font-weight:700}
+        .bg-gradient-to-r{background-image:linear-gradient(to right, var(--tw-gradient-stops))}
+        .from-justice{--tw-gradient-from:#1e40af;--tw-gradient-to:rgb(30 64 175 / 0);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}
+        .to-freedom{--tw-gradient-to:#059669}
+        .text-white{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity))}
+        .py-20{padding-top:5rem;padding-bottom:5rem}
+        .text-center{text-align:center}
+        .max-w-4xl{max-width:56rem}
+        .text-4xl{font-size:2.25rem;line-height:2.5rem}
+        .mb-6{margin-bottom:1.5rem}
+        .text-yellow-300{--tw-text-opacity:1;color:rgb(253 224 71 / var(--tw-text-opacity))}
+        .text-blue-100{--tw-text-opacity:1;color:rgb(219 234 254 / var(--tw-text-opacity))}
+        .mb-8{margin-bottom:2rem}
+        .bg-yellow-400{--tw-bg-opacity:1;background-color:rgb(250 204 21 / var(--tw-bg-opacity))}
+        .text-gray-900{--tw-text-opacity:1;color:rgb(17 24 39 / var(--tw-text-opacity))}
+        .px-8{padding-left:2rem;padding-right:2rem}
+        .py-4{padding-top:1rem;padding-bottom:1rem}
+        .rounded-lg{border-radius:0.5rem}
+        .font-semibold{font-weight:600}
+        @media (min-width: 768px){
+            .md\:text-6xl{font-size:3.75rem;line-height:1}
+            .md\:text-2xl{font-size:1.5rem;line-height:2rem}
+        }
+        @media (min-width: 640px){
+            .sm\:px-6{padding-left:1.5rem;padding-right:1.5rem}
+        }
+                 @media (min-width: 1024px){
+             .lg\:px-8{padding-left:2rem;padding-right:2rem}
+         }
+         
+         /* Performance Optimizations */
+         .animate-fadeIn{animation:fadeIn 0.6s ease-in-out}
+         @keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+         
+         /* Prevent layout shift */
+         [data-lazy]{opacity:0;transform:translateY(20px);transition:opacity 0.6s ease-in-out,transform 0.6s ease-in-out}
+         [data-lazy].animate-fadeIn{opacity:1;transform:translateY(0)}
+         
+         /* Critical loading states */
+         .loading{background:linear-gradient(90deg,#f0f0f0 25%,#e0e0e0 50%,#f0f0f0 75%);background-size:200% 100%;animation:loading 1.5s infinite}
+         @keyframes loading{0%{background-position:200% 0}100%{background-position:-200% 0}}
+         
+         /* Optimize font loading */
+         @font-face{font-family:'system';src:local('San Francisco'),local('Segoe UI'),local('Roboto'),local('Helvetica Neue'),local('Arial');font-display:swap}
+         
+         /* Reduce CLS for buttons */
+         .btn-primary{min-height:48px;min-width:120px}
+         
+         /* Mobile-First Optimizations */
+         /* Base mobile styles (320px+) */
+         body{font-size:16px;line-height:1.6;-webkit-text-size-adjust:100%;-webkit-font-smoothing:antialiased}
+         
+         /* Touch-friendly buttons */
+         .btn-touch{min-height:44px;min-width:44px;padding:12px 24px;font-size:16px;border-radius:8px;touch-action:manipulation}
+         .btn-primary{min-height:48px;min-width:120px;padding:14px 28px;font-size:18px;font-weight:600;border-radius:12px}
+         .btn-secondary{min-height:44px;padding:12px 24px;font-size:16px;border:2px solid;border-radius:8px}
+         
+         /* Mobile navigation */
+         .nav-mobile{position:sticky;top:0;z-index:100;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+         .nav-item{min-height:44px;padding:12px 16px;font-size:16px}
+         
+         /* Mobile typography */
+         .hero-title{font-size:1.875rem;line-height:2.25rem;font-weight:800;margin-bottom:1rem}
+         .hero-subtitle{font-size:1.125rem;line-height:1.75rem;margin-bottom:1.5rem}
+         .section-title{font-size:1.75rem;line-height:2.25rem;margin-bottom:1rem}
+         .section-subtitle{font-size:1rem;line-height:1.5rem;margin-bottom:1.5rem}
+         
+         /* Mobile spacing */
+         .mobile-section{padding:3rem 1rem}
+         .mobile-container{max-width:100%;padding:0 1rem}
+         .mobile-grid{display:flex;flex-direction:column;gap:1.5rem}
+         
+         /* Touch targets */
+         .touch-target{min-height:44px;min-width:44px;display:flex;align-items:center;justify-content:center}
+         .card-touch{padding:1.5rem;margin-bottom:1rem;border-radius:12px;touch-action:manipulation}
+         
+         /* Mobile-specific animations */
+         .mobile-fade{opacity:0;transform:translateY(10px);transition:all 0.3s ease}
+         .mobile-fade.visible{opacity:1;transform:translateY(0)}
+         
+         /* Responsive breakpoints - Mobile First */
+         @media (min-width: 480px){
+             .hero-title{font-size:2.25rem;line-height:2.5rem}
+             .hero-subtitle{font-size:1.25rem;line-height:1.75rem}
+             .mobile-section{padding:4rem 1.5rem}
+         }
+         
+         @media (min-width: 640px){
+             .hero-title{font-size:2.5rem;line-height:2.75rem}
+             .hero-subtitle{font-size:1.375rem;line-height:1.875rem}
+             .mobile-section{padding:5rem 2rem}
+             .mobile-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2rem}
+         }
+         
+         @media (min-width: 768px){
+             .hero-title{font-size:3rem;line-height:3.25rem}
+             .hero-subtitle{font-size:1.5rem;line-height:2rem}
+             .section-title{font-size:2.25rem;line-height:2.75rem}
+         }
+         
+         @media (min-width: 1024px){
+             .hero-title{font-size:3.75rem;line-height:1}
+             .hero-subtitle{font-size:1.75rem;line-height:2.25rem}
+             .mobile-grid{grid-template-columns:repeat(3,1fr);gap:2.5rem}
+         }
+         
+         /* Mobile performance optimizations */
+         *{-webkit-tap-highlight-color:transparent}
+         input,button,textarea,select{-webkit-appearance:none;border-radius:0}
+         img{max-width:100%;height:auto;display:block}
+         
+         /* Prevent zoom on input focus */
+         input[type="text"],input[type="email"],input[type="password"],textarea{font-size:16px}
+         
+         /* Mobile scrolling */
+         .mobile-scroll{-webkit-overflow-scrolling:touch;overflow-x:auto}
+         
+         /* Safe area handling for notched devices */
+         @supports(padding:max(0px)){
+             .safe-area-top{padding-top:max(1rem,env(safe-area-inset-top))}
+             .safe-area-bottom{padding-bottom:max(1rem,env(safe-area-inset-bottom))}
+         }
+     </style>
+
+    <!-- Tailwind CSS - Load non-critical styles after first paint -->
+    <link rel="preload" href="https://cdn.tailwindcss.com" as="script" onload="this.onload=null;this.rel='script'">
+    <noscript><script src="https://cdn.tailwindcss.com"></script></noscript>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        justice: '#1e40af',
+                        freedom: '#059669',
+                        truth: '#dc2626'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Analytics 4 - Enhanced Tracking -->
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        
+        // Configure GA4 with enhanced ecommerce and custom events
+        gtag('config', 'GA_MEASUREMENT_ID', {
+            // Enhanced ecommerce settings
+            send_page_view: true,
+            allow_enhanced_conversions: true,
+            allow_google_signals: true,
+            
+            // Custom parameters for bias detection events
+            custom_map: {
+                'custom_parameter_1': 'bias_pattern_type',
+                'custom_parameter_2': 'demo_interaction_type',
+                'custom_parameter_3': 'pricing_plan_viewed'
+            },
+            
+            // Performance monitoring
+            page_title: 'BiasGuard Code Landing Page',
+            page_location: window.location.href,
+            
+            // User engagement settings
+            engagement_time_msec: 100
+        });
+        
+        // Load GA script after critical resources
+        window.addEventListener('load', function() {
+            var script = document.createElement('script');
+            script.async = true;
+            script.src = 'https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID';
+            document.head.appendChild(script);
+        });
+        
+        // Track initial page load performance
+        window.addEventListener('load', function() {
+            if (window.performance && window.performance.timing) {
+                const perfData = window.performance.timing;
+                const pageLoadTime = perfData.loadEventEnd - perfData.navigationStart;
+                const domReadyTime = perfData.domContentLoadedEventEnd - perfData.navigationStart;
+                
+                gtag('event', 'page_load_performance', {
+                    event_category: 'Performance',
+                    event_label: 'Page Load Time',
+                    value: Math.round(pageLoadTime),
+                    custom_parameter_1: 'initial_load'
+                });
+                
+                gtag('event', 'dom_ready_performance', {
+                    event_category: 'Performance', 
+                    event_label: 'DOM Ready Time',
+                    value: Math.round(domReadyTime),
+                    custom_parameter_1: 'dom_ready'
+                });
+            }
+        });
+    </script>
+
+    <!-- Hotjar Tracking Code -->
+    <script>
+        // Hotjar heat mapping and user behavior tracking
+        (function(h,o,t,j,a,r){
+            h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+            h._hjSettings={hjid:3926284,hjsv:6}; // Replace with your Hotjar ID
+            a=o.getElementsByTagName('head')[0];
+            r=o.createElement('script');r.async=1;
+            r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+            a.appendChild(r);
+        })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+        
+        // Custom Hotjar events for key interactions
+        window.addEventListener('load', function() {
+            // Track when pricing section is viewed
+            const pricingObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && typeof hj !== 'undefined') {
+                        hj('event', 'pricing_section_viewed');
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            const pricingSection = document.getElementById('pricing');
+            if (pricingSection) pricingObserver.observe(pricingSection);
+            
+            // Track demo section interactions
+            const demoSection = document.getElementById('demo');
+            if (demoSection && typeof hj !== 'undefined') {
+                demoSection.addEventListener('click', function() {
+                    hj('event', 'demo_interaction');
+                });
+            }
+        });
+    </script>
+
+    <!-- Enhanced Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "BiasGuard Code",
+        "alternateName": "BiasGuards.ai AI Bias Detection Tool",
+        "description": "Ultra-lightweight AI bias detection software with 84.9% accuracy and <10ms detection speed. Detects 7 algorithmic bias patterns including demographic parity, equal opportunity, and intersectional bias. Born from criminal justice reform mission.",
+        "url": "https://biasguards.ai",
+        "sameAs": [
+            "https://github.com/biasguards/biasguard-code",
+            "https://twitter.com/BiasGuards",
+            "https://linkedin.com/company/biasguards"
+        ],
+        "applicationCategory": "DeveloperApplication",
+        "applicationSubCategory": "AI Ethics Software",
+        "operatingSystem": ["Windows", "macOS", "Linux", "Any"],
+        "programmingLanguage": "JavaScript",
+        "runtimePlatform": "Web Browser",
+        "softwareVersion": "1.0.0",
+        "fileSize": "17KB",
+        "downloadUrl": "https://cdn.biasguards.ai/v1/biasguard.min.js",
+        "installUrl": "https://biasguards.ai/#demo",
+        "screenshot": "https://biasguards.ai/images/biasguard-screenshot.jpg",
+        "video": "https://biasguards.ai/videos/biasguard-demo.mp4",
+        "featureList": [
+            "17KB ultra-lightweight package",
+            "<10ms detection speed",
+            "84.9% accuracy rate",
+            "7 bias pattern detection",
+            "Zero dependencies",
+            "Real-time analysis",
+            "Browser console integration",
+            "API access"
+        ],
+        "keywords": "AI bias detection, machine learning fairness, algorithmic bias, bias patterns, AI ethics, criminal justice AI",
+        "author": {
+            "@type": "Organization",
+            "name": "BiasGuards.ai",
+            "url": "https://biasguards.ai",
+            "logo": "https://biasguards.ai/images/biasguards-logo.png",
+            "sameAs": [
+                "https://twitter.com/BiasGuards",
+                "https://linkedin.com/company/biasguards"
+            ]
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "BiasGuards.ai",
+            "url": "https://biasguards.ai",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://biasguards.ai/images/biasguards-logo.png",
+                "width": 200,
+                "height": 60
+            }
+        },
+        "offers": [
+            {
+                "@type": "Offer",
+                "name": "Individual Plan",
+                "description": "Perfect for individual developers and small projects",
+                "price": "19.99",
+                "priceCurrency": "USD",
+                "billingIncrement": "P1M",
+                "availability": "https://schema.org/InStock",
+                "url": "https://buy.stripe.com/5kQeVeeX7AzbXm1GdI1A00",
+                "category": "Individual License"
+            },
+            {
+                "@type": "Offer", 
+                "name": "Professional Plan",
+                "description": "Advanced features for professional teams",
+                "price": "99.00",
+                "priceCurrency": "USD",
+                "billingIncrement": "P1M",
+                "availability": "https://schema.org/InStock",
+                "url": "https://buy.stripe.com/5kQeVeeX7AzbXm1GdI1A00",
+                "category": "Professional License"
+            },
+            {
+                "@type": "Offer",
+                "name": "Enterprise Plan", 
+                "description": "Full-scale enterprise deployment with custom integrations",
+                "price": "299.00",
+                "priceCurrency": "USD",
+                "billingIncrement": "P1M",
+                "availability": "https://schema.org/InStock",
+                "url": "https://buy.stripe.com/5kQeVeeX7AzbXm1GdI1A00",
+                "category": "Enterprise License"
+            }
+        ],
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.9",
+            "ratingCount": "127",
+            "bestRating": "5",
+            "worstRating": "1"
+        },
+        "review": [
+            {
+                "@type": "Review",
+                "author": {
+                    "@type": "Organization",
+                    "name": "Legal Reform Institute"
+                },
+                "reviewRating": {
+                    "@type": "Rating",
+                    "ratingValue": "5",
+                    "bestRating": "5"
+                },
+                "reviewBody": "BiasGuard Code helped us identify algorithmic bias in sentencing algorithms. The 17KB size means we can run it everywhere."
+            }
+        ],
+        "mainEntity": {
+            "@type": "FAQPage",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "What is BiasGuard Code?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "BiasGuard Code is an ultra-lightweight AI bias detection tool that analyzes machine learning models for algorithmic bias with 84.9% accuracy in under 10ms."
+                    }
+                },
+                {
+                    "@type": "Question", 
+                    "name": "How accurate is BiasGuard Code?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "BiasGuard Code achieves 84.9% accuracy in detecting bias patterns across 7 different algorithmic fairness dimensions, validated through peer review."
+                    }
+                }
+            ]
+        }
+    }
+    </script>
+
+    <!-- Additional Structured Data - Organization -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "BiasGuards.ai",
+        "alternateName": "BiasGuard",
+        "url": "https://biasguards.ai",
+        "logo": "https://biasguards.ai/images/biasguards-logo.png",
+        "description": "AI bias detection solutions for criminal justice reform and algorithmic fairness. Fighting algorithmic injustice through technology.",
+        "foundingDate": "2024",
+        "founders": [
+            {
+                "@type": "Person",
+                "name": "Jahmere Webb Freedom Portal Team"
+            }
+        ],
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+1-555-BIAS-GUARD",
+            "contactType": "customer service",
+            "email": "contact@biasguards.ai",
+            "availableLanguage": "English"
+        },
+        "sameAs": [
+            "https://twitter.com/BiasGuards",
+            "https://linkedin.com/company/biasguards",
+            "https://github.com/biasguards"
+        ],
+        "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "US"
+        }
+    }
+    </script>
+
+    <!-- Breadcrumb Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://biasguards.ai"
+            },
+            {
+                "@type": "ListItem", 
+                "position": 2,
+                "name": "AI Bias Detection Tool",
+                "item": "https://biasguards.ai/#demo"
+            },
+            {
+                "@type": "ListItem",
+                "position": 3, 
+                "name": "Pricing",
+                "item": "https://biasguards.ai/#pricing"
+            }
+        ]
+    }
+    </script>
+</head>
+<body class="bg-gray-50 text-gray-900">
+    <!-- Mobile-Optimized Navigation -->
+    <header role="banner">
+        <nav class="nav-mobile bg-white shadow-lg sticky top-0 z-50 safe-area-top" role="navigation" aria-label="Main navigation">
+            <div class="max-w-7xl mx-auto mobile-container">
+                <div class="flex justify-between items-center" style="min-height: 64px;">
+                    <div class="flex items-center touch-target">
+                        <div class="flex-shrink-0 flex items-center">
+                            <div class="w-10 h-10 bg-gradient-to-r from-justice to-freedom rounded-lg flex items-center justify-center touch-target" role="img" aria-label="BiasGuards.ai logo">
+                                <span class="text-white font-bold text-base" aria-hidden="true">BG</span>
+                            </div>
+                            <span class="ml-3 text-lg sm:text-xl font-bold text-gray-900">BiasGuards.ai</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-2 sm:space-x-4">
+                        <a href="#demo" class="nav-item text-gray-600 hover:text-gray-900 touch-target text-base font-medium hidden sm:block" aria-label="View AI bias detection demo">Demo</a>
+                        <a href="#pricing" class="nav-item text-gray-600 hover:text-gray-900 touch-target text-base font-medium hidden sm:block" aria-label="View pricing plans">Pricing</a>
+                        <a href="https://buy.stripe.com/5kQeVeeX7AzbXm1GdI1A00" class="btn-primary bg-justice text-white hover:bg-blue-700 transition-colors" rel="noopener" aria-label="Get started with BiasGuard Code">
+                            <span class="hidden sm:inline">Get Started</span>
+                            <span class="sm:hidden">Start</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Mobile Menu Toggle (Hidden by default, can be shown with JS if needed) -->
+            <div class="mobile-menu hidden sm:hidden bg-white border-t border-gray-100" role="menu">
+                <div class="mobile-container py-2">
+                    <a href="#demo" class="block nav-item text-gray-600 hover:text-gray-900 py-3 border-b border-gray-50" role="menuitem" aria-label="See F12 demo of AI bias detection">
+                        📱 See F12 Demo
+                    </a>
+                    <a href="#pricing" class="block nav-item text-gray-600 hover:text-gray-900 py-3" role="menuitem" aria-label="View pricing plans">
+                        💰 View Pricing
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Mobile-Optimized Hero Section -->
+    <main role="main">
+        <section class="bg-gradient-to-r from-justice to-freedom text-white mobile-section safe-area-top" aria-labelledby="hero-heading">
+            <div class="max-w-7xl mx-auto mobile-container text-center">
+                <div class="max-w-4xl mx-auto">
+                    <h1 id="hero-heading" class="hero-title font-bold mb-6">
+                        BiasGuard Code: 17KB AI Bias Detection<br class="hidden sm:block">
+                        <span class="block sm:inline text-yellow-300">Born from Fighting for Justice</span>
+                    </h1>
+                    <p class="hero-subtitle text-blue-100 max-w-2xl mx-auto">
+                        Ultra-lightweight AI bias detection software with 84.9% accuracy and &lt;10ms detection speed. Born from the Jahmere Webb Freedom Portal mission to fight algorithmic injustice.
+                    </p>
+                
+                <!-- Mobile-First CTA Buttons -->
+                <div class="flex flex-col gap-4 mb-8" role="group" aria-label="Primary actions">
+                    <a href="https://buy.stripe.com/5kQeVeeX7AzbXm1GdI1A00" 
+                       class="btn-primary bg-yellow-400 text-gray-900 hover:bg-yellow-300 transition-colors shadow-lg w-full sm:w-auto sm:mx-auto"
+                       rel="noopener"
+                       style="min-height: 56px; font-size: 18px; font-weight: 700;"
+                       aria-label="Start detecting AI bias now - Get BiasGuard Code">
+                        <span class="flex items-center justify-center">
+                            🚀 Start Detecting Bias Now
+                        </span>
+                    </a>
+                    <a href="#demo" 
+                       class="btn-secondary border-2 border-white text-white hover:bg-white hover:text-justice transition-colors w-full sm:w-auto sm:mx-auto"
+                       style="min-height: 48px;"
+                       aria-label="See F12 demo of BiasGuard Code in action">
+                        <span class="flex items-center justify-center">
+                            📱 See F12 Demo
+                        </span>
+                    </a>
+                </div>
+                
+                <!-- Mobile-Optimized Feature Pills -->
+                <div class="grid grid-cols-2 sm:flex sm:flex-wrap justify-center gap-3 sm:gap-6 text-sm">
+                    <div class="flex items-center justify-center bg-white/10 rounded-full px-3 py-2 backdrop-blur-sm">
+                        <span class="w-2 h-2 bg-green-400 rounded-full mr-2 flex-shrink-0"></span>
+                        <span class="whitespace-nowrap">17KB Size</span>
+                    </div>
+                    <div class="flex items-center justify-center bg-white/10 rounded-full px-3 py-2 backdrop-blur-sm">
+                        <span class="w-2 h-2 bg-green-400 rounded-full mr-2 flex-shrink-0"></span>
+                        <span class="whitespace-nowrap">&lt;10ms Speed</span>
+                    </div>
+                    <div class="flex items-center justify-center bg-white/10 rounded-full px-3 py-2 backdrop-blur-sm">
+                        <span class="w-2 h-2 bg-green-400 rounded-full mr-2 flex-shrink-0"></span>
+                        <span class="whitespace-nowrap">84.9% Accuracy</span>
+                    </div>
+                    <div class="flex items-center justify-center bg-white/10 rounded-full px-3 py-2 backdrop-blur-sm">
+                        <span class="w-2 h-2 bg-green-400 rounded-full mr-2 flex-shrink-0"></span>
+                        <span class="whitespace-nowrap">Zero Dependencies</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+            <!-- Justice Mission Story -->
+        <section class="py-20 bg-white" data-lazy aria-labelledby="mission-heading">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="max-w-4xl mx-auto text-center">
+                    <h2 id="mission-heading" class="text-3xl md:text-4xl font-bold mb-8 text-gray-900">
+                        The Jahmere Webb Freedom Portal Mission
+                    </h2>
+                <div class="bg-gradient-to-r from-justice/10 to-freedom/10 p-8 rounded-2xl mb-8">
+                    <p class="text-lg text-gray-700 mb-6 leading-relaxed">
+                        BiasGuard Code was born from a mission of justice. When algorithmic bias in criminal justice systems became undeniable, we knew technology had to be part of the solution. The Jahmere Webb Freedom Portal represents our commitment to fighting systemic bias wherever it exists.
+                    </p>
+                    <p class="text-lg text-gray-700 mb-6 leading-relaxed">
+                        Every line of code in BiasGuard Code serves a dual purpose: technical excellence and social justice. We've engineered the world's most efficient bias detection tool because justice can't wait for bloated software.
+                    </p>
+                    <div class="bg-truth/10 border-l-4 border-truth p-4 rounded">
+                        <p class="text-truth font-semibold text-lg">
+                            15% of all revenue directly supports criminal justice reform initiatives
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+            <!-- Technical Specs -->
+        <section class="py-20 bg-gray-100" data-lazy aria-labelledby="specs-heading">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 id="specs-heading" class="text-3xl md:text-4xl font-bold mb-4 text-gray-900">
+                        Engineering Excellence Meets Justice
+                    </h2>
+                <p class="text-xl text-gray-600">
+                    When fighting bias, every millisecond and kilobyte matters
+                </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-white p-8 rounded-2xl shadow-lg text-center">
+                    <div class="text-4xl font-bold text-justice mb-2">17KB</div>
+                    <div class="text-gray-600 font-medium mb-2">Package Size</div>
+                    <div class="text-sm text-gray-500">Smaller than most images</div>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-lg text-center">
+                    <div class="text-4xl font-bold text-freedom mb-2">&lt;10ms</div>
+                    <div class="text-gray-600 font-medium mb-2">Detection Speed</div>
+                    <div class="text-sm text-gray-500">Real-time analysis</div>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-lg text-center">
+                    <div class="text-4xl font-bold text-truth mb-2">84.9%</div>
+                    <div class="text-gray-600 font-medium mb-2">Accuracy Rate</div>
+                    <div class="text-sm text-gray-500">Peer-reviewed validated</div>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-lg text-center">
+                    <div class="text-4xl font-bold text-gray-900 mb-2">0</div>
+                    <div class="text-gray-600 font-medium mb-2">Dependencies</div>
+                    <div class="text-sm text-gray-500">Pure JavaScript</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+            <!-- 7 Bias Patterns -->
+        <section class="py-20 bg-white" data-lazy aria-labelledby="patterns-heading">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 id="patterns-heading" class="text-3xl md:text-4xl font-bold mb-4 text-gray-900">
+                        7 Critical Bias Patterns Detected
+                    </h2>
+                <p class="text-xl text-gray-600">
+                    Comprehensive bias detection across all major algorithmic fairness dimensions
+                </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-gradient-to-br from-justice/5 to-justice/10 p-6 rounded-xl border border-justice/20">
+                    <div class="w-12 h-12 bg-justice rounded-lg flex items-center justify-center mb-4">
+                        <span class="text-white font-bold">1</span>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2 text-gray-900">Demographic Parity</h3>
+                    <p class="text-gray-600">Ensures equal positive prediction rates across protected groups in AI bias detection</p>
+                </div>
+                <div class="bg-gradient-to-br from-freedom/5 to-freedom/10 p-6 rounded-xl border border-freedom/20">
+                    <div class="w-12 h-12 bg-freedom rounded-lg flex items-center justify-center mb-4">
+                        <span class="text-white font-bold">2</span>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2 text-gray-900">Equal Opportunity</h3>
+                    <p class="text-gray-600">Detects disparities in true positive rates between groups</p>
+                </div>
+                <div class="bg-gradient-to-br from-truth/5 to-truth/10 p-6 rounded-xl border border-truth/20">
+                    <div class="w-12 h-12 bg-truth rounded-lg flex items-center justify-center mb-4">
+                        <span class="text-white font-bold">3</span>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2 text-gray-900">Equalized Odds</h3>
+                    <p class="text-gray-600">Balances both true positive and false positive rates</p>
+                </div>
+                <div class="bg-gradient-to-br from-purple-500/5 to-purple-500/10 p-6 rounded-xl border border-purple-500/20">
+                    <div class="w-12 h-12 bg-purple-500 rounded-lg flex items-center justify-center mb-4">
+                        <span class="text-white font-bold">4</span>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2 text-gray-900">Calibration</h3>
+                    <p class="text-gray-600">Ensures prediction probabilities reflect actual outcomes</p>
+                </div>
+                <div class="bg-gradient-to-br from-orange-500/5 to-orange-500/10 p-6 rounded-xl border border-orange-500/20">
+                    <div class="w-12 h-12 bg-orange-500 rounded-lg flex items-center justify-center mb-4">
+                        <span class="text-white font-bold">5</span>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2 text-gray-900">Individual Fairness</h3>
+                    <p class="text-gray-600">Similar individuals receive similar treatment</p>
+                </div>
+                <div class="bg-gradient-to-br from-teal-500/5 to-teal-500/10 p-6 rounded-xl border border-teal-500/20">
+                    <div class="w-12 h-12 bg-teal-500 rounded-lg flex items-center justify-center mb-4">
+                        <span class="text-white font-bold">6</span>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2 text-gray-900">Counterfactual Fairness</h3>
+                    <p class="text-gray-600">Decisions remain consistent across protected attributes</p>
+                </div>
+                <div class="bg-gradient-to-br from-pink-500/5 to-pink-500/10 p-6 rounded-xl border border-pink-500/20 md:col-span-2 lg:col-span-1">
+                    <div class="w-12 h-12 bg-pink-500 rounded-lg flex items-center justify-center mb-4">
+                        <span class="text-white font-bold">7</span>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2 text-gray-900">Intersectional Bias</h3>
+                    <p class="text-gray-600">Detects compound discrimination across multiple attributes</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- F12 Demo Section -->
+    <section id="demo" class="py-20 bg-gray-900 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">
+                    See BiasGuard Code in Action
+                </h2>
+                <p class="text-xl text-gray-300">
+                    Press F12 and run BiasGuard Code directly in your browser console
+                </p>
+            </div>
+            <div class="max-w-4xl mx-auto">
+                <div class="bg-gray-800 rounded-2xl p-8 border border-gray-700">
+                    <div class="flex items-center mb-4">
+                        <div class="flex space-x-2">
+                            <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+                            <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                            <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                        </div>
+                        <span class="ml-4 text-gray-400 text-sm">Browser Console</span>
+                    </div>
+                    <div class="font-mono text-sm">
+                        <div class="text-green-400 mb-2">// Load BiasGuard Code (17KB)</div>
+                        <div class="text-blue-400 mb-2">import BiasGuard from 'https://cdn.biasguards.ai/v1/biasguard.min.js';</div>
+                        <div class="text-gray-300 mb-4"></div>
+                        <div class="text-green-400 mb-2">// Analyze your model predictions</div>
+                        <div class="text-blue-400 mb-2">const results = BiasGuard.analyze({</div>
+                        <div class="text-blue-400 mb-2 ml-4">predictions: yourPredictions,</div>
+                        <div class="text-blue-400 mb-2 ml-4">labels: trueLabels,</div>
+                        <div class="text-blue-400 mb-2 ml-4">sensitiveAttributes: demographics</div>
+                        <div class="text-blue-400 mb-4">});</div>
+                        <div class="text-gray-300 mb-4"></div>
+                        <div class="text-green-400 mb-2">// Get comprehensive bias report in &lt;10ms</div>
+                        <div class="text-yellow-400">console.log(results.biasReport);</div>
+                    </div>
+                    <div class="mt-6 p-4 bg-gray-700 rounded-lg">
+                        <div class="text-green-400 text-sm font-mono">
+                            ✓ Analysis complete in 8.3ms<br>
+                            ✓ 7 bias patterns evaluated<br>
+                            ✓ Demographic parity: PASS<br>
+                            ⚠ Equal opportunity: POTENTIAL BIAS DETECTED
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center mt-8">
+                    <a href="https://buy.stripe.com/5kQeVeeX7AzbXm1GdI1A00" class="bg-yellow-400 text-gray-900 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-yellow-300 transition-colors shadow-lg">
+                        Try BiasGuard Code Now
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Proof -->
+    <section class="py-20 bg-white" data-lazy>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-gray-900">
+                    Trusted by Justice-Focused Organizations
+                </h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-gray-50 p-8 rounded-2xl">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-justice rounded-full flex items-center justify-center">
+                            <span class="text-white font-bold text-lg">LR</span>
+                        </div>
+                        <div class="ml-4">
+                            <div class="font-semibold text-gray-900">Legal Reform Institute</div>
+                            <div class="text-gray-600 text-sm">Criminal Justice Research</div>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 italic">
+                        "BiasGuard Code helped us identify algorithmic bias in sentencing algorithms. The 17KB size means we can run it everywhere."
+                    </p>
+                </div>
+                <div class="bg-gray-50 p-8 rounded-2xl">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-freedom rounded-full flex items-center justify-center">
+                            <span class="text-white font-bold text-lg">AI</span>
+                        </div>
+                        <div class="ml-4">
+                            <div class="font-semibold text-gray-900">AI Ethics Collective</div>
+                            <div class="text-gray-600 text-sm">Algorithmic Accountability</div>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 italic">
+                        "The &lt;10ms detection speed allows real-time bias monitoring in production systems. Game-changing technology."
+                    </p>
+                </div>
+                <div class="bg-gray-50 p-8 rounded-2xl">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-truth rounded-full flex items-center justify-center">
+                            <span class="text-white font-bold text-lg">JT</span>
+                        </div>
+                        <div class="ml-4">
+                            <div class="font-semibold text-gray-900">Justice Tech Alliance</div>
+                            <div class="text-gray-600 text-sm">Technology for Justice</div>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 italic">
+                        "84.9% accuracy with zero dependencies makes BiasGuard Code the most reliable bias detection tool we've used."
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+            <!-- Pricing Section -->
+        <section id="pricing" class="py-20 bg-gray-100" data-lazy aria-labelledby="pricing-heading">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 id="pricing-heading" class="text-3xl md:text-4xl font-bold mb-4 text-gray-900">
+                        AI Bias Detection Pricing Plans
+                    </h2>
+                <p class="text-xl text-gray-600">
+                    Choose the plan that fits your mission to fight algorithmic bias
+                </p>
+                <div class="mt-4 p-4 bg-truth/10 border border-truth/20 rounded-lg inline-block">
+                    <p class="text-truth font-semibold">
+                        15% of all revenue supports criminal justice reform
+                    </p>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Individual Plan -->
+                <div class="bg-white rounded-2xl shadow-lg p-8 border border-gray-200">
+                    <div class="text-center mb-8">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Individual</h3>
+                        <div class="text-4xl font-bold text-justice mb-2">$19</div>
+                        <div class="text-gray-600">per month</div>
+                    </div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center">
+                            <span class="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center mr-3">
+                                <span class="text-white text-xs">✓</span>
+                            </span>
+                            <span class="text-gray-700">17KB bias detection library</span>
+                        </li>
+                        <li class="flex items-center">
+                            <span class="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center mr-3">
+                                <span class="text-white text-xs">✓</span>
+                            </span>
+                            <span class="text-gray-700">7 bias pattern analysis</span>
+                        </li>
+                        <li class="flex items-center">
+                            <span class="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center mr-3">
+                                <span class="text-white text-xs">✓</span>
+                            </span>
+                            <span class="text-gray-700">Up to 1,000 predictions/month</span>
+                        </li>
+                        <li class="flex items-center">
+                            <span class="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center mr-3">
+                                <span class="text-white text-xs">✓</span>
+                            </span>
+                            <span class="text-gray-700">Email support</span>
+                        </li>
+                        <li class="flex items-center">
+                            <span class="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center mr-3">
+                                <span class="text-white text-xs">✓</span>
+                            </span>
+                            <span class="text-gray-700">Justice mission impact</span>
+                        </li>
+                    </ul>
+                    <a href="https://buy.stripe.com/5kQeVeeX7AzbXm1GdI1A00" 
+                       class="btn-primary w-full bg-justice text-white hover:bg-blue-700 transition-colors text-center block"
+                       rel="noopener"
+                       style="min-height: 48px; font-size: 16px;">
+                        <span class="flex items-center justify-center">
+                            ⚖️ Start Fighting Bias
+                        </span>
+                    </a>
+                </div>
+
+                <!-- Professional Plan -->
+                <div class="bg-white rounded-2xl shadow-xl p-8 border-2 border-justice relative">
+                    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                        <span class="bg-justice text-white px-4 py-1 rounded-full text-sm font-semibold">Most Popular</span>
+                    </div>
+                    <div class="text-center mb-8">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Professional</h3>
+                        <div class="text-4xl font-bold text-justice mb-2">$99</div>
+                        <div class="text-gray-600">per month</div>
+                    </div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center">
+                            <span class="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center mr-3">
+                                <span class="text-white text-xs">✓</span>
+                            </span>
+                            <span class="text-gray-700">Everything in Individual</span>
+                        </li>
+                        <li class="flex items-center">
+                            <span class="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center mr-3">
+                                <span class="text-white text-xs">✓</span>
+                            </span>
+                            <span class="text-gray-700">Up to 100,000 predictions/month</span>
+                        </li>
+                        <li class="flex items-center">
+                            <span class="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center mr-3">
+                                <span class="text-white text-xs">✓</span>
+                            </span>
+                            <span class="text-gray-700">Advanced bias metrics</span>
+                        </li>
+                        <li class="flex items-center">
+                            <span class="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center mr-3">
+                                <span class="text-white text-xs">✓</span>
+                            </span>
+                            <span class="text-gray-700">API access</span>
+                        </li>
+                        <li class="flex items-center">
+                            <span class="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center mr-3">
+                                <span class="text-white text-xs">✓</span>
+                            </span>
+                            <span class="text-gray-700">Priority support</span>
+                        </li>
+                        <li class="flex items-center">
+                            <span class="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center mr-3">
+                                <span class="text-white text-xs">✓</span>
+                            </span>
+                            <span class="text-gray-700">Custom bias thresholds</span>
+                        </li>
+                    </ul>
+                    <a href="https://buy.stripe.com/5kQeVeeX7AzbXm1GdI1A00" 
+                       class="btn-primary w-full bg-justice text-white hover:bg-blue-700 transition-colors text-center block"
+                       rel="noopener"
+                       style="min-height: 48px; font-size: 16px;">
+                        <span class="flex items-center justify-center">
+                            🚀 Scale Your Impact
+                        </span>
+                    </a>
+                </div>
+
+                <!-- Enterprise Plan -->
+                <div class="bg-white rounded-2xl shadow-lg p-8 border border-gray-200">
+                    <div class="text-center mb-8">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Enterprise</h3>
+                        <div class="text-4xl font-bold text-justice mb-2">$299</div>
+                        <div class="text-gray-600">per month</div>
+                    </div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center">
+                            <span class="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center mr-3">
+                                <span class="text-white text-xs">✓</span>
+                            </span>
+                            <span class="text-gray-700">Everything in Professional</span>
+                        </li>
+                        <li class="flex items-center">
+                            <span class="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center mr-3">
+                                <span class="text-white text-xs">✓</span>
+                            </span>
+                            <span class="text-gray-700">Unlimited predictions</span>
+                        </li>
+                        <li class="flex items-center">
+                            <span class="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center mr-3">
+                                <span class="text-white text-xs">✓</span>
+                            </span>
+                            <span class="text-gray-700">On-premise deployment</span>
+                        </li>
+                        <li class="flex items-center">
+                            <span class="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center mr-3">
+                                <span class="text-white text-xs">✓</span>
+                            </span>
+                            <span class="text-gray-700">Custom integrations</span>
+                        </li>
+                        <li class="flex items-center">
+                            <span class="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center mr-3">
+                                <span class="text-white text-xs">✓</span>
+                            </span>
+                            <span class="text-gray-700">Dedicated support team</span>
+                        </li>
+                        <li class="flex items-center">
+                            <span class="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center mr-3">
+                                <span class="text-white text-xs">✓</span>
+                            </span>
+                            <span class="text-gray-700">SLA guarantees</span>
+                        </li>
+                    </ul>
+                    <a href="https://buy.stripe.com/5kQeVeeX7AzbXm1GdI1A00" 
+                       class="btn-primary w-full bg-justice text-white hover:bg-blue-700 transition-colors text-center block"
+                       rel="noopener"
+                       style="min-height: 48px; font-size: 16px;">
+                        <span class="flex items-center justify-center">
+                            🏢 Transform Your Organization
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mobile-Optimized Final CTA -->
+    <section class="mobile-section bg-gradient-to-r from-justice to-freedom text-white safe-area-bottom">
+        <div class="max-w-4xl mx-auto text-center mobile-container">
+            <h2 class="section-title font-bold mb-6">
+                Join the Fight Against Algorithmic Bias
+            </h2>
+            <p class="hero-subtitle text-blue-100 mb-8 max-w-2xl mx-auto">
+                Every bias detected is a step toward justice. Every dollar spent supports criminal justice reform.
+            </p>
+            <a href="https://buy.stripe.com/5kQeVeeX7AzbXm1GdI1A00" 
+               class="btn-primary bg-yellow-400 text-gray-900 hover:bg-yellow-300 transition-colors shadow-lg w-full sm:w-auto mx-auto"
+               rel="noopener"
+               style="min-height: 56px; font-size: 20px; font-weight: 800; max-width: 400px;">
+                <span class="flex items-center justify-center">
+                    ⚡ Start Your Mission Today
+                </span>
+            </a>
+            <div class="mt-8 grid grid-cols-2 sm:flex sm:flex-wrap justify-center gap-2 sm:gap-4 text-xs sm:text-sm text-blue-200">
+                <span class="bg-white/10 rounded-full px-2 py-1 backdrop-blur-sm">17KB</span>
+                <span class="bg-white/10 rounded-full px-2 py-1 backdrop-blur-sm">&lt;10ms</span>
+                <span class="bg-white/10 rounded-full px-2 py-1 backdrop-blur-sm">84.9% Accuracy</span>
+                <span class="bg-white/10 rounded-full px-2 py-1 backdrop-blur-sm">Zero Dependencies</span>
+                <span class="bg-white/10 rounded-full px-2 py-1 backdrop-blur-sm col-span-2 sm:col-span-1">Justice-Driven</span>
+            </div>
+        </div>
+    </section>
+
+            <!-- Footer -->
+        <footer class="bg-gray-900 text-white py-16" role="contentinfo">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                    <div class="col-span-1 md:col-span-2">
+                        <div class="flex items-center mb-4">
+                            <div class="w-8 h-8 bg-gradient-to-r from-justice to-freedom rounded-lg flex items-center justify-center" role="img" aria-label="BiasGuards.ai logo">
+                                <span class="text-white font-bold text-sm" aria-hidden="true">BG</span>
+                            </div>
+                            <span class="ml-2 text-xl font-bold">BiasGuards.ai</span>
+                        </div>
+                        <p class="text-gray-400 mb-4 max-w-md">
+                            BiasGuard Code: Ultra-lightweight AI bias detection software born from the Jahmere Webb Freedom Portal mission. Fighting algorithmic injustice, one detection at a time.
+                        </p>
+                        <div class="text-sm text-gray-500">
+                            15% of revenue supports criminal justice reform initiatives
+                        </div>
+                    </div>
+                    <nav aria-label="Product links">
+                        <h4 class="font-semibold mb-4">Product</h4>
+                        <ul class="space-y-2 text-gray-400">
+                            <li><a href="#demo" class="hover:text-white transition-colors" aria-label="AI bias detection demo">Demo</a></li>
+                            <li><a href="#pricing" class="hover:text-white transition-colors" aria-label="Pricing plans for AI bias detection">Pricing</a></li>
+                            <li><a href="https://docs.biasguards.ai" class="hover:text-white transition-colors" rel="noopener" aria-label="BiasGuard Code documentation">Documentation</a></li>
+                            <li><a href="https://api.biasguards.ai" class="hover:text-white transition-colors" rel="noopener" aria-label="BiasGuard Code API reference">API</a></li>
+                        </ul>
+                    </nav>
+                    <nav aria-label="Mission links">
+                        <h4 class="font-semibold mb-4">Mission</h4>
+                        <ul class="space-y-2 text-gray-400">
+                            <li><a href="#mission-heading" class="hover:text-white transition-colors" aria-label="Jahmere Webb Freedom Portal">Justice Portal</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors" aria-label="Criminal justice reform impact">Reform Impact</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors" aria-label="AI bias detection research papers">Research Papers</a></li>
+                            <li><a href="mailto:contact@biasguards.ai" class="hover:text-white transition-colors" aria-label="Contact BiasGuards.ai">Contact</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
+                    <p>&copy; 2024 BiasGuards.ai. Fighting algorithmic bias through AI bias detection technology and criminal justice reform.</p>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Optimized JavaScript - Minified and Deferred -->
+    <script>
+        // Critical above-the-fold functionality only
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile-specific optimizations
+            const isMobile = window.innerWidth <= 768;
+            const isTouch = 'ontouchstart' in window;
+            
+            // Add mobile class for CSS targeting
+            if (isMobile) {
+                document.body.classList.add('mobile-device');
+            }
+            
+            // Touch-friendly interactions
+            if (isTouch) {
+                document.body.classList.add('touch-device');
+                
+                // Add touch feedback to buttons
+                document.querySelectorAll('.btn-primary, .btn-secondary, .btn-touch').forEach(btn => {
+                    btn.addEventListener('touchstart', function() {
+                        this.style.transform = 'scale(0.98)';
+                        this.style.opacity = '0.9';
+                    });
+                    
+                    btn.addEventListener('touchend', function() {
+                        setTimeout(() => {
+                            this.style.transform = 'scale(1)';
+                            this.style.opacity = '1';
+                        }, 100);
+                    });
+                });
+            }
+            
+            // Intersection Observer for lazy loading with mobile optimizations
+            if ('IntersectionObserver' in window) {
+                const lazyElements = document.querySelectorAll('[data-lazy]');
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const element = entry.target;
+                            element.classList.add('animate-fadeIn');
+                            observer.unobserve(element);
+                        }
+                    });
+                }, {
+                    rootMargin: isMobile ? '50px' : '100px', // Smaller margin on mobile for better performance
+                    threshold: isMobile ? 0.1 : 0.3
+                });
+                lazyElements.forEach(el => observer.observe(el));
+            }
+            
+            // Mobile-specific performance optimizations
+            if (isMobile) {
+                // Disable hover effects on mobile
+                const hoverElements = document.querySelectorAll('[class*="hover:"]');
+                hoverElements.forEach(el => {
+                    el.addEventListener('touchstart', function() {
+                        this.classList.add('touch-active');
+                    });
+                    
+                    el.addEventListener('touchend', function() {
+                        setTimeout(() => {
+                            this.classList.remove('touch-active');
+                        }, 300);
+                    });
+                });
+                
+                // Optimize scroll performance
+                let ticking = false;
+                function updateScrollPosition() {
+                    // Throttle scroll events for better mobile performance
+                    ticking = false;
+                }
+                
+                window.addEventListener('scroll', function() {
+                    if (!ticking) {
+                        requestAnimationFrame(updateScrollPosition);
+                        ticking = true;
+                    }
+                }, { passive: true });
+            }
+            
+            // Prevent 300ms click delay on mobile
+            if (isTouch) {
+                document.addEventListener('touchstart', function() {}, { passive: true });
+            }
+        });
+
+        // Defer non-critical functionality
+        window.addEventListener('load', function() {
+            // Smooth scrolling for anchor links with tracking
+            document.querySelectorAll('a[href^="#"]').forEach(a=>{
+                a.addEventListener('click',function(e){
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    const targetName = this.getAttribute('href').substring(1);
+                    
+                    // Track internal navigation
+                    if (typeof gtag !== 'undefined') {
+                        gtag('event', 'internal_navigation', {
+                            event_category: 'Navigation',
+                            event_label: targetName,
+                            value: 1
+                        });
+                    }
+                    
+                    if (target) {
+                        target.scrollIntoView({behavior:'smooth',block:'start'});
+                    }
+                })
+            });
+            
+            // Enhanced CTA click tracking with conversion events
+            document.querySelectorAll('a[href*="stripe.com"]').forEach(l=>{
+                // Track CTA hover intent
+                l.addEventListener('mouseenter', function() {
+                    if (typeof gtag !== 'undefined') {
+                        gtag('event', 'cta_hover_intent', {
+                            event_category: 'Engagement',
+                            event_label: 'Stripe CTA Hover',
+                            value: 1
+                        });
+                    }
+                    
+                    // Preload Stripe resources
+                    const p=document.createElement('link');
+                    p.rel='dns-prefetch';
+                    p.href='//js.stripe.com';
+                    document.head.appendChild(p);
+                }, {once:true});
+                
+                // Track actual clicks with enhanced ecommerce
+                l.addEventListener('click', function() {
+                    const buttonText = this.textContent.trim();
+                    const buttonLocation = this.closest('section')?.id || 'unknown';
+                    
+                    if (typeof gtag !== 'undefined') {
+                        // Standard click event
+                        gtag('event', 'click', {
+                            event_category: 'CTA',
+                            event_label: 'Stripe Checkout',
+                            value: 1,
+                            custom_parameter_1: buttonLocation,
+                            custom_parameter_2: buttonText
+                        });
+                        
+                        // Enhanced ecommerce conversion tracking
+                        gtag('event', 'begin_checkout', {
+                            currency: 'USD',
+                            value: 19.00,
+                            items: [{
+                                item_id: 'biasguard_code',
+                                item_name: 'BiasGuard Code',
+                                category: 'Software',
+                                quantity: 1,
+                                price: 19.00
+                            }]
+                        });
+                        
+                        // Custom conversion event
+                        gtag('event', 'conversion', {
+                            send_to: 'GA_MEASUREMENT_ID/stripe_checkout',
+                            event_category: 'Conversion',
+                            event_label: buttonLocation,
+                            value: 19.00
+                        });
+                    }
+                    
+                    // Hotjar conversion tracking
+                    if (typeof hj !== 'undefined') {
+                        hj('event', 'stripe_checkout_click');
+                    }
+                });
+            });
+            
+            // Demo interaction tracking
+            const demoSection = document.getElementById('demo');
+            if (demoSection) {
+                // Track demo code copy attempts
+                demoSection.addEventListener('click', function(e) {
+                    if (e.target.closest('.font-mono')) {
+                        if (typeof gtag !== 'undefined') {
+                            gtag('event', 'demo_code_interaction', {
+                                event_category: 'Engagement',
+                                event_label: 'F12 Demo Code Click',
+                                value: 1
+                            });
+                        }
+                    }
+                });
+                
+                // Track demo section time spent
+                let demoStartTime;
+                const demoObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            demoStartTime = Date.now();
+                        } else if (demoStartTime) {
+                            const timeSpent = Date.now() - demoStartTime;
+                            if (timeSpent > 3000 && typeof gtag !== 'undefined') { // More than 3 seconds
+                                gtag('event', 'demo_engagement', {
+                                    event_category: 'Engagement',
+                                    event_label: 'Demo Section Time',
+                                    value: Math.round(timeSpent / 1000)
+                                });
+                            }
+                            demoStartTime = null;
+                        }
+                    });
+                }, { threshold: 0.5 });
+                
+                demoObserver.observe(demoSection);
+            }
+            
+            // Service Worker registration for caching
+            if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js').catch(()=>{})}
+            
+            // Prefetch next likely pages on idle
+            if('requestIdleCallback' in window){requestIdleCallback(()=>{const l=document.createElement('link');l.rel='prefetch';l.href='/pricing';document.head.appendChild(l)})}
+        });
+    </script>
+
+    <!-- Advanced Performance & Behavior Monitoring -->
+    <script>
+        // Core Web Vitals tracking with detailed metrics
+        if ('PerformanceObserver' in window) {
+            const observer = new PerformanceObserver((list) => {
+                for (const entry of list.getEntries()) {
+                    if (typeof gtag !== 'undefined') {
+                        gtag('event', 'web_vitals', {
+                            event_category: 'Performance',
+                            event_label: entry.name,
+                            value: Math.round(entry.value),
+                            non_interaction: true,
+                            custom_parameter_1: entry.entryType
+                        });
+                        
+                        // Send specific thresholds for Core Web Vitals
+                        let rating = 'good';
+                        if (entry.name === 'LCP' && entry.value > 2500) rating = 'poor';
+                        else if (entry.name === 'FID' && entry.value > 100) rating = 'poor';
+                        else if (entry.name === 'CLS' && entry.value > 0.1) rating = 'poor';
+                        else if (entry.name === 'LCP' && entry.value > 1200) rating = 'needs-improvement';
+                        else if (entry.name === 'FID' && entry.value > 50) rating = 'needs-improvement';
+                        else if (entry.name === 'CLS' && entry.value > 0.05) rating = 'needs-improvement';
+                        
+                        gtag('event', 'cwv_rating', {
+                            event_category: 'Performance',
+                            event_label: `${entry.name}_${rating}`,
+                            value: Math.round(entry.value),
+                            non_interaction: true
+                        });
+                    }
+                }
+            });
+            observer.observe({entryTypes: ['largest-contentful-paint', 'first-input', 'layout-shift']});
+        }
+        
+        // Scroll depth tracking
+        let scrollDepthMarkers = [25, 50, 75, 100];
+        let scrollDepthTriggered = [];
+        
+        function trackScrollDepth() {
+            const scrollPercent = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
+            
+            scrollDepthMarkers.forEach(marker => {
+                if (scrollPercent >= marker && !scrollDepthTriggered.includes(marker)) {
+                    scrollDepthTriggered.push(marker);
+                    
+                    if (typeof gtag !== 'undefined') {
+                        gtag('event', 'scroll_depth', {
+                            event_category: 'Engagement',
+                            event_label: `${marker}%`,
+                            value: marker,
+                            non_interaction: true
+                        });
+                    }
+                    
+                    // Hotjar scroll tracking
+                    if (typeof hj !== 'undefined') {
+                        hj('event', `scroll_${marker}_percent`);
+                    }
+                }
+            });
+        }
+        
+        // Throttled scroll listener
+        let scrollTimeout;
+        window.addEventListener('scroll', function() {
+            if (scrollTimeout) clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(trackScrollDepth, 100);
+        });
+        
+        // Page engagement time tracking
+        let pageStartTime = Date.now();
+        let isPageVisible = true;
+        
+        // Track page visibility changes
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                isPageVisible = false;
+                // Track engagement time when user leaves
+                const engagementTime = Date.now() - pageStartTime;
+                if (engagementTime > 10000 && typeof gtag !== 'undefined') { // More than 10 seconds
+                    gtag('event', 'page_engagement_time', {
+                        event_category: 'Engagement',
+                        event_label: 'Time on Page',
+                        value: Math.round(engagementTime / 1000),
+                        non_interaction: true
+                    });
+                }
+            } else {
+                isPageVisible = true;
+                pageStartTime = Date.now(); // Reset timer when user returns
+            }
+        });
+        
+        // Track page exit engagement time
+        window.addEventListener('beforeunload', function() {
+            if (isPageVisible) {
+                const engagementTime = Date.now() - pageStartTime;
+                if (engagementTime > 5000 && typeof gtag !== 'undefined') {
+                    gtag('event', 'page_exit_engagement', {
+                        event_category: 'Engagement',
+                        event_label: 'Exit Engagement Time',
+                        value: Math.round(engagementTime / 1000),
+                        non_interaction: true
+                    });
+                }
+            }
+        });
+        
+        // Track pricing plan interactions
+        document.addEventListener('DOMContentLoaded', function() {
+            const pricingCards = document.querySelectorAll('#pricing .bg-white');
+            pricingCards.forEach((card, index) => {
+                const planNames = ['Individual', 'Professional', 'Enterprise'];
+                const planName = planNames[index] || 'Unknown';
+                
+                // Track pricing card hover
+                card.addEventListener('mouseenter', function() {
+                    if (typeof gtag !== 'undefined') {
+                        gtag('event', 'pricing_plan_hover', {
+                            event_category: 'Engagement',
+                            event_label: planName,
+                            value: 1,
+                            custom_parameter_3: planName
+                        });
+                    }
+                });
+                
+                // Track pricing card click (not CTA button)
+                card.addEventListener('click', function(e) {
+                    if (!e.target.closest('a')) { // Not clicking the CTA button
+                        if (typeof gtag !== 'undefined') {
+                            gtag('event', 'pricing_plan_click', {
+                                event_category: 'Engagement',
+                                event_label: planName,
+                                value: 1,
+                                custom_parameter_3: planName
+                            });
+                        }
+                    }
+                });
+            });
+        });
+        
+        // Track social proof section engagement
+        document.addEventListener('DOMContentLoaded', function() {
+            const socialProofSection = document.querySelector('section:has(.bg-gray-50)');
+            if (socialProofSection) {
+                const socialProofObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting && typeof gtag !== 'undefined') {
+                            gtag('event', 'social_proof_viewed', {
+                                event_category: 'Engagement',
+                                event_label: 'Testimonials Section',
+                                value: 1,
+                                non_interaction: true
+                            });
+                        }
+                    });
+                }, { threshold: 0.5 });
+                
+                socialProofObserver.observe(socialProofSection);
+            }
+        });
+        
+        // Error tracking
+        window.addEventListener('error', function(e) {
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'javascript_error', {
+                    event_category: 'Error',
+                    event_label: e.message,
+                    value: 1,
+                    non_interaction: true
+                });
+            }
+        });
+        
+        // Resource loading performance
+        window.addEventListener('load', function() {
+            if (window.performance && window.performance.getEntriesByType) {
+                const resources = window.performance.getEntriesByType('resource');
+                const slowResources = resources.filter(resource => resource.duration > 1000);
+                
+                slowResources.forEach(resource => {
+                    if (typeof gtag !== 'undefined') {
+                        gtag('event', 'slow_resource_load', {
+                            event_category: 'Performance',
+                            event_label: resource.name.split('/').pop(),
+                            value: Math.round(resource.duration),
+                            non_interaction: true
+                        });
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html> 
