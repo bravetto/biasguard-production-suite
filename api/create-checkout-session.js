@@ -74,8 +74,8 @@ export default async function handler(req, res) {
           features: JSON.stringify(getTierFeatures(tier))
         }
       } : undefined,
-      // Enable customer portal for subscription management
-      ...(mode === 'subscription' && {
+      // Enable customer creation for payment mode only
+      ...(mode === 'payment' && {
         customer_creation: 'always'
       })
     });
