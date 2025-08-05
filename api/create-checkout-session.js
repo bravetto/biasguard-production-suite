@@ -29,9 +29,18 @@ export default async function handler(req, res) {
       'enterprise': process.env.STRIPE_PRICE_ID_ENTERPRISE || 'price_1RsDz8L7UMRowhrwqqKW2tV7'
     };
 
+    console.log('🔍 Debug - Received:', { priceId, tier, mode });
+    console.log('🔍 Debug - Valid Price IDs:', validPriceIds);
+    console.log('🔍 Debug - Environment Check:', {
+      STRIPE_SECRET_KEY: !!process.env.STRIPE_SECRET_KEY,
+      STRIPE_PRICE_ID_STARTER: process.env.STRIPE_PRICE_ID_STARTER,
+      STRIPE_PRICE_ID_PROFESSIONAL: process.env.STRIPE_PRICE_ID_PROFESSIONAL,
+      STRIPE_PRICE_ID_ENTERPRISE: process.env.STRIPE_PRICE_ID_ENTERPRISE
+    });
+
     if (!validPriceIds[tier] || priceId !== validPriceIds[tier]) {
       return res.status(400).json({ 
-        error: `Invalid price ID for tier: ${tier}` 
+        error: `Invalid price ID for tier: ${tier}. Expected: ${validPriceIds[tier]}, Got: ${priceId}` 
       });
     }
 
