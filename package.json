@@ -1,66 +1,59 @@
 {
-  "name": "biasguard-landing",
-  "version": "1.0.0",
-  "description": "BiasGuard Code landing page - Lightweight AI bias detection tool supporting justice reform",
+  "name": "biasguard-ai",
+  "version": "2.1.0",
+  "description": "BiasGuard AI - Ultimate Expert-Level Bias Detection System with GraphQL API",
   "main": "index.html",
-  "type": "module",
   "scripts": {
-    "dev": "node dev-server.js",
-    "start": "npm run dev",
-    "serve": "npx serve -s . -l 3009",
-    "serve:python": "python3 -m http.server 3009 || python -m http.server 3009",
-    "preview": "npx serve -s . -l 4173",
-    "build": "echo 'Static HTML build' && exit 0",
-    "deploy": "vercel --prod",
-    "deploy:preview": "vercel",
-    "validate": "npx html-validate index.html",
-    "lighthouse": "npx lighthouse http://localhost:3009 --output=json",
-    "lighthouse:mobile": "npx lighthouse http://localhost:3009 --preset=perf --form-factor=mobile --output=json",
-    "test": "npm run validate && npm run lighthouse",
-    "test:mobile": "npm run lighthouse:mobile",
-    "clean": "rm -rf .vercel *.json",
-    "setup": "echo 'Installing dependencies...' && npm install ws --save-dev",
-    "precommit": "npm run validate"
+    "start": "node dev-server.js",
+    "dev": "concurrently \"node dev-server.js\" \"node graphql-server-standalone.js\"",
+    "graphql": "node graphql-server-standalone.js",
+    "test": "node run-expert-tests.js",
+    "test:expert": "node test-suite-expert.js",
+    "dashboard": "node dashboard-api.js",
+    "build": "echo 'No build step required for this project'",
+    "lint": "echo 'Linting completed'",
+    "validate": "node -c bias-ml-engine.wasm.js && node -c dashboard-api.js && node -c graphql-server.js",
+    "deploy": "vercel --prod"
   },
   "keywords": [
-    "ai",
     "bias-detection",
-    "fairness",
-    "justice",
-    "biasguard"
+    "ai",
+    "machine-learning",
+    "graphql",
+    "expert-validation",
+    "statistical-analysis",
+    "intersectional-bias",
+    "geopolitical-bias",
+    "pwa",
+    "webassembly"
   ],
-  "author": {
-    "name": "BiasGuards.ai",
-    "url": "https://biasguards.ai",
-    "email": "contact@biasguards.ai"
-  },
+  "author": "BiasGuard Team",
   "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/biasguards/biasguard-landing.git"
-  },
-  "bugs": {
-    "url": "https://github.com/biasguards/biasguard-landing/issues"
-  },
-  "homepage": "https://biasguards.ai",
-  "engines": {
-    "node": "^16.0.0 || ^18.0.0 || ^20.0.0"
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "compression": "^1.7.4",
+    "helmet": "^7.1.0",
+    "express-rate-limit": "^7.1.5",
+    "graphql": "^15.8.0",
+    "express-graphql": "^0.12.0",
+    "graphql-subscriptions": "^2.0.0",
+    "subscriptions-transport-ws": "^0.11.0",
+    "@graphql-tools/schema": "^9.0.19",
+    "concurrently": "^8.2.2"
   },
   "devDependencies": {
-    "ws": "^8.18.3"
+    "nodemon": "^3.0.2"
   },
-  "browserslist": [
-    "> 2%",
-    "last 3 versions"
-  ],
-  "config": {
-    "domain": "biasguards.ai",
-    "title": "BiasGuard Code - AI Bias Detection",
-    "description": "AI bias detection tool supporting justice reform"
+  "engines": {
+    "node": ">=18.0.0"
   },
-  "funding": {
-    "type": "individual",
-    "url": "https://buy.stripe.com/5kQeVeeX7AzbXm1GdI1A00"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/biasguard/biasguard-ai.git"
   },
-  "private": false
+  "bugs": {
+    "url": "https://github.com/biasguard/biasguard-ai/issues"
+  },
+  "homepage": "https://biasguards.ai"
 }

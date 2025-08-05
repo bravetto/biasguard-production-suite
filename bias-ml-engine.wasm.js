@@ -230,17 +230,145 @@ class BiasMLEngine {
                 icon: '💰'
             },
 
-            // Geographic Bias
-            geographic: {
-                keywords: [
+            // Advanced Geopolitical Bias Detection
+            geopolitical: {
+                // Core geographic identifiers
+                geographicKeywords: [
                     'location', 'address', 'city', 'state', 'region', 'urban', 'rural',
-                    'suburban', 'inner city', 'downtown', 'residential area', 'school district'
+                    'suburban', 'inner city', 'downtown', 'residential area', 'school district',
+                    'zip code', 'postal code', 'county', 'province', 'territory'
                 ],
-                mlWeight: 0.75,
-                severity: 'medium',
-                description: 'Geographic location bias detected',
-                color: '#f59e0b',
-                icon: '🗺️'
+                
+                // Nationality and citizenship patterns
+                nationalityPatterns: {
+                    // Direct nationality references
+                    direct: [
+                        'american', 'americans', 'canadian', 'canadians', 'mexican', 'mexicans',
+                        'british', 'french', 'german', 'germans', 'italian', 'italians',
+                        'chinese', 'japanese', 'korean', 'koreans', 'indian', 'indians',
+                        'russian', 'russians', 'brazilian', 'brazilians', 'australian',
+                        'spanish', 'portuguese', 'dutch', 'swedish', 'norwegian',
+                        'saudi', 'iranian', 'iraqi', 'afghan', 'pakistani', 'bangladeshi',
+                        'nigerian', 'egyptian', 'south african', 'kenyan', 'ethiopian'
+                    ],
+                    
+                    // Citizenship and immigration status
+                    citizenship: [
+                        'citizen', 'citizens', 'non-citizen', 'immigrant', 'immigrants',
+                        'refugee', 'refugees', 'asylum seeker', 'green card holder',
+                        'permanent resident', 'naturalized citizen', 'foreign national',
+                        'undocumented', 'illegal immigrant', 'visa holder', 'expatriate',
+                        'migrant', 'migrant worker', 'temporary worker'
+                    ],
+                    
+                    // Regional and continental identifiers
+                    regional: [
+                        'european', 'europeans', 'asian', 'asians', 'african', 'africans',
+                        'north american', 'south american', 'latin american', 'middle eastern',
+                        'caribbean', 'pacific islander', 'scandinavian', 'mediterranean',
+                        'eastern european', 'western european', 'southeast asian',
+                        'sub-saharan african', 'north african', 'central asian'
+                    ]
+                },
+                
+                // Geographic bias indicators
+                geographicBiasTerms: {
+                    // Socioeconomic geographic stereotypes
+                    socioeconomic: [
+                        'wealthy neighborhood', 'poor neighborhood', 'good area', 'bad area',
+                        'safe area', 'dangerous area', 'upscale', 'low-income area',
+                        'ghetto', 'slums', 'projects', 'trailer park', 'gated community',
+                        'exclusive area', 'prestigious location', 'undesirable location'
+                    ],
+                    
+                    // Urban vs rural bias
+                    urbanRural: [
+                        'city people', 'country people', 'urban elite', 'rural folk',
+                        'sophisticated urbanites', 'simple rural people', 'cosmopolitan',
+                        'provincial', 'backwards', 'hillbilly', 'redneck', 'hick'
+                    ],
+                    
+                    // International bias terms
+                    international: [
+                        'third world', 'developing country', 'underdeveloped',
+                        'first world', 'advanced nation', 'civilized country',
+                        'backward country', 'primitive society', 'failed state',
+                        'banana republic', 'emerging market', 'global south'
+                    ]
+                },
+                
+                // Cultural and ethnic geographic associations
+                culturalGeographic: {
+                    // Ethnic enclaves and communities
+                    enclaves: [
+                        'chinatown', 'little italy', 'koreatown', 'barrio',
+                        'ethnic enclave', 'immigrant community', 'diaspora',
+                        'cultural district', 'ethnic neighborhood'
+                    ],
+                    
+                    // Religious geographic associations
+                    religious: [
+                        'bible belt', 'muslim country', 'christian nation',
+                        'secular society', 'religious community', 'atheist region',
+                        'fundamentalist area', 'progressive region'
+                    ],
+                    
+                    // Political geographic terms
+                    political: [
+                        'red state', 'blue state', 'swing state', 'conservative area',
+                        'liberal area', 'progressive city', 'traditional region',
+                        'politically correct', 'backwards thinking'
+                    ]
+                },
+                
+                // Negative sentiment amplifiers for geographic bias
+                negativeAmplifiers: [
+                    'typical', 'all', 'those', 'these', 'such', 'most',
+                    'always', 'never', 'obviously', 'clearly', 'naturally'
+                ],
+                
+                // Multilingual geopolitical patterns
+                multilingualGeopolitical: {
+                    french: {
+                        nationality: [
+                            'américains', 'canadiens', 'mexicains', 'britanniques',
+                            'français', 'allemands', 'italiens', 'chinois',
+                            'immigrants', 'réfugiés', 'étrangers', 'expatriés'
+                        ],
+                        geographic: [
+                            'quartier riche', 'quartier pauvre', 'banlieue',
+                            'centre-ville', 'zone dangereuse', 'bon quartier',
+                            'pays développé', 'pays en développement', 'tiers monde'
+                        ],
+                        bias_terms: [
+                            'arriérés', 'primitifs', 'civilisés', 'sophistiqués',
+                            'provinciaux', 'cosmopolites', 'élite urbaine'
+                        ]
+                    },
+                    
+                    spanish: {
+                        nationality: [
+                            'americanos', 'canadienses', 'mexicanos', 'británicos',
+                            'franceses', 'alemanes', 'italianos', 'chinos',
+                            'inmigrantes', 'refugiados', 'extranjeros', 'expatriados'
+                        ],
+                        geographic: [
+                            'barrio rico', 'barrio pobre', 'zona peligrosa',
+                            'buen barrio', 'área exclusiva', 'zona marginal',
+                            'país desarrollado', 'país en desarrollo', 'tercer mundo'
+                        ],
+                        bias_terms: [
+                            'atrasados', 'primitivos', 'civilizados', 'sofisticados',
+                            'provincianos', 'cosmopolitas', 'elite urbana'
+                        ]
+                    }
+                },
+                
+                mlWeight: 0.85, // Increased for geopolitical importance
+                severity: 'high', // Elevated due to international implications
+                description: 'Advanced geopolitical bias including nationality, geographic, and cultural patterns',
+                color: '#dc2626',
+                icon: '🌍'
             },
 
             // Language and Communication Bias
@@ -446,7 +574,7 @@ class BiasMLEngine {
                 this.detectAlgorithmicBias(preprocessed, calibrationData),
                 this.detectDemographicBias(preprocessed, calibrationData),
                 this.detectSocioeconomicBias(preprocessed, calibrationData),
-                this.detectGeographicBias(preprocessed, calibrationData),
+                this.detectGeopoliticalBias(preprocessed, calibrationData),
                 this.detectLinguisticBias(preprocessed, calibrationData),
                 this.detectTemporalBias(preprocessed, calibrationData)
             ]);
@@ -454,11 +582,14 @@ class BiasMLEngine {
             // Combine results with ML weighting
             const combinedResults = this.combinePatternResults(patternResults);
             
+            // Perform intersectional bias analysis
+            const intersectionalAnalysis = await this.performIntersectionalAnalysis(preprocessed, combinedResults, calibrationData);
+            
             // Perform counterfactual analysis if bias detected
             const counterfactualAnalysis = await this.performCounterfactualAnalysis(text, combinedResults, calibrationData);
             
-            // Calculate advanced scores with counterfactual validation
-            const scores = await this.calculateAdvancedScores(combinedResults, counterfactualAnalysis);
+            // Calculate advanced scores with intersectional and counterfactual validation
+            const scores = await this.calculateAdvancedScores(combinedResults, counterfactualAnalysis, intersectionalAnalysis);
             
             // Generate visualizations
             const visualizations = await this.generateVisualizations(combinedResults);
@@ -477,6 +608,7 @@ class BiasMLEngine {
                 riskLevel: this.calculateRiskLevel(scores.overall),
                 patterns: combinedResults,
                 scores: scores,
+                intersectionalAnalysis: intersectionalAnalysis,
                 counterfactualAnalysis: counterfactualAnalysis,
                 visualizations: visualizations,
                 recommendations: recommendations,
@@ -750,26 +882,129 @@ class BiasMLEngine {
     }
 
     /**
-     * Geographic bias detection
+     * Advanced Geopolitical Bias Detection
+     * Includes nationality, geographic, cultural, and international bias patterns
      */
-    async detectGeographicBias(preprocessed) {
-        const pattern = this.patterns.geographic;
-        const matches = this.findMatches(preprocessed.normalized, pattern.keywords);
+    async detectGeopoliticalBias(preprocessed, calibrationData = null) {
+        const pattern = this.patterns.geopolitical;
+        const text = preprocessed.normalized;
         
-        if (matches.length === 0) return null;
-
-        const score = this.calculatePatternScore(matches, pattern);
+        // Detect language for multilingual support
+        const detectedLanguage = this.detectLanguage(preprocessed.original);
+        
+        // Multi-layer geopolitical pattern detection
+        const geographicMatches = this.findMatches(text, pattern.geographicKeywords || []);
+        
+        // Nationality pattern detection
+        const nationalityMatches = {
+            direct: this.findMatches(text, pattern.nationalityPatterns?.direct || []),
+            citizenship: this.findMatches(text, pattern.nationalityPatterns?.citizenship || []),
+            regional: this.findMatches(text, pattern.nationalityPatterns?.regional || [])
+        };
+        
+        // Geographic bias term detection
+        const biasTermMatches = {
+            socioeconomic: this.findMatches(text, pattern.geographicBiasTerms?.socioeconomic || []),
+            urbanRural: this.findMatches(text, pattern.geographicBiasTerms?.urbanRural || []),
+            international: this.findMatches(text, pattern.geographicBiasTerms?.international || [])
+        };
+        
+        // Cultural geographic pattern detection
+        const culturalMatches = {
+            enclaves: this.findMatches(text, pattern.culturalGeographic?.enclaves || []),
+            religious: this.findMatches(text, pattern.culturalGeographic?.religious || []),
+            political: this.findMatches(text, pattern.culturalGeographic?.political || [])
+        };
+        
+        // Negative amplifier detection
+        const amplifierMatches = this.findMatches(text, pattern.negativeAmplifiers || []);
+        
+        // Multilingual geopolitical detection
+        let multilingualMatches = {};
+        if (detectedLanguage !== 'english' && pattern.multilingualGeopolitical?.[detectedLanguage]) {
+            const langPatterns = pattern.multilingualGeopolitical[detectedLanguage];
+            multilingualMatches = {
+                nationality: this.findMatches(text, langPatterns.nationality || []),
+                geographic: this.findMatches(text, langPatterns.geographic || []),
+                biasTerms: this.findMatches(text, langPatterns.bias_terms || [])
+            };
+        }
+        
+        // Calculate total matches across all categories
+        const allMatches = [
+            ...geographicMatches,
+            ...nationalityMatches.direct,
+            ...nationalityMatches.citizenship,
+            ...nationalityMatches.regional,
+            ...biasTermMatches.socioeconomic,
+            ...biasTermMatches.urbanRural,
+            ...biasTermMatches.international,
+            ...culturalMatches.enclaves,
+            ...culturalMatches.religious,
+            ...culturalMatches.political,
+            ...amplifierMatches
+        ];
+        
+        // Add multilingual matches if detected
+        if (Object.keys(multilingualMatches).length > 0) {
+            allMatches.push(
+                ...(multilingualMatches.nationality || []),
+                ...(multilingualMatches.geographic || []),
+                ...(multilingualMatches.biasTerms || [])
+            );
+        }
+        
+        if (allMatches.length === 0) return null;
+        
+        // Calculate enhanced geopolitical score
+        const score = this.calculateGeopoliticalScore({
+            geographicMatches,
+            nationalityMatches,
+            biasTermMatches,
+            culturalMatches,
+            amplifierMatches,
+            multilingualMatches,
+            pattern,
+            detectedLanguage
+        });
+        
+        // Apply baseline calibration if available
+        const calibratedScoring = calibrationData ? 
+            this.applyCalibratedScoring(score, 'geopolitical') : 
+            { calibratedScore: score, rawScore: score, biasOffset: 0, calibrated: false };
         
         return {
-            type: 'geographic',
-            severity: pattern.severity,
-            description: pattern.description,
-            matches: matches,
-            score: score,
+            type: 'geopolitical',
+            severity: this.getDynamicSeverity(calibratedScoring.calibratedScore),
+            description: this.getGeopoliticalDescription(nationalityMatches, biasTermMatches, detectedLanguage),
+            matches: allMatches,
+            score: calibratedScoring.calibratedScore,
+            rawScore: calibratedScoring.rawScore,
             mlWeight: pattern.mlWeight,
             color: pattern.color,
             icon: pattern.icon,
-            recommendations: this.generateGeographicRecommendations(matches)
+            detectedLanguage: detectedLanguage,
+            breakdown: {
+                geographicScore: Math.min(geographicMatches.length * 15, 40),
+                nationalityScore: Math.min((nationalityMatches.direct.length + nationalityMatches.citizenship.length + nationalityMatches.regional.length) * 20, 50),
+                biasTermScore: Math.min((biasTermMatches.socioeconomic.length + biasTermMatches.urbanRural.length + biasTermMatches.international.length) * 25, 60),
+                culturalScore: Math.min((culturalMatches.enclaves.length + culturalMatches.religious.length + culturalMatches.political.length) * 20, 40),
+                amplifierBonus: Math.min(amplifierMatches.length * 10, 20),
+                multilingualBonus: Object.keys(multilingualMatches).length > 0 ? 15 : 0
+            },
+            geopoliticalAnalysis: {
+                nationalityPatterns: nationalityMatches,
+                geographicBias: biasTermMatches,
+                culturalContext: culturalMatches,
+                internationalBias: biasTermMatches.international.length > 0,
+                multilingualContext: detectedLanguage !== 'english'
+            },
+            calibration: {
+                applied: calibratedScoring.calibrated,
+                biasOffset: calibratedScoring.biasOffset,
+                calibrationQuality: calibrationData?.calibrationQuality || 'not_available'
+            },
+            recommendations: this.generateGeopoliticalRecommendations(allMatches, score, detectedLanguage, multilingualMatches)
         };
     }
 
@@ -863,7 +1098,7 @@ class BiasMLEngine {
     /**
      * Calculate advanced scores with multiple metrics including Impact Ratio and Counterfactual Analysis
      */
-    async calculateAdvancedScores(patterns, counterfactualAnalysis = null) {
+    async calculateAdvancedScores(patterns, counterfactualAnalysis = null, intersectionalAnalysis = null) {
         if (patterns.length === 0) {
             return {
                 overall: 0,
@@ -891,6 +1126,9 @@ class BiasMLEngine {
         // Calculate Impact Ratio for statistical bias validation
         const impactAnalysis = this.calculateImpactRatio(patterns);
 
+        // Calculate Advanced Bias Concentration Metrics
+        const concentrationAnalysis = this.calculateBiasConcentrationMetrics(scores, patterns);
+
         // Create breakdown by pattern type
         const breakdown = {};
         patterns.forEach(pattern => {
@@ -917,7 +1155,12 @@ class BiasMLEngine {
             biasValidation: impactAnalysis.validation,
             statisticalValidation: statisticalAnalysis.validation,
             counterfactualValidation: counterfactualAnalysis ? counterfactualAnalysis.validation : 'No counterfactual analysis performed',
-            systematicBias: counterfactualAnalysis ? counterfactualAnalysis.systematicBias : false
+            systematicBias: counterfactualAnalysis ? counterfactualAnalysis.systematicBias : false,
+            concentrationMetrics: concentrationAnalysis,
+            biasConcentrationValidation: concentrationAnalysis.validation,
+            intersectionalAnalysis: intersectionalAnalysis,
+            intersectionalValidation: intersectionalAnalysis ? intersectionalAnalysis.validation : 'No intersectional analysis performed',
+            compoundBias: intersectionalAnalysis ? intersectionalAnalysis.compoundBias : false
         };
     }
 
@@ -994,6 +1237,354 @@ class BiasMLEngine {
             validation: validation,
             threshold: biasThreshold,
             fourFifthsRule: impactRatio >= 0.8
+        };
+    }
+
+    /**
+     * Calculate Advanced Bias Concentration Metrics
+     * Implements Max Z-Score and Dixon Q-Test for outlier detection and bias concentration analysis
+     * Based on 2025 research standards for statistical bias validation
+     */
+    calculateBiasConcentrationMetrics(scores, patterns) {
+        if (scores.length === 0) {
+            return {
+                maxZScore: 0,
+                dixonQTest: null,
+                concentrationLevel: 'none',
+                outliers: [],
+                validation: 'No data for concentration analysis',
+                biasConcentration: false
+            };
+        }
+
+        if (scores.length < 3) {
+            return {
+                maxZScore: 0,
+                dixonQTest: null,
+                concentrationLevel: 'insufficient_data',
+                outliers: [],
+                validation: 'Insufficient data for concentration analysis (n < 3)',
+                biasConcentration: false
+            };
+        }
+
+        // Calculate basic statistics
+        const n = scores.length;
+        const mean = scores.reduce((sum, score) => sum + score, 0) / n;
+        const variance = this.calculateVariance(scores);
+        const standardDeviation = Math.sqrt(variance);
+
+        // Calculate Max Z-Score for outlier detection
+        const zScores = scores.map(score => Math.abs((score - mean) / standardDeviation));
+        const maxZScore = Math.max(...zScores);
+        const maxZScoreIndex = zScores.indexOf(maxZScore);
+
+        // Z-Score interpretation (standard thresholds)
+        let zScoreInterpretation = 'normal';
+        if (maxZScore > 3.0) {
+            zScoreInterpretation = 'extreme_outlier';
+        } else if (maxZScore > 2.5) {
+            zScoreInterpretation = 'significant_outlier';
+        } else if (maxZScore > 2.0) {
+            zScoreInterpretation = 'moderate_outlier';
+        } else if (maxZScore > 1.5) {
+            zScoreInterpretation = 'mild_outlier';
+        }
+
+        // Calculate Dixon Q-Test for outlier detection
+        const dixonQResult = this.calculateDixonQTest(scores);
+
+        // Identify outliers based on both methods
+        const outliers = [];
+        
+        // Z-Score outliers (threshold: |z| > 2.0)
+        scores.forEach((score, index) => {
+            if (zScores[index] > 2.0) {
+                outliers.push({
+                    index: index,
+                    score: score,
+                    zScore: zScores[index],
+                    patternType: patterns[index] ? patterns[index].type : 'unknown',
+                    method: 'z_score',
+                    severity: zScores[index] > 3.0 ? 'extreme' : zScores[index] > 2.5 ? 'high' : 'moderate'
+                });
+            }
+        });
+
+        // Dixon Q-Test outliers
+        if (dixonQResult.isOutlier) {
+            const existingOutlier = outliers.find(o => o.index === dixonQResult.outlierIndex);
+            if (existingOutlier) {
+                existingOutlier.confirmedByDixon = true;
+                existingOutlier.dixonQ = dixonQResult.qCalculated;
+            } else {
+                outliers.push({
+                    index: dixonQResult.outlierIndex,
+                    score: scores[dixonQResult.outlierIndex],
+                    zScore: zScores[dixonQResult.outlierIndex],
+                    patternType: patterns[dixonQResult.outlierIndex] ? patterns[dixonQResult.outlierIndex].type : 'unknown',
+                    method: 'dixon_q',
+                    dixonQ: dixonQResult.qCalculated,
+                    severity: dixonQResult.qCalculated > 0.9 ? 'extreme' : dixonQResult.qCalculated > 0.7 ? 'high' : 'moderate'
+                });
+            }
+        }
+
+        // Determine concentration level
+        let concentrationLevel = 'distributed';
+        let biasConcentration = false;
+
+        if (outliers.length > 0) {
+            const outliersRatio = outliers.length / n;
+            if (outliersRatio >= 0.3) {
+                concentrationLevel = 'highly_concentrated';
+                biasConcentration = true;
+            } else if (outliersRatio >= 0.2) {
+                concentrationLevel = 'moderately_concentrated';
+                biasConcentration = true;
+            } else if (outliersRatio >= 0.1) {
+                concentrationLevel = 'mildly_concentrated';
+                biasConcentration = maxZScore > 2.5;
+            } else {
+                concentrationLevel = 'scattered_outliers';
+                biasConcentration = maxZScore > 3.0;
+            }
+        }
+
+        // Calculate bias concentration by pattern type
+        const patternConcentration = {};
+        patterns.forEach((pattern, index) => {
+            if (!patternConcentration[pattern.type]) {
+                patternConcentration[pattern.type] = {
+                    scores: [],
+                    outliers: 0,
+                    maxZScore: 0
+                };
+            }
+            patternConcentration[pattern.type].scores.push(scores[index]);
+            patternConcentration[pattern.type].maxZScore = Math.max(
+                patternConcentration[pattern.type].maxZScore, 
+                zScores[index]
+            );
+            
+            if (outliers.some(o => o.index === index)) {
+                patternConcentration[pattern.type].outliers++;
+            }
+        });
+
+        // Generate validation message
+        let validation = `Max Z-Score: ${maxZScore.toFixed(3)} (${zScoreInterpretation})`;
+        if (dixonQResult.isOutlier) {
+            validation += `, Dixon Q-Test: ${dixonQResult.qCalculated.toFixed(3)} > ${dixonQResult.qCritical.toFixed(3)} (outlier detected)`;
+        } else {
+            validation += `, Dixon Q-Test: ${dixonQResult.qCalculated.toFixed(3)} ≤ ${dixonQResult.qCritical.toFixed(3)} (no outlier)`;
+        }
+        validation += `, Concentration: ${concentrationLevel}`;
+
+        // Advanced concentration analysis
+        const concentrationCoefficient = this.calculateConcentrationCoefficient(scores);
+        const biasClusterAnalysis = this.analyzeBiasClusters(scores, patterns);
+
+        return {
+            maxZScore: Math.round(maxZScore * 1000) / 1000,
+            maxZScoreInterpretation: zScoreInterpretation,
+            maxZScoreIndex: maxZScoreIndex,
+            dixonQTest: dixonQResult,
+            concentrationLevel: concentrationLevel,
+            concentrationCoefficient: concentrationCoefficient,
+            outliers: outliers,
+            patternConcentration: patternConcentration,
+            biasClusterAnalysis: biasClusterAnalysis,
+            biasConcentration: biasConcentration,
+            validation: validation,
+            methodology: {
+                zScoreThresholds: {
+                    mild: 1.5,
+                    moderate: 2.0,
+                    significant: 2.5,
+                    extreme: 3.0
+                },
+                dixonQSignificance: 0.05,
+                sampleSize: n
+            }
+        };
+    }
+
+    /**
+     * Calculate Dixon Q-Test for outlier detection
+     * Based on statistical tables and critical values
+     */
+    calculateDixonQTest(scores) {
+        const n = scores.length;
+        
+        if (n < 3 || n > 30) {
+            return {
+                qCalculated: 0,
+                qCritical: 0,
+                isOutlier: false,
+                outlierIndex: -1,
+                validation: n < 3 ? 'Sample size too small for Dixon Q-Test' : 'Sample size too large for standard Dixon Q-Test'
+            };
+        }
+
+        // Sort scores to identify potential outliers
+        const sortedScores = [...scores].sort((a, b) => a - b);
+        const sortedIndices = scores
+            .map((score, index) => ({ score, index }))
+            .sort((a, b) => a.score - b.score)
+            .map(item => item.index);
+
+        // Critical values for Dixon Q-Test (α = 0.05)
+        const qCriticalValues = {
+            3: 0.970, 4: 0.829, 5: 0.710, 6: 0.625, 7: 0.568,
+            8: 0.526, 9: 0.493, 10: 0.466, 11: 0.444, 12: 0.426,
+            13: 0.410, 14: 0.396, 15: 0.384, 16: 0.374, 17: 0.365,
+            18: 0.356, 19: 0.349, 20: 0.342, 21: 0.337, 22: 0.331,
+            23: 0.326, 24: 0.321, 25: 0.317, 26: 0.312, 27: 0.308,
+            28: 0.304, 29: 0.300, 30: 0.296
+        };
+
+        const qCritical = qCriticalValues[n] || 0.296;
+
+        // Test both ends for outliers
+        const range = sortedScores[n - 1] - sortedScores[0];
+        
+        // Test highest value
+        const qHigh = (sortedScores[n - 1] - sortedScores[n - 2]) / range;
+        
+        // Test lowest value  
+        const qLow = (sortedScores[1] - sortedScores[0]) / range;
+
+        // Determine which test gives the higher Q value
+        let qCalculated, outlierIndex, isOutlier;
+        
+        if (qHigh > qLow) {
+            qCalculated = qHigh;
+            outlierIndex = sortedIndices[n - 1]; // Index of highest value in original array
+            isOutlier = qHigh > qCritical;
+        } else {
+            qCalculated = qLow;
+            outlierIndex = sortedIndices[0]; // Index of lowest value in original array
+            isOutlier = qLow > qCritical;
+        }
+
+        return {
+            qCalculated: Math.round(qCalculated * 1000) / 1000,
+            qCritical: qCritical,
+            isOutlier: isOutlier,
+            outlierIndex: outlierIndex,
+            outlierValue: scores[outlierIndex],
+            testDirection: qHigh > qLow ? 'high' : 'low',
+            validation: isOutlier ? 
+                `Outlier detected: Q=${qCalculated.toFixed(3)} > ${qCritical.toFixed(3)}` : 
+                `No outlier: Q=${qCalculated.toFixed(3)} ≤ ${qCritical.toFixed(3)}`
+        };
+    }
+
+    /**
+     * Calculate concentration coefficient for bias distribution analysis
+     */
+    calculateConcentrationCoefficient(scores) {
+        if (scores.length < 2) return 0;
+
+        const n = scores.length;
+        const mean = scores.reduce((sum, score) => sum + score, 0) / n;
+        const variance = this.calculateVariance(scores);
+        
+        // Coefficient of variation
+        const coefficientOfVariation = Math.sqrt(variance) / mean;
+        
+        // Gini coefficient for concentration measurement
+        const sortedScores = [...scores].sort((a, b) => a - b);
+        let giniSum = 0;
+        
+        for (let i = 0; i < n; i++) {
+            giniSum += (2 * (i + 1) - n - 1) * sortedScores[i];
+        }
+        
+        const giniCoefficient = giniSum / (n * n * mean);
+        
+        // Concentration index (0 = perfectly distributed, 1 = maximum concentration)
+        const concentrationIndex = Math.abs(giniCoefficient);
+        
+        return {
+            coefficientOfVariation: Math.round(coefficientOfVariation * 1000) / 1000,
+            giniCoefficient: Math.round(giniCoefficient * 1000) / 1000,
+            concentrationIndex: Math.round(concentrationIndex * 1000) / 1000,
+            interpretation: concentrationIndex > 0.6 ? 'highly_concentrated' :
+                           concentrationIndex > 0.4 ? 'moderately_concentrated' :
+                           concentrationIndex > 0.2 ? 'mildly_concentrated' : 'well_distributed'
+        };
+    }
+
+    /**
+     * Analyze bias clusters and patterns in score distribution
+     */
+    analyzeBiasClusters(scores, patterns) {
+        if (scores.length < 3) {
+            return {
+                clusters: [],
+                clusterAnalysis: 'insufficient_data',
+                dominantPatterns: []
+            };
+        }
+
+        // Group scores by pattern type for cluster analysis
+        const patternGroups = {};
+        patterns.forEach((pattern, index) => {
+            if (!patternGroups[pattern.type]) {
+                patternGroups[pattern.type] = [];
+            }
+            patternGroups[pattern.type].push({
+                score: scores[index],
+                index: index,
+                severity: pattern.severity
+            });
+        });
+
+        // Analyze clusters within each pattern type
+        const clusters = [];
+        Object.entries(patternGroups).forEach(([patternType, patternScores]) => {
+            if (patternScores.length >= 2) {
+                const scores = patternScores.map(p => p.score);
+                const mean = scores.reduce((sum, score) => sum + score, 0) / scores.length;
+                const variance = this.calculateVariance(scores);
+                const standardDeviation = Math.sqrt(variance);
+                
+                clusters.push({
+                    patternType: patternType,
+                    count: patternScores.length,
+                    meanScore: Math.round(mean * 100) / 100,
+                    standardDeviation: Math.round(standardDeviation * 100) / 100,
+                    variance: Math.round(variance * 100) / 100,
+                    minScore: Math.min(...scores),
+                    maxScore: Math.max(...scores),
+                    cohesion: standardDeviation < 10 ? 'high' : standardDeviation < 20 ? 'moderate' : 'low'
+                });
+            }
+        });
+
+        // Sort clusters by mean score to identify dominant patterns
+        clusters.sort((a, b) => b.meanScore - a.meanScore);
+        
+        // Identify dominant patterns (top 3 or those with mean > 60)
+        const dominantPatterns = clusters
+            .filter(cluster => cluster.meanScore > 60 || clusters.indexOf(cluster) < 3)
+            .map(cluster => ({
+                patternType: cluster.patternType,
+                meanScore: cluster.meanScore,
+                dominanceLevel: cluster.meanScore > 80 ? 'critical' :
+                               cluster.meanScore > 60 ? 'high' :
+                               cluster.meanScore > 40 ? 'moderate' : 'low'
+            }));
+
+        return {
+            clusters: clusters,
+            clusterCount: clusters.length,
+            dominantPatterns: dominantPatterns,
+            clusterAnalysis: clusters.length > 3 ? 'highly_fragmented' :
+                            clusters.length > 1 ? 'moderately_clustered' : 'single_cluster',
+            totalPatternTypes: Object.keys(patternGroups).length
         };
     }
     
@@ -1404,6 +1995,554 @@ class BiasMLEngine {
         }
         
         return recommendations;
+    }
+
+    /**
+     * Perform Comprehensive Intersectional Bias Analysis
+     * Detects compound discrimination across multiple protected attributes
+     * Based on intersectionality theory and multi-dimensional bias research
+     */
+    async performIntersectionalAnalysis(preprocessed, patterns, calibrationData = null) {
+        if (patterns.length < 2) {
+            return {
+                intersectionalBias: false,
+                compoundBias: false,
+                intersectionalScore: 0,
+                attributeIntersections: [],
+                intersectionalPatterns: [],
+                validation: 'Insufficient patterns for intersectional analysis (minimum 2 required)',
+                recommendations: []
+            };
+        }
+
+        console.log('🔍 Performing intersectional bias analysis...');
+
+        // Define intersectional attribute categories
+        const attributeCategories = this.defineIntersectionalAttributes(patterns);
+        
+        // Analyze attribute intersections
+        const attributeIntersections = this.analyzeAttributeIntersections(patterns, attributeCategories);
+        
+        // Detect compound bias patterns
+        const compoundBiasAnalysis = this.detectCompoundBiasPatterns(patterns, attributeIntersections);
+        
+        // Calculate intersectional bias score
+        const intersectionalScore = this.calculateIntersectionalScore(attributeIntersections, compoundBiasAnalysis);
+        
+        // Identify specific intersectional patterns
+        const intersectionalPatterns = this.identifyIntersectionalPatterns(patterns, attributeIntersections);
+        
+        // Analyze bias amplification effects
+        const amplificationAnalysis = this.analyzeIntersectionalAmplification(patterns, intersectionalPatterns);
+        
+        // Generate intersectional validation
+        const validation = this.generateIntersectionalValidation(
+            intersectionalScore, 
+            attributeIntersections, 
+            compoundBiasAnalysis
+        );
+        
+        // Generate intersectional recommendations
+        const recommendations = this.generateIntersectionalRecommendations(
+            intersectionalScore,
+            attributeIntersections,
+            compoundBiasAnalysis,
+            intersectionalPatterns
+        );
+
+        return {
+            intersectionalBias: intersectionalScore > 60,
+            compoundBias: compoundBiasAnalysis.hasCompoundBias,
+            intersectionalScore: Math.round(intersectionalScore),
+            attributeIntersections: attributeIntersections,
+            intersectionalPatterns: intersectionalPatterns,
+            compoundBiasAnalysis: compoundBiasAnalysis,
+            amplificationAnalysis: amplificationAnalysis,
+            validation: validation,
+            recommendations: recommendations,
+            methodology: {
+                framework: 'Intersectionality Theory + Multi-Dimensional Bias Analysis',
+                attributeCategories: Object.keys(attributeCategories),
+                intersectionCount: attributeIntersections.length,
+                analysisDepth: 'comprehensive'
+            }
+        };
+    }
+
+    /**
+     * Define intersectional attribute categories from detected patterns
+     */
+    defineIntersectionalAttributes(patterns) {
+        const categories = {
+            demographic: [],
+            socioeconomic: [],
+            geographic: [],
+            cultural: [],
+            institutional: [],
+            temporal: []
+        };
+
+        patterns.forEach(pattern => {
+            switch (pattern.type) {
+                case 'demographic':
+                    categories.demographic.push({
+                        type: 'demographic',
+                        score: pattern.score,
+                        matches: pattern.matches,
+                        severity: pattern.severity,
+                        breakdown: pattern.breakdown || {}
+                    });
+                    break;
+                    
+                case 'socioeconomic':
+                    categories.socioeconomic.push({
+                        type: 'socioeconomic',
+                        score: pattern.score,
+                        matches: pattern.matches,
+                        severity: pattern.severity
+                    });
+                    break;
+                    
+                case 'geopolitical':
+                    categories.geographic.push({
+                        type: 'geopolitical',
+                        score: pattern.score,
+                        matches: pattern.matches,
+                        severity: pattern.severity,
+                        geopoliticalAnalysis: pattern.geopoliticalAnalysis || {}
+                    });
+                    break;
+                    
+                case 'linguistic':
+                    categories.cultural.push({
+                        type: 'linguistic',
+                        score: pattern.score,
+                        matches: pattern.matches,
+                        severity: pattern.severity
+                    });
+                    break;
+                    
+                case 'criminalJustice':
+                case 'algorithmic':
+                    categories.institutional.push({
+                        type: pattern.type,
+                        score: pattern.score,
+                        matches: pattern.matches,
+                        severity: pattern.severity
+                    });
+                    break;
+                    
+                case 'temporal':
+                    categories.temporal.push({
+                        type: 'temporal',
+                        score: pattern.score,
+                        matches: pattern.matches,
+                        severity: pattern.severity
+                    });
+                    break;
+            }
+        });
+
+        return categories;
+    }
+
+    /**
+     * Analyze intersections between different attribute categories
+     */
+    analyzeAttributeIntersections(patterns, attributeCategories) {
+        const intersections = [];
+        const categoryKeys = Object.keys(attributeCategories).filter(key => 
+            attributeCategories[key].length > 0
+        );
+
+        // Analyze all possible intersections between categories
+        for (let i = 0; i < categoryKeys.length; i++) {
+            for (let j = i + 1; j < categoryKeys.length; j++) {
+                const category1 = categoryKeys[i];
+                const category2 = categoryKeys[j];
+                
+                const intersection = this.calculateIntersectionStrength(
+                    attributeCategories[category1],
+                    attributeCategories[category2]
+                );
+                
+                if (intersection.strength > 0.3) { // Threshold for meaningful intersection
+                    intersections.push({
+                        categories: [category1, category2],
+                        strength: intersection.strength,
+                        combinedScore: intersection.combinedScore,
+                        intersectionType: intersection.type,
+                        riskLevel: this.assessIntersectionRisk(intersection.combinedScore),
+                        patterns: intersection.patterns
+                    });
+                }
+            }
+        }
+
+        // Sort by intersection strength (highest first)
+        return intersections.sort((a, b) => b.strength - a.strength);
+    }
+
+    /**
+     * Calculate intersection strength between two attribute categories
+     */
+    calculateIntersectionStrength(category1Patterns, category2Patterns) {
+        if (category1Patterns.length === 0 || category2Patterns.length === 0) {
+            return { strength: 0, combinedScore: 0, type: 'none', patterns: [] };
+        }
+
+        // Calculate average scores for each category
+        const avg1 = category1Patterns.reduce((sum, p) => sum + p.score, 0) / category1Patterns.length;
+        const avg2 = category2Patterns.reduce((sum, p) => sum + p.score, 0) / category2Patterns.length;
+        
+        // Combined score with intersectional amplification
+        const combinedScore = Math.min((avg1 + avg2) * 1.2, 100); // 20% amplification for intersection
+        
+        // Intersection strength based on both categories having significant bias
+        let strength = 0;
+        if (avg1 > 40 && avg2 > 40) {
+            strength = Math.min((avg1 + avg2) / 100, 1.0);
+        }
+        
+        // Determine intersection type
+        let intersectionType = 'weak';
+        if (strength > 0.8) {
+            intersectionType = 'critical';
+        } else if (strength > 0.6) {
+            intersectionType = 'strong';
+        } else if (strength > 0.4) {
+            intersectionType = 'moderate';
+        }
+
+        return {
+            strength: Math.round(strength * 1000) / 1000,
+            combinedScore: Math.round(combinedScore),
+            type: intersectionType,
+            patterns: [...category1Patterns, ...category2Patterns]
+        };
+    }
+
+    /**
+     * Detect compound bias patterns across multiple attributes
+     */
+    detectCompoundBiasPatterns(patterns, attributeIntersections) {
+        const compoundPatterns = [];
+        let hasCompoundBias = false;
+        let maxCompoundScore = 0;
+
+        // Analyze each intersection for compound bias
+        attributeIntersections.forEach(intersection => {
+            if (intersection.strength > 0.6 && intersection.combinedScore > 70) {
+                hasCompoundBias = true;
+                maxCompoundScore = Math.max(maxCompoundScore, intersection.combinedScore);
+                
+                compoundPatterns.push({
+                    categories: intersection.categories,
+                    compoundScore: intersection.combinedScore,
+                    biasType: 'intersectional_amplification',
+                    severity: intersection.riskLevel,
+                    description: `Compound bias detected between ${intersection.categories.join(' and ')} categories`,
+                    amplificationFactor: intersection.strength
+                });
+            }
+        });
+
+        // Check for triple+ intersections (high complexity)
+        const tripleIntersections = this.detectTripleIntersections(patterns);
+        if (tripleIntersections.length > 0) {
+            hasCompoundBias = true;
+            compoundPatterns.push(...tripleIntersections);
+        }
+
+        return {
+            hasCompoundBias: hasCompoundBias,
+            compoundPatterns: compoundPatterns,
+            maxCompoundScore: maxCompoundScore,
+            complexityLevel: compoundPatterns.length > 2 ? 'high' : compoundPatterns.length > 0 ? 'medium' : 'low',
+            intersectionCount: attributeIntersections.length
+        };
+    }
+
+    /**
+     * Detect triple intersections (3+ attribute categories)
+     */
+    detectTripleIntersections(patterns) {
+        const tripleIntersections = [];
+        
+        // Group patterns by type for analysis
+        const patternsByType = {};
+        patterns.forEach(pattern => {
+            if (!patternsByType[pattern.type]) {
+                patternsByType[pattern.type] = [];
+            }
+            patternsByType[pattern.type].push(pattern);
+        });
+
+        const types = Object.keys(patternsByType);
+        
+        // Look for combinations of 3+ pattern types with significant scores
+        if (types.length >= 3) {
+            const highScoreTypes = types.filter(type => {
+                const avgScore = patternsByType[type].reduce((sum, p) => sum + p.score, 0) / patternsByType[type].length;
+                return avgScore > 50;
+            });
+
+            if (highScoreTypes.length >= 3) {
+                const tripleScore = highScoreTypes.slice(0, 3).reduce((sum, type) => {
+                    const avgScore = patternsByType[type].reduce((s, p) => s + p.score, 0) / patternsByType[type].length;
+                    return sum + avgScore;
+                }, 0) / 3;
+
+                tripleIntersections.push({
+                    categories: highScoreTypes.slice(0, 3),
+                    compoundScore: Math.min(tripleScore * 1.5, 100), // 50% amplification for triple intersection
+                    biasType: 'multi_dimensional_compound',
+                    severity: 'critical',
+                    description: `Multi-dimensional compound bias across ${highScoreTypes.slice(0, 3).join(', ')} categories`,
+                    amplificationFactor: 1.5
+                });
+            }
+        }
+
+        return tripleIntersections;
+    }
+
+    /**
+     * Calculate overall intersectional bias score
+     */
+    calculateIntersectionalScore(attributeIntersections, compoundBiasAnalysis) {
+        if (attributeIntersections.length === 0) {
+            return 0;
+        }
+
+        // Base score from strongest intersection
+        const baseScore = attributeIntersections.length > 0 ? attributeIntersections[0].combinedScore : 0;
+        
+        // Complexity bonus for multiple intersections
+        const complexityBonus = Math.min(attributeIntersections.length * 5, 20);
+        
+        // Compound bias bonus
+        const compoundBonus = compoundBiasAnalysis.hasCompoundBias ? 15 : 0;
+        
+        // High-severity intersection bonus
+        const severityBonus = attributeIntersections.filter(i => i.riskLevel === 'critical').length * 10;
+
+        const finalScore = Math.min(baseScore + complexityBonus + compoundBonus + severityBonus, 100);
+        
+        return finalScore;
+    }
+
+    /**
+     * Identify specific intersectional patterns
+     */
+    identifyIntersectionalPatterns(patterns, attributeIntersections) {
+        const identifiedPatterns = [];
+
+        attributeIntersections.forEach(intersection => {
+            const pattern = {
+                name: `${intersection.categories.join(' × ')} Intersection`,
+                categories: intersection.categories,
+                score: intersection.combinedScore,
+                strength: intersection.strength,
+                type: intersection.intersectionType,
+                riskLevel: intersection.riskLevel,
+                description: this.generateIntersectionDescription(intersection),
+                examples: this.extractIntersectionExamples(intersection.patterns)
+            };
+
+            identifiedPatterns.push(pattern);
+        });
+
+        return identifiedPatterns;
+    }
+
+    /**
+     * Analyze bias amplification effects in intersections
+     */
+    analyzeIntersectionalAmplification(patterns, intersectionalPatterns) {
+        const amplificationEffects = [];
+        let maxAmplification = 0;
+        let hasSignificantAmplification = false;
+
+        intersectionalPatterns.forEach(pattern => {
+            // Calculate amplification factor
+            const baseScores = pattern.categories.map(category => {
+                const categoryPatterns = patterns.filter(p => this.mapPatternToCategory(p.type) === category);
+                return categoryPatterns.length > 0 ? 
+                    categoryPatterns.reduce((sum, p) => sum + p.score, 0) / categoryPatterns.length : 0;
+            });
+
+            const expectedCombinedScore = baseScores.reduce((sum, score) => sum + score, 0) / baseScores.length;
+            const actualScore = pattern.score;
+            const amplificationFactor = actualScore / expectedCombinedScore;
+
+            if (amplificationFactor > 1.2) { // 20% amplification threshold
+                hasSignificantAmplification = true;
+                maxAmplification = Math.max(maxAmplification, amplificationFactor);
+
+                amplificationEffects.push({
+                    pattern: pattern.name,
+                    categories: pattern.categories,
+                    expectedScore: Math.round(expectedCombinedScore),
+                    actualScore: actualScore,
+                    amplificationFactor: Math.round(amplificationFactor * 100) / 100,
+                    amplificationType: amplificationFactor > 1.5 ? 'strong' : 'moderate'
+                });
+            }
+        });
+
+        return {
+            hasSignificantAmplification: hasSignificantAmplification,
+            maxAmplificationFactor: Math.round(maxAmplification * 100) / 100,
+            amplificationEffects: amplificationEffects,
+            amplificationLevel: maxAmplification > 1.5 ? 'high' : maxAmplification > 1.2 ? 'moderate' : 'low'
+        };
+    }
+
+    /**
+     * Map pattern type to intersectional category
+     */
+    mapPatternToCategory(patternType) {
+        const mapping = {
+            'demographic': 'demographic',
+            'socioeconomic': 'socioeconomic',
+            'geopolitical': 'geographic',
+            'linguistic': 'cultural',
+            'criminalJustice': 'institutional',
+            'algorithmic': 'institutional',
+            'temporal': 'temporal'
+        };
+        return mapping[patternType] || 'other';
+    }
+
+    /**
+     * Assess risk level of intersection
+     */
+    assessIntersectionRisk(combinedScore) {
+        if (combinedScore >= 80) return 'critical';
+        if (combinedScore >= 60) return 'high';
+        if (combinedScore >= 40) return 'medium';
+        return 'low';
+    }
+
+    /**
+     * Generate description for intersection
+     */
+    generateIntersectionDescription(intersection) {
+        const [cat1, cat2] = intersection.categories;
+        const strength = intersection.type;
+        
+        return `${strength.charAt(0).toUpperCase() + strength.slice(1)} intersection between ${cat1} and ${cat2} bias patterns (strength: ${(intersection.strength * 100).toFixed(1)}%)`;
+    }
+
+    /**
+     * Extract examples from intersection patterns
+     */
+    extractIntersectionExamples(patterns) {
+        const examples = [];
+        patterns.forEach(pattern => {
+            if (pattern.matches && pattern.matches.length > 0) {
+                examples.push(...pattern.matches.slice(0, 2)); // Max 2 examples per pattern
+            }
+        });
+        return examples.slice(0, 5); // Max 5 total examples
+    }
+
+    /**
+     * Generate intersectional validation message
+     */
+    generateIntersectionalValidation(intersectionalScore, attributeIntersections, compoundBiasAnalysis) {
+        let validation = `Intersectional Score: ${intersectionalScore}`;
+        
+        if (intersectionalScore > 80) {
+            validation += ' - CRITICAL INTERSECTIONAL BIAS DETECTED';
+        } else if (intersectionalScore > 60) {
+            validation += ' - High intersectional bias risk';
+        } else if (intersectionalScore > 40) {
+            validation += ' - Moderate intersectional bias detected';
+        } else {
+            validation += ' - Low intersectional bias risk';
+        }
+
+        validation += `, Intersections: ${attributeIntersections.length}`;
+        
+        if (compoundBiasAnalysis.hasCompoundBias) {
+            validation += ', Compound Bias: DETECTED';
+        }
+
+        return validation;
+    }
+
+    /**
+     * Generate comprehensive intersectional recommendations
+     */
+    generateIntersectionalRecommendations(intersectionalScore, attributeIntersections, compoundBiasAnalysis, intersectionalPatterns) {
+        const recommendations = [];
+
+        // Critical intersectional bias
+        if (intersectionalScore > 80) {
+            recommendations.push({
+                priority: 'critical',
+                category: 'Intersectional Discrimination',
+                icon: '🚨',
+                title: 'Critical Intersectional Bias Detected',
+                message: 'Multiple protected attributes show compound discrimination patterns',
+                action: 'Immediate comprehensive review and intersectional bias mitigation required'
+            });
+        }
+
+        // Compound bias recommendations
+        if (compoundBiasAnalysis.hasCompoundBias) {
+            recommendations.push({
+                priority: 'high',
+                category: 'Compound Bias',
+                icon: '⚡',
+                title: 'Compound Bias Amplification',
+                message: 'Bias effects are amplified when multiple attributes intersect',
+                action: 'Implement intersectional fairness constraints and multi-attribute testing'
+            });
+        }
+
+        // Specific intersection recommendations
+        attributeIntersections.forEach(intersection => {
+            if (intersection.riskLevel === 'critical' || intersection.riskLevel === 'high') {
+                recommendations.push({
+                    priority: intersection.riskLevel === 'critical' ? 'critical' : 'high',
+                    category: 'Attribute Intersection',
+                    icon: '🔗',
+                    title: `${intersection.categories.join(' × ')} Intersection Risk`,
+                    message: `Strong bias interaction between ${intersection.categories.join(' and ')} attributes`,
+                    action: `Address ${intersection.categories.join(' and ')} bias intersection with targeted interventions`
+                });
+            }
+        });
+
+        // Multi-dimensional analysis recommendation
+        if (intersectionalPatterns.length > 2) {
+            recommendations.push({
+                priority: 'medium',
+                category: 'Multi-Dimensional Analysis',
+                icon: '📊',
+                title: 'Complex Intersectional Patterns',
+                message: 'Multiple intersections detected requiring sophisticated analysis',
+                action: 'Implement multi-dimensional fairness testing and intersectional impact assessment'
+            });
+        }
+
+        // General intersectional best practices
+        recommendations.push({
+            priority: 'low',
+            category: 'Intersectional Best Practices',
+            icon: '📋',
+            title: 'Intersectional Fairness Framework',
+            message: 'Implement comprehensive intersectional bias prevention',
+            action: 'Regular intersectional audits, multi-attribute testing, and inclusive design practices'
+        });
+
+        return recommendations.sort((a, b) => {
+            const priorityOrder = { critical: 0, high: 1, medium: 2, low: 3 };
+            return priorityOrder[a.priority] - priorityOrder[b.priority];
+        });
     }
 
     /**
@@ -2150,7 +3289,188 @@ class BiasMLEngine {
     }
 
     /**
-     * Generate specific recommendations for geographic bias
+     * Calculate enhanced geopolitical scoring with multi-layer analysis
+     */
+    calculateGeopoliticalScore({
+        geographicMatches,
+        nationalityMatches,
+        biasTermMatches,
+        culturalMatches,
+        amplifierMatches,
+        multilingualMatches,
+        pattern,
+        detectedLanguage
+    }) {
+        // Base scores for each category
+        const geographicScore = Math.min(geographicMatches.length * 15, 40);
+        const nationalityScore = Math.min(
+            (nationalityMatches.direct.length + nationalityMatches.citizenship.length + nationalityMatches.regional.length) * 20, 
+            50
+        );
+        const biasTermScore = Math.min(
+            (biasTermMatches.socioeconomic.length + biasTermMatches.urbanRural.length + biasTermMatches.international.length) * 25, 
+            60
+        );
+        const culturalScore = Math.min(
+            (culturalMatches.enclaves.length + culturalMatches.religious.length + culturalMatches.political.length) * 20, 
+            40
+        );
+        
+        // Bonus scores
+        const amplifierBonus = Math.min(amplifierMatches.length * 10, 20);
+        const multilingualBonus = Object.keys(multilingualMatches).length > 0 ? 15 : 0;
+        
+        // International bias penalty (higher severity)
+        const internationalBiasPenalty = biasTermMatches.international.length > 0 ? 25 : 0;
+        
+        // Nationality discrimination penalty (high severity)
+        const nationalityDiscriminationPenalty = 
+            (nationalityMatches.citizenship.length > 0 && biasTermMatches.socioeconomic.length > 0) ? 30 : 0;
+        
+        // Calculate composite score
+        const baseScore = Math.max(
+            geographicScore + nationalityScore,
+            biasTermScore + culturalScore
+        );
+        
+        const finalScore = Math.min(
+            baseScore + amplifierBonus + multilingualBonus + internationalBiasPenalty + nationalityDiscriminationPenalty,
+            100
+        );
+        
+        return Math.round(finalScore);
+    }
+
+    /**
+     * Generate descriptive analysis for geopolitical bias
+     */
+    getGeopoliticalDescription(nationalityMatches, biasTermMatches, detectedLanguage) {
+        const descriptions = [];
+        
+        // Nationality bias description
+        const totalNationalityMatches = nationalityMatches.direct.length + 
+                                       nationalityMatches.citizenship.length + 
+                                       nationalityMatches.regional.length;
+        
+        if (totalNationalityMatches > 0) {
+            if (nationalityMatches.citizenship.length > 0) {
+                descriptions.push('citizenship and immigration status bias detected');
+            }
+            if (nationalityMatches.direct.length > 0) {
+                descriptions.push('direct nationality references found');
+            }
+            if (nationalityMatches.regional.length > 0) {
+                descriptions.push('regional and continental bias patterns identified');
+            }
+        }
+        
+        // Geographic bias terms description
+        const totalBiasTerms = biasTermMatches.socioeconomic.length + 
+                              biasTermMatches.urbanRural.length + 
+                              biasTermMatches.international.length;
+        
+        if (totalBiasTerms > 0) {
+            if (biasTermMatches.international.length > 0) {
+                descriptions.push('international development bias detected');
+            }
+            if (biasTermMatches.socioeconomic.length > 0) {
+                descriptions.push('socioeconomic geographic stereotypes found');
+            }
+            if (biasTermMatches.urbanRural.length > 0) {
+                descriptions.push('urban vs rural bias patterns identified');
+            }
+        }
+        
+        // Language context
+        if (detectedLanguage !== 'english') {
+            descriptions.push(`multilingual geopolitical bias in ${detectedLanguage}`);
+        }
+        
+        if (descriptions.length === 0) {
+            return 'Geopolitical bias patterns detected';
+        }
+        
+        return `Geopolitical bias detected: ${descriptions.join(', ')}`;
+    }
+
+    /**
+     * Generate comprehensive geopolitical bias recommendations
+     */
+    generateGeopoliticalRecommendations(matches, score, detectedLanguage, multilingualMatches) {
+        const recommendations = [];
+        
+        // High-priority recommendations for severe bias
+        if (score >= 70) {
+            recommendations.push({
+                priority: 'critical',
+                category: 'Nationality Discrimination',
+                icon: '🚨',
+                title: 'Critical Geopolitical Bias Detected',
+                message: 'Immediate review required for nationality and geographic discrimination',
+                action: 'Remove nationality-based criteria and implement geographic fairness protocols'
+            });
+        }
+        
+        // International bias recommendations
+        recommendations.push({
+            priority: 'high',
+            category: 'International Fairness',
+            icon: '🌍',
+            title: 'International Bias Prevention',
+            message: 'Ensure fair treatment across nationalities and geographic regions',
+            action: 'Implement international anti-discrimination guidelines and cultural sensitivity training'
+        });
+        
+        // Geographic equity recommendations
+        recommendations.push({
+            priority: 'medium',
+            category: 'Geographic Equity',
+            icon: '🗺️',
+            title: 'Geographic Bias Mitigation',
+            message: 'Address location-based discrimination and regional stereotypes',
+            action: 'Evaluate geographic variables for disparate impact and remove biased location criteria'
+        });
+        
+        // Multilingual considerations
+        if (detectedLanguage !== 'english' && Object.keys(multilingualMatches).length > 0) {
+            recommendations.push({
+                priority: 'medium',
+                category: 'Multilingual Fairness',
+                icon: '🌐',
+                title: 'Cross-Cultural Bias Detection',
+                message: `Geopolitical bias detected in ${detectedLanguage} content`,
+                action: 'Implement culturally-aware bias detection and multilingual fairness protocols'
+            });
+        }
+        
+        // Immigration and citizenship recommendations
+        recommendations.push({
+            priority: 'high',
+            category: 'Immigration Fairness',
+            icon: '🛂',
+            title: 'Citizenship Status Neutrality',
+            message: 'Ensure fair treatment regardless of immigration or citizenship status',
+            action: 'Remove citizenship requirements where not legally mandated and implement inclusive policies'
+        });
+        
+        // General best practices
+        recommendations.push({
+            priority: 'low',
+            category: 'Best Practices',
+            icon: '📋',
+            title: 'Geopolitical Bias Prevention',
+            message: 'Implement comprehensive geographic and nationality fairness protocols',
+            action: 'Regular audits, cultural sensitivity training, and international compliance monitoring'
+        });
+        
+        return recommendations.sort((a, b) => {
+            const priorityOrder = { critical: 0, high: 1, medium: 2, low: 3 };
+            return priorityOrder[a.priority] - priorityOrder[b.priority];
+        });
+    }
+
+    /**
+     * Generate specific recommendations for geographic bias (legacy compatibility)
      */
     generateGeographicRecommendations() {
         return [

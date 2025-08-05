@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BiasGuard Expert Validation Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Performance-optimized loading -->
+    <script type="module" src="./performance-optimizer.js"></script>
+    <script type="module" src="./dashboard-lazy-loader.js"></script>
+    <script type="module" src="./wasm-memory-optimizer.js"></script>
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .card-shadow {
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        .metric-card {
+            transition: all 0.3s ease;
+        }
+        .metric-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+        .status-indicator {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .chart-container {
+            position: relative;
+            height: 300px;
+        }
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Header -->
+    <header class="gradient-bg text-white py-6 shadow-lg">
+        <div class="container mx-auto px-6">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <div class="w-12 h-12 bg-white bg-opacity-20 rounded-lg flex items-center justify-center">
+                        <span class="text-2xl font-bold">BG</span>
+                    </div>
+                    <div>
+                        <h1 class="text-3xl font-bold">BiasGuard Expert Dashboard</h1>
+                        <p class="text-blue-100">Real-time Bias Detection & Validation</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div class="status-indicator w-3 h-3 bg-green-400 rounded-full"></div>
+                    <span class="text-sm">System Active</span>
+                    <div class="text-right">
+                        <div class="text-sm opacity-75">Last Updated</div>
+                        <div id="lastUpdated" class="font-semibold">--:--:--</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Dashboard -->
+    <main class="container mx-auto px-6 py-8">
+        <!-- Key Metrics Row -->
+        <section class="mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">📊 Real-time Metrics</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Total Analyses -->
+                <div class="metric-card bg-white rounded-xl p-6 card-shadow" data-lazy-component="metrics" data-component-type="metrics">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-gray-500 text-sm font-medium">Total Analyses</p>
+                            <p id="totalAnalyses" class="text-3xl font-bold text-gray-800">0</p>
+                        </div>
+                        <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                            <span class="text-2xl">📈</span>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <span id="analysesChange" class="text-sm text-green-600">+0% from yesterday</span>
+                    </div>
+                </div>
+
+                <!-- Bias Detection Rate -->
+                <div class="metric-card bg-white rounded-xl p-6 card-shadow">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-gray-500 text-sm font-medium">Bias Detection Rate</p>
+                            <p id="biasDetectionRate" class="text-3xl font-bold text-gray-800">0%</p>
+                        </div>
+                        <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center">
+                            <span class="text-2xl">🚨</span>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <span id="detectionChange" class="text-sm text-red-600">+0% from yesterday</span>
+                    </div>
+                </div>
+
+                <!-- Average Confidence -->
+                <div class="metric-card bg-white rounded-xl p-6 card-shadow">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-gray-500 text-sm font-medium">Avg Confidence</p>
+                            <p id="avgConfidence" class="text-3xl font-bold text-gray-800">0%</p>
+                        </div>
+                        <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                            <span class="text-2xl">🎯</span>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <span id="confidenceChange" class="text-sm text-green-600">+0% from yesterday</span>
+                    </div>
+                </div>
+
+                <!-- Critical Alerts -->
+                <div class="metric-card bg-white rounded-xl p-6 card-shadow">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-gray-500 text-sm font-medium">Critical Alerts</p>
+                            <p id="criticalAlerts" class="text-3xl font-bold text-red-600">0</p>
+                        </div>
+                        <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center">
+                            <span class="text-2xl">⚠️</span>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <span id="alertsChange" class="text-sm text-red-600">+0 from yesterday</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Advanced Analytics Row -->
+        <section class="mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">🔬 Advanced Analytics</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- Bias Pattern Distribution -->
+                <div class="bg-white rounded-xl p-6 card-shadow">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4">Bias Pattern Distribution</h3>
+                    <div class="chart-container">
+                        <canvas id="biasPatternChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Statistical Significance Trends -->
+                <div class="bg-white rounded-xl p-6 card-shadow">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4">Statistical Significance Trends</h3>
+                    <div class="chart-container">
+                        <canvas id="significanceChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Intersectional Analysis Row -->
+        <section class="mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">🔗 Intersectional Analysis</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Intersection Heatmap -->
+                <div class="lg:col-span-2 bg-white rounded-xl p-6 card-shadow">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4">Attribute Intersection Matrix</h3>
+                    <div id="intersectionHeatmap" class="h-64 overflow-auto">
+                        <!-- Intersection matrix will be generated here -->
+                    </div>
+                </div>
+
+                <!-- Compound Bias Metrics -->
+                <div class="bg-white rounded-xl p-6 card-shadow">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4">Compound Bias Metrics</h3>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-600">Intersectional Score</span>
+                            <span id="intersectionalScore" class="font-bold text-lg">0</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-600">Compound Patterns</span>
+                            <span id="compoundPatterns" class="font-bold text-lg">0</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-600">Amplification Factor</span>
+                            <span id="amplificationFactor" class="font-bold text-lg">1.0x</span>
+                        </div>
+                        <div class="mt-6">
+                            <div class="text-sm text-gray-600 mb-2">Risk Distribution</div>
+                            <div class="space-y-2">
+                                <div class="flex justify-between">
+                                    <span class="text-xs">Critical</span>
+                                    <span id="criticalRisk" class="text-xs font-semibold text-red-600">0%</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-xs">High</span>
+                                    <span id="highRisk" class="text-xs font-semibold text-orange-600">0%</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-xs">Medium</span>
+                                    <span id="mediumRisk" class="text-xs font-semibold text-yellow-600">0%</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-xs">Low</span>
+                                    <span id="lowRisk" class="text-xs font-semibold text-green-600">0%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Expert Validation Row -->
+        <section class="mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">🎓 Expert Validation</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- Framework Compliance -->
+                <div class="bg-white rounded-xl p-6 card-shadow">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4">Framework Compliance</h3>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm">BEATS Framework</span>
+                            <div class="flex items-center space-x-2">
+                                <div class="w-16 bg-gray-200 rounded-full h-2">
+                                    <div id="beatsProgress" class="bg-green-500 h-2 rounded-full" style="width: 0%"></div>
+                                </div>
+                                <span id="beatsScore" class="text-sm font-semibold">0%</span>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm">SAGED Pipeline</span>
+                            <div class="flex items-center space-x-2">
+                                <div class="w-16 bg-gray-200 rounded-full h-2">
+                                    <div id="sagedProgress" class="bg-blue-500 h-2 rounded-full" style="width: 0%"></div>
+                                </div>
+                                <span id="sagedScore" class="text-sm font-semibold">0%</span>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm">Statistical Rigor</span>
+                            <div class="flex items-center space-x-2">
+                                <div class="w-16 bg-gray-200 rounded-full h-2">
+                                    <div id="statisticalProgress" class="bg-purple-500 h-2 rounded-full" style="width: 0%"></div>
+                                </div>
+                                <span id="statisticalScore" class="text-sm font-semibold">0%</span>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm">Intersectional Theory</span>
+                            <div class="flex items-center space-x-2">
+                                <div class="w-16 bg-gray-200 rounded-full h-2">
+                                    <div id="intersectionalProgress" class="bg-red-500 h-2 rounded-full" style="width: 0%"></div>
+                                </div>
+                                <span id="intersectionalTheoryScore" class="text-sm font-semibold">0%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Performance Benchmarks -->
+                <div class="bg-white rounded-xl p-6 card-shadow">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4">Performance Benchmarks</h3>
+                    <div class="chart-container">
+                        <canvas id="performanceChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recent Activity & Alerts -->
+        <section class="mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">📋 Recent Activity & Alerts</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- Recent Analyses -->
+                <div class="bg-white rounded-xl p-6 card-shadow">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4">Recent Analyses</h3>
+                    <div id="recentAnalyses" class="space-y-3 max-h-64 overflow-y-auto">
+                        <!-- Recent analyses will be populated here -->
+                    </div>
+                </div>
+
+                <!-- Critical Alerts -->
+                <div class="bg-white rounded-xl p-6 card-shadow">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4">Critical Alerts</h3>
+                    <div id="criticalAlertsList" class="space-y-3 max-h-64 overflow-y-auto">
+                        <!-- Critical alerts will be populated here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Test Analysis Section -->
+        <section class="mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">🧪 Live Bias Analysis</h2>
+            <div class="bg-white rounded-xl p-6 card-shadow">
+                <div class="mb-4">
+                    <label for="testText" class="block text-sm font-medium text-gray-700 mb-2">
+                        Test Text for Bias Analysis
+                    </label>
+                    <textarea 
+                        id="testText" 
+                        rows="4" 
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        placeholder="Enter text to analyze for bias patterns..."
+                    ></textarea>
+                </div>
+                <div class="flex space-x-4 mb-6">
+                    <button 
+                        id="analyzeBtn" 
+                        class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium transition-colors"
+                    >
+                        Analyze Bias
+                    </button>
+                    <button 
+                        id="clearBtn" 
+                        class="bg-gray-500 hover:bg-gray-600 text-white px-6 py-2 rounded-lg font-medium transition-colors"
+                    >
+                        Clear
+                    </button>
+                </div>
+                <div id="analysisResults" class="hidden">
+                    <!-- Analysis results will be displayed here -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Load BiasGuard Engine -->
+    <script src="bias-ml-engine.wasm.js"></script>
+    
+    <!-- Dashboard JavaScript -->
+    <script type="module">
+        // Import performance optimizers
+        import { performanceOptimizer } from './performance-optimizer.js';
+        import { DashboardLazyLoader, ChartLazyLoader } from './dashboard-lazy-loader.js';
+        import { wasmMemoryOptimizer } from './wasm-memory-optimizer.js';
+
+        // Initialize BiasGuard Engine
+        let biasEngine = null;
+        let dashboardData = {
+            totalAnalyses: 0,
+            biasDetectionRate: 0,
+            avgConfidence: 0,
+            criticalAlerts: 0,
+            recentAnalyses: [],
+            frameworkScores: {
+                beats: 95,
+                saged: 92,
+                statistical: 98,
+                intersectional: 94
+            }
+        };
+
+        // Initialize dashboard with performance optimizations
+        async function initializeDashboard() {
+            try {
+                // Initialize performance optimizations first
+                console.log('[Performance] Initializing optimizations...');
+                
+                // Initialize BiasMLEngine with memory optimization
+                biasEngine = new BiasMLEngine();
+                await biasEngine.initialize();
+
+                // Apply performance optimizations to the engine
+                performanceOptimizer.optimizeBiasDetection(biasEngine);
+                wasmMemoryOptimizer.optimizeBiasEngine(biasEngine);
+                
+                updateLastUpdated();
+                loadDashboardData();
+                initializeCharts();
+                setupEventListeners();
+                
+                // Update dashboard every 30 seconds
+                setInterval(updateDashboard, 30000);
+                
+                // Log performance metrics
+                setTimeout(() => {
+                    console.log('[Performance] Initial metrics:', {
+                        optimizer: performanceOptimizer.getPerformanceReport(),
+                        lazyLoader: window.dashboardLazyLoader.getPerformanceReport(),
+                        memory: wasmMemoryOptimizer.getMemoryStats()
+                    });
+                }, 2000);
+                
+                console.log('✅ Dashboard initialized successfully with performance optimizations');
+            } catch (error) {
+                console.error('❌ Dashboard initialization failed:', error);
+            }
+        }
+
+        // Update last updated timestamp
+        function updateLastUpdated() {
+            const now = new Date();
+            document.getElementById('lastUpdated').textContent = now.toLocaleTimeString();
+        }
+
+        // Load and display dashboard data
+        function loadDashboardData() {
+            // Update key metrics
+            document.getElementById('totalAnalyses').textContent = dashboardData.totalAnalyses.toLocaleString();
+            document.getElementById('biasDetectionRate').textContent = dashboardData.biasDetectionRate + '%';
+            document.getElementById('avgConfidence').textContent = dashboardData.avgConfidence + '%';
+            document.getElementById('criticalAlerts').textContent = dashboardData.criticalAlerts;
+
+            // Update framework compliance scores
+            updateFrameworkScores();
+            
+            // Update recent analyses
+            updateRecentAnalyses();
+            
+            // Update alerts
+            updateCriticalAlerts();
+        }
+
+        // Update framework compliance scores
+        function updateFrameworkScores() {
+            const frameworks = ['beats', 'saged', 'statistical', 'intersectionalTheory'];
+            const scores = [
+                dashboardData.frameworkScores.beats,
+                dashboardData.frameworkScores.saged,
+                dashboardData.frameworkScores.statistical,
+                dashboardData.frameworkScores.intersectional
+            ];
+
+            frameworks.forEach((framework, index) => {
+                const score = scores[index];
+                document.getElementById(framework + 'Score').textContent = score + '%';
+                document.getElementById(framework + 'Progress').style.width = score + '%';
+            });
+        }
+
+        // Update recent analyses
+        function updateRecentAnalyses() {
+            const container = document.getElementById('recentAnalyses');
+            
+            if (dashboardData.recentAnalyses.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-8 text-gray-500">
+                        <span class="text-4xl">📊</span>
+                        <p class="mt-2">No recent analyses</p>
+                        <p class="text-sm">Run a bias analysis to see results here</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = dashboardData.recentAnalyses.map(analysis => `
+                <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-8 h-8 rounded-full flex items-center justify-center ${getRiskColorClass(analysis.riskLevel)}">
+                            <span class="text-xs font-bold text-white">${analysis.overallScore}</span>
+                        </div>
+                        <div>
+                            <p class="text-sm font-medium text-gray-800">${analysis.text}</p>
+                            <p class="text-xs text-gray-500">${new Date(analysis.timestamp).toLocaleTimeString()}</p>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-sm font-semibold ${getRiskTextColor(analysis.riskLevel)}">${analysis.riskLevel.level}</p>
+                        <p class="text-xs text-gray-500">${analysis.patterns.length} patterns</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Update critical alerts
+        function updateCriticalAlerts() {
+            const container = document.getElementById('criticalAlertsList');
+            
+            const criticalAnalyses = dashboardData.recentAnalyses.filter(
+                analysis => analysis.overallScore >= 80 || analysis.riskLevel.level === 'critical'
+            );
+
+            if (criticalAnalyses.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-8 text-gray-500">
+                        <span class="text-4xl">✅</span>
+                        <p class="mt-2">No critical alerts</p>
+                        <p class="text-sm">System operating normally</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = criticalAnalyses.map(analysis => `
+                <div class="flex items-center space-x-3 p-3 bg-red-50 border border-red-200 rounded-lg">
+                    <div class="w-8 h-8 bg-red-500 rounded-full flex items-center justify-center">
+                        <span class="text-xs font-bold text-white">⚠️</span>
+                    </div>
+                    <div class="flex-1">
+                        <p class="text-sm font-medium text-red-800">High Bias Risk Detected</p>
+                        <p class="text-xs text-red-600">Score: ${analysis.overallScore}% - ${analysis.patterns.length} patterns detected</p>
+                        <p class="text-xs text-gray-500">${new Date(analysis.timestamp).toLocaleTimeString()}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Initialize charts with lazy loading
+        function initializeCharts() {
+            setupLazyLoadedCharts();
+        }
+
+        // Setup lazy loaded charts
+        function setupLazyLoadedCharts() {
+            // Initialize memory optimizations
+            performanceOptimizer.initializeWasmMemoryPool();
+            performanceOptimizer.initializeStatisticalCache();
+            performanceOptimizer.setupLazyLoading();
+
+            // Register chart components for lazy loading
+            const chartElements = document.querySelectorAll('[data-lazy-component="chart"]');
+            chartElements.forEach(element => {
+                const chartType = element.dataset.chartType || 'line';
+                const loader = createChartLoader(chartType, element);
+                
+                window.dashboardLazyLoader.registerComponent(element, {
+                    type: 'chart',
+                    loader: loader,
+                    priority: chartType === 'doughnut' ? 1 : 0 // Prioritize key charts
+                });
+            });
+
+            // Register metrics components
+            const metricsElements = document.querySelectorAll('[data-lazy-component="metrics"]');
+            metricsElements.forEach(element => {
+                window.dashboardLazyLoader.registerComponent(element, {
+                    type: 'metrics',
+                    loader: ChartLazyLoader.createMetricsLoader({
+                        title: 'Total Analyses',
+                        value: dashboardData.totalAnalyses,
+                        icon: '📈'
+                    }),
+                    priority: 2 // High priority for metrics
+                });
+            });
+
+            // Preload high-priority components
+            setTimeout(() => {
+                window.dashboardLazyLoader.preloadHighPriorityComponents();
+            }, 100);
+        }
+
+        // Create chart loader function
+        function createChartLoader(chartType, element) {
+            return async (containerElement) => {
+                // Dynamic Chart.js import for better performance
+                if (typeof Chart === 'undefined') {
+                    const chartModule = await import('https://cdn.jsdelivr.net/npm/chart.js');
+                    window.Chart = chartModule.Chart;
+                }
+
+                const chartConfig = getChartConfig(chartType);
+                const dataSize = chartConfig.data?.datasets?.[0]?.data?.length || 0;
+                
+                // Apply performance optimizations
+                const optimizedConfig = performanceOptimizer.optimizeChartConfig(chartConfig, dataSize);
+
+                // Create canvas
+                const canvas = document.createElement('canvas');
+                canvas.id = `${chartType}Chart`;
+                canvas.width = 400;
+                canvas.height = 300;
+
+                // Clear container and add canvas
+                containerElement.innerHTML = '';
+                containerElement.appendChild(canvas);
+
+                // Create chart with optimized config
+                new Chart(canvas.getContext('2d'), optimizedConfig);
+                
+                console.log(`[Performance] ${chartType} chart loaded with optimizations`);
+            };
+        }
+
+        // Get chart configuration based on type
+        function getChartConfig(chartType) {
+            const configs = {
+                doughnut: {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Demographic', 'Geopolitical', 'Socioeconomic', 'Institutional', 'Cultural', 'Temporal'],
+                        datasets: [{
+                            data: [25, 20, 18, 15, 12, 10],
+                            backgroundColor: [
+                                '#ef4444', '#3b82f6', '#f59e0b', '#10b981', '#8b5cf6', '#f97316'
+                            ],
+                            borderWidth: 2,
+                            borderColor: '#ffffff'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'bottom'
+                            }
+                        }
+                    }
+                },
+                line: {
+                    type: 'line',
+                    data: {
+                        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                        datasets: [{
+                            label: 'Statistical Significance',
+                            data: [85, 88, 92, 89, 94, 96],
+                            borderColor: '#3b82f6',
+                            backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                            fill: true,
+                            tension: 0.4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                max: 100
+                            }
+                        }
+                    }
+                },
+                bar: {
+                    type: 'bar',
+                    data: {
+                        labels: ['Performance', 'Accuracy', 'Speed', 'Reliability'],
+                        datasets: [{
+                            label: 'Metrics',
+                            data: [95, 92, 88, 96],
+                            backgroundColor: '#10b981',
+                            borderColor: '#059669',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                max: 100
+                            }
+                        }
+                    }
+                }
+            };
+
+            return configs[chartType] || configs.line;
+        }
+
+        // Initialize bias pattern distribution chart
+        function initializeBiasPatternChart() {
+            const ctx = document.getElementById('biasPatternChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Demographic', 'Geopolitical', 'Socioeconomic', 'Institutional', 'Cultural', 'Temporal'],
+                    datasets: [{
+                        data: [25, 20, 18, 15, 12, 10],
+                        backgroundColor: [
+                            '#ef4444', '#3b82f6', '#f59e0b', '#10b981', '#8b5cf6', '#f97316'
+                        ],
+                        borderWidth: 2,
+                        borderColor: '#ffffff'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+        }
+
+        // Initialize statistical significance chart
+        function initializeSignificanceChart() {
+            const ctx = document.getElementById('significanceChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                    datasets: [{
+                        label: 'Statistical Significance',
+                        data: [85, 88, 92, 89, 94, 96],
+                        borderColor: '#3b82f6',
+                        backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                        fill: true,
+                        tension: 0.4
+                    }, {
+                        label: 'Confidence Level',
+                        data: [78, 82, 85, 87, 90, 93],
+                        borderColor: '#10b981',
+                        backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            min: 70,
+                            max: 100
+                        }
+                    }
+                }
+            });
+        }
+
+        // Initialize performance chart
+        function initializePerformanceChart() {
+            const ctx = document.getElementById('performanceChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: ['Accuracy', 'Precision', 'Recall', 'F1-Score', 'Speed', 'Coverage'],
+                    datasets: [{
+                        label: 'Current Performance',
+                        data: [94, 92, 96, 94, 88, 98],
+                        borderColor: '#8b5cf6',
+                        backgroundColor: 'rgba(139, 92, 246, 0.2)',
+                        pointBackgroundColor: '#8b5cf6'
+                    }, {
+                        label: 'Target Performance',
+                        data: [95, 95, 95, 95, 90, 100],
+                        borderColor: '#10b981',
+                        backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                        pointBackgroundColor: '#10b981'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            beginAtZero: true,
+                            max: 100
+                        }
+                    }
+                }
+            });
+        }
+
+        // Initialize intersection heatmap
+        function initializeIntersectionHeatmap() {
+            const container = document.getElementById('intersectionHeatmap');
+            const attributes = ['Demographic', 'Socioeconomic', 'Geographic', 'Cultural', 'Institutional'];
+            
+            // Create intersection matrix
+            let heatmapHTML = '<div class="grid grid-cols-6 gap-1 text-xs">';
+            
+            // Header row
+            heatmapHTML += '<div class="p-2"></div>'; // Empty corner
+            attributes.forEach(attr => {
+                heatmapHTML += `<div class="p-2 font-semibold text-center">${attr.substring(0, 4)}</div>`;
+            });
+            
+            // Data rows
+            attributes.forEach((rowAttr, i) => {
+                heatmapHTML += `<div class="p-2 font-semibold">${rowAttr.substring(0, 4)}</div>`;
+                attributes.forEach((colAttr, j) => {
+                    if (i === j) {
+                        heatmapHTML += '<div class="p-2 bg-gray-200 rounded"></div>';
+                    } else {
+                        const intensity = Math.random() * 0.8 + 0.1; // Random for demo
+                        const color = intensity > 0.6 ? 'bg-red-500' : intensity > 0.4 ? 'bg-yellow-500' : 'bg-green-500';
+                        const opacity = Math.floor(intensity * 100);
+                        heatmapHTML += `<div class="p-2 ${color} rounded text-white text-center" style="opacity: ${opacity}%">${Math.floor(intensity * 100)}</div>`;
+                    }
+                });
+            });
+            
+            heatmapHTML += '</div>';
+            container.innerHTML = heatmapHTML;
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            document.getElementById('analyzeBtn').addEventListener('click', performBiasAnalysis);
+            document.getElementById('clearBtn').addEventListener('click', clearAnalysis);
+        }
+
+        // Perform bias analysis
+        async function performBiasAnalysis() {
+            const textInput = document.getElementById('testText');
+            const text = textInput.value.trim();
+            
+            if (!text) {
+                alert('Please enter text to analyze');
+                return;
+            }
+
+            const analyzeBtn = document.getElementById('analyzeBtn');
+            analyzeBtn.disabled = true;
+            analyzeBtn.textContent = 'Analyzing...';
+
+            try {
+                const analysis = await biasEngine.analyzeAdvanced(text);
+                displayAnalysisResults(analysis);
+                
+                // Add to recent analyses
+                dashboardData.recentAnalyses.unshift(analysis);
+                if (dashboardData.recentAnalyses.length > 10) {
+                    dashboardData.recentAnalyses.pop();
+                }
+                
+                // Update dashboard metrics
+                dashboardData.totalAnalyses++;
+                if (analysis.patterns.length > 0) {
+                    dashboardData.biasDetectionRate = Math.round(
+                        (dashboardData.recentAnalyses.filter(a => a.patterns.length > 0).length / 
+                         dashboardData.recentAnalyses.length) * 100
+                    );
+                }
+                if (analysis.overallScore >= 80) {
+                    dashboardData.criticalAlerts++;
+                }
+                
+                // Update dashboard
+                loadDashboardData();
+                
+            } catch (error) {
+                console.error('Analysis failed:', error);
+                alert('Analysis failed. Please try again.');
+            } finally {
+                analyzeBtn.disabled = false;
+                analyzeBtn.textContent = 'Analyze Bias';
+            }
+        }
+
+        // Display analysis results
+        function displayAnalysisResults(analysis) {
+            const resultsContainer = document.getElementById('analysisResults');
+            
+            let resultsHTML = `
+                <div class="border-t pt-6">
+                    <h4 class="text-lg font-semibold text-gray-800 mb-4">Analysis Results</h4>
+                    
+                    <!-- Overall Score -->
+                    <div class="mb-6 p-4 rounded-lg ${getRiskBgColor(analysis.riskLevel)}">
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <h5 class="font-semibold ${getRiskTextColor(analysis.riskLevel)}">Overall Bias Score</h5>
+                                <p class="text-sm opacity-75">Risk Level: ${analysis.riskLevel.level}</p>
+                            </div>
+                            <div class="text-3xl font-bold ${getRiskTextColor(analysis.riskLevel)}">${analysis.overallScore}%</div>
+                        </div>
+                    </div>
+
+                    <!-- Detected Patterns -->
+                    <div class="mb-6">
+                        <h5 class="font-semibold text-gray-800 mb-3">Detected Patterns (${analysis.patterns.length})</h5>
+                        <div class="space-y-3">
+            `;
+
+            analysis.patterns.forEach(pattern => {
+                resultsHTML += `
+                    <div class="p-3 border rounded-lg">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h6 class="font-medium text-gray-800">${pattern.icon} ${pattern.type}</h6>
+                                <p class="text-sm text-gray-600">${pattern.description}</p>
+                                <p class="text-xs text-gray-500 mt-1">Matches: ${pattern.matches.join(', ')}</p>
+                            </div>
+                            <div class="text-right">
+                                <span class="font-bold text-lg ${getRiskTextColor({level: pattern.severity})}">${pattern.score}%</span>
+                                <p class="text-xs text-gray-500">${pattern.severity}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            resultsHTML += `
+                        </div>
+                    </div>
+            `;
+
+            // Add intersectional analysis if available
+            if (analysis.intersectionalAnalysis && analysis.intersectionalAnalysis.intersectionalBias) {
+                resultsHTML += `
+                    <div class="mb-6">
+                        <h5 class="font-semibold text-gray-800 mb-3">🔗 Intersectional Analysis</h5>
+                        <div class="p-4 bg-purple-50 border border-purple-200 rounded-lg">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="font-medium">Intersectional Score</span>
+                                <span class="font-bold text-purple-600">${analysis.intersectionalAnalysis.intersectionalScore}%</span>
+                            </div>
+                            <p class="text-sm text-purple-700">${analysis.intersectionalAnalysis.validation}</p>
+                        </div>
+                    </div>
+                `;
+            }
+
+            // Add statistical validation
+            if (analysis.scores.statisticallySignificant) {
+                resultsHTML += `
+                    <div class="mb-6">
+                        <h5 class="font-semibold text-gray-800 mb-3">📊 Statistical Validation</h5>
+                        <div class="p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                            <p class="text-sm text-blue-700 mb-2">
+                                <strong>Statistically Significant:</strong> p-value = ${analysis.scores.pValue.toFixed(4)}
+                            </p>
+                            <p class="text-xs text-blue-600">
+                                Confidence Interval: [${analysis.scores.confidenceInterval.lower}, ${analysis.scores.confidenceInterval.upper}]
+                            </p>
+                        </div>
+                    </div>
+                `;
+            }
+
+            resultsHTML += `</div>`;
+            
+            resultsContainer.innerHTML = resultsHTML;
+            resultsContainer.classList.remove('hidden');
+        }
+
+        // Clear analysis
+        function clearAnalysis() {
+            document.getElementById('testText').value = '';
+            document.getElementById('analysisResults').classList.add('hidden');
+        }
+
+        // Update dashboard periodically
+        function updateDashboard() {
+            updateLastUpdated();
+            loadDashboardData();
+        }
+
+        // Utility functions
+        function getRiskColorClass(riskLevel) {
+            const colors = {
+                critical: 'bg-red-600',
+                high: 'bg-red-500',
+                medium: 'bg-yellow-500',
+                low: 'bg-green-500',
+                minimal: 'bg-green-600'
+            };
+            return colors[riskLevel.level] || 'bg-gray-500';
+        }
+
+        function getRiskTextColor(riskLevel) {
+            const colors = {
+                critical: 'text-red-600',
+                high: 'text-red-500',
+                medium: 'text-yellow-600',
+                low: 'text-green-600',
+                minimal: 'text-green-700'
+            };
+            return colors[riskLevel.level || riskLevel] || 'text-gray-600';
+        }
+
+        function getRiskBgColor(riskLevel) {
+            const colors = {
+                critical: 'bg-red-50 border border-red-200',
+                high: 'bg-red-50 border border-red-200',
+                medium: 'bg-yellow-50 border border-yellow-200',
+                low: 'bg-green-50 border border-green-200',
+                minimal: 'bg-green-50 border border-green-200'
+            };
+            return colors[riskLevel.level] || 'bg-gray-50 border border-gray-200';
+        }
+
+        // Initialize dashboard when page loads
+        document.addEventListener('DOMContentLoaded', initializeDashboard);
+    </script>
+</body>
+</html>

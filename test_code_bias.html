@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Code Bias Detection</title>
+</head>
+<body>
+    <h1>Testing BiasGuards with Code Examples</h1>
+    
+    <h2>Test 1: Biased Variable Names</h2>
+    <pre>
+// Example of potentially biased code
+function calculateLoanApproval(applicant) {
+    if (applicant.name.includes('Chang') || applicant.name.includes('Rodriguez')) {
+        return false; // Reject based on name
+    }
+    
+    if (applicant.zipCode.startsWith('90210')) {
+        return true; // Rich neighborhood auto-approve
+    }
+    
+    if (applicant.age > 65) {
+        return false; // Age discrimination
+    }
+    
+    return evaluateCredit(applicant);
+}
+    </pre>
+    
+    <h2>Test 2: Biased Comments</h2>
+    <pre>
+// This algorithm works better for men than women
+// because women are generally bad at math
+function calculateSalary(employee) {
+    let baseSalary = employee.experience * 1000;
+    
+    // Male employees get bonus
+    if (employee.gender === 'male') {
+        baseSalary *= 1.2;
+    }
+    
+    return baseSalary;
+}
+    </pre>
+    
+    <h2>Test 3: Clean Code (Should Score Low)</h2>
+    <pre>
+function calculateSalary(employee) {
+    const baseSalary = employee.experience * 1000;
+    const performanceMultiplier = employee.performanceScore / 100;
+    return baseSalary * performanceMultiplier;
+}
+    </pre>
+    
+    <script>
+        // Let's test these programmatically
+        const testCases = [
+            {
+                name: "Biased Variable Names",
+                code: `function calculateLoanApproval(applicant) {
+    if (applicant.name.includes('Chang') || applicant.name.includes('Rodriguez')) {
+        return false; // Reject based on name
+    }
+    
+    if (applicant.zipCode.startsWith('90210')) {
+        return true; // Rich neighborhood auto-approve  
+    }
+    
+    if (applicant.age > 65) {
+        return false; // Age discrimination
+    }
+    
+    return evaluateCredit(applicant);
+}`
+            },
+            {
+                name: "Biased Comments",
+                code: `// This algorithm works better for men than women
+// because women are generally bad at math
+function calculateSalary(employee) {
+    let baseSalary = employee.experience * 1000;
+    
+    // Male employees get bonus
+    if (employee.gender === 'male') {
+        baseSalary *= 1.2;
+    }
+    
+    return baseSalary;
+}`
+            },
+            {
+                name: "Clean Code",
+                code: `function calculateSalary(employee) {
+    const baseSalary = employee.experience * 1000;
+    const performanceMultiplier = employee.performanceScore / 100;
+    return baseSalary * performanceMultiplier;
+}`
+            }
+        ];
+        
+        console.log("Code Bias Detection Test Results:");
+        console.log("==================================");
+        
+        testCases.forEach((testCase, index) => {
+            console.log(`\nTest ${index + 1}: ${testCase.name}`);
+            console.log("Code:", testCase.code.substring(0, 100) + "...");
+            
+            // Simulate BiasGuards analysis
+            const lowerText = testCase.code.toLowerCase();
+            let biasScore = 0;
+            let detectedPatterns = [];
+            
+            // Check for demographic terms
+            const demographicTerms = ['men', 'women', 'male', 'female', 'age', 'gender', 'name'];
+            const negativeTerms = ['bad', 'worse', 'terrible', 'awful'];
+            const socioeconomicTerms = ['zipcode', 'neighborhood', 'income'];
+            
+            demographicTerms.forEach(term => {
+                if (lowerText.includes(term)) {
+                    detectedPatterns.push(`Demographic: ${term}`);
+                    biasScore += 20;
+                }
+            });
+            
+            negativeTerms.forEach(term => {
+                if (lowerText.includes(term)) {
+                    detectedPatterns.push(`Negative sentiment: ${term}`);
+                    biasScore += 30;
+                }
+            });
+            
+            socioeconomicTerms.forEach(term => {
+                if (lowerText.includes(term)) {
+                    detectedPatterns.push(`Socioeconomic: ${term}`);
+                    biasScore += 15;
+                }
+            });
+            
+            console.log(`Bias Score: ${Math.min(biasScore, 100)}%`);
+            console.log(`Detected Patterns: ${detectedPatterns.join(', ') || 'None'}`);
+        });
+    </script>
+</body>
+</html>
