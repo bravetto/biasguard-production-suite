@@ -3821,16 +3821,233 @@
                 console.log('✅ Redirecting to Stripe Checkout:', data.url);
                 window.location.href = data.url;
                 
-            } catch (error) {
-                console.error('❌ Stripe checkout failed:', error);
-                
-                // Remove loading overlay
-                const loadingOverlay = document.getElementById('stripe-loading');
-                if (loadingOverlay) loadingOverlay.remove();
-                
-                // Show error message
-                alert(`Payment setup failed: ${error.message}\n\nPlease try again or contact support.`);
+                            } catch (error) {
+                    console.error('❌ Stripe checkout failed:', error);
+                    
+                    // Remove loading overlay
+                    const loadingOverlay = document.getElementById('stripe-loading');
+                    if (loadingOverlay) loadingOverlay.remove();
+                    
+                    // Show comprehensive error handling
+                    this.showPaymentError(error, tier, priceId);
+                }
+        };
+
+        // Comprehensive Error Handling System
+        window.showPaymentError = function(error, tier, priceId) {
+            const errorTypes = {
+                'network': {
+                    title: 'Connection Issue',
+                    message: 'Unable to connect to payment services. Please check your internet connection and try again.',
+                    icon: '🌐',
+                    actions: ['retry', 'contact']
+                },
+                'card_error': {
+                    title: 'Payment Method Issue',
+                    message: 'There was an issue with your payment method. Please try a different card or payment method.',
+                    icon: '💳',
+                    actions: ['retry', 'update_payment']
+                },
+                'invalid_request': {
+                    title: 'Request Error',
+                    message: 'There was an issue processing your request. Our team has been notified.',
+                    icon: '⚠️',
+                    actions: ['retry', 'contact']
+                },
+                'api_error': {
+                    title: 'Service Temporarily Unavailable',
+                    message: 'Our payment service is temporarily unavailable. Please try again in a few moments.',
+                    icon: '🔧',
+                    actions: ['retry', 'contact']
+                },
+                'authentication_error': {
+                    title: 'Authentication Issue',
+                    message: 'There was an authentication error. Please refresh the page and try again.',
+                    icon: '🔐',
+                    actions: ['refresh', 'contact']
+                },
+                'rate_limit': {
+                    title: 'Too Many Requests',
+                    message: 'Please wait a moment before trying again.',
+                    icon: '⏱️',
+                    actions: ['wait', 'contact']
+                }
+            };
+
+            // Determine error type
+            let errorType = 'network';
+            const errorMessage = error.message?.toLowerCase() || '';
+            
+            if (errorMessage.includes('card') || errorMessage.includes('payment method')) {
+                errorType = 'card_error';
+            } else if (errorMessage.includes('invalid') || errorMessage.includes('parameter')) {
+                errorType = 'invalid_request';
+            } else if (errorMessage.includes('api') || errorMessage.includes('server')) {
+                errorType = 'api_error';
+            } else if (errorMessage.includes('auth')) {
+                errorType = 'authentication_error';
+            } else if (errorMessage.includes('rate') || errorMessage.includes('limit')) {
+                errorType = 'rate_limit';
             }
+
+            const errorInfo = errorTypes[errorType];
+            
+            // Create error modal
+            const errorModal = document.createElement('div');
+            errorModal.id = 'payment-error-modal';
+            errorModal.style.cssText = `
+                position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+                background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(8px);
+                display: flex; align-items: center; justify-content: center;
+                z-index: 10001; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            `;
+
+            errorModal.innerHTML = `
+                <div style="
+                    background: white; border-radius: 1rem; padding: 2rem; max-width: 500px; margin: 1rem;
+                    box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); text-align: center;
+                ">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">${errorInfo.icon}</div>
+                    <h3 style="margin: 0 0 0.5rem 0; color: #1e293b; font-size: 1.5rem; font-weight: 600;">
+                        ${errorInfo.title}
+                    </h3>
+                    <p style="margin: 0 0 1.5rem 0; color: #64748b; line-height: 1.5;">
+                        ${errorInfo.message}
+                    </p>
+                    
+                    <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;">
+                        ${this.generateErrorActions(errorInfo.actions, tier, priceId)}
+                    </div>
+                    
+                    <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid #e2e8f0;">
+                        <p style="margin: 0; color: #94a3b8; font-size: 0.875rem;">
+                            Error ID: ${Date.now().toString(36).toUpperCase()}
+                        </p>
+                    </div>
+                </div>
+            `;
+
+            document.body.appendChild(errorModal);
+
+            // Track error for analytics
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'payment_error', {
+                    'event_category': 'payment',
+                    'event_label': errorType,
+                    'error_message': error.message
+                });
+            }
+        };
+
+        window.generateErrorActions = function(actions, tier, priceId) {
+            const actionButtons = {
+                'retry': `
+                    <button onclick="this.retryPayment('${tier}', '${priceId}')" 
+                            style="background: #1e40af; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 600; cursor: pointer; transition: all 0.2s;"
+                            onmouseover="this.style.background='#1d4ed8'"
+                            onmouseout="this.style.background='#1e40af'">
+                        Try Again
+                    </button>
+                `,
+                'contact': `
+                    <button onclick="this.openSupportChat()" 
+                            style="background: #f8fafc; color: #475569; border: 2px solid #e2e8f0; padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 600; cursor: pointer; transition: all 0.2s;"
+                            onmouseover="this.style.background='#f1f5f9'"
+                            onmouseout="this.style.background='#f8fafc'">
+                        Contact Support
+                    </button>
+                `,
+                'update_payment': `
+                    <button onclick="this.updatePaymentMethod()" 
+                            style="background: #fbbf24; color: #111827; border: none; padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 600; cursor: pointer; transition: all 0.2s;"
+                            onmouseover="this.style.background='#f59e0b'"
+                            onmouseout="this.style.background='#fbbf24'">
+                        Try Different Payment
+                    </button>
+                `,
+                'refresh': `
+                    <button onclick="window.location.reload()" 
+                            style="background: #059669; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 600; cursor: pointer; transition: all 0.2s;"
+                            onmouseover="this.style.background='#047857'"
+                            onmouseout="this.style.background='#059669'">
+                        Refresh Page
+                    </button>
+                `,
+                'wait': `
+                    <button onclick="this.closeErrorModal(); setTimeout(() => this.retryPayment('${tier}', '${priceId}'), 3000)" 
+                            style="background: #7c3aed; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 600; cursor: pointer; transition: all 0.2s;"
+                            onmouseover="this.style.background='#6d28d9'"
+                            onmouseout="this.style.background='#7c3aed'">
+                        Wait & Retry
+                    </button>
+                `
+            };
+
+            return actions.map(action => actionButtons[action] || '').join('');
+        };
+
+        // Error handling utility functions
+        window.retryPayment = function(tier, priceId) {
+            this.closeErrorModal();
+            setTimeout(() => {
+                initiateStripeCheckout(tier, priceId);
+            }, 1000);
+        };
+
+        window.closeErrorModal = function() {
+            const modal = document.getElementById('payment-error-modal');
+            if (modal) modal.remove();
+        };
+
+        window.openSupportChat = function() {
+            // Implement your support chat system here
+            window.open('mailto:support@biasguards.ai?subject=Payment%20Issue&body=I%20encountered%20an%20issue%20while%20trying%20to%20make%20a%20payment.', '_blank');
+        };
+
+        window.updatePaymentMethod = function() {
+            this.closeErrorModal();
+            // Redirect to pricing page or show alternative payment methods
+            document.getElementById('pricing').scrollIntoView({ behavior: 'smooth' });
+        };
+
+        // Network status monitoring
+        window.addEventListener('online', function() {
+            console.log('✅ Connection restored');
+            // Show toast notification
+            showToast('Connection restored', 'success');
+        });
+
+        window.addEventListener('offline', function() {
+            console.log('⚠️ Connection lost');
+            showToast('Connection lost. Please check your internet connection.', 'warning');
+        });
+
+        // Toast notification system
+        window.showToast = function(message, type = 'info') {
+            const toast = document.createElement('div');
+            toast.style.cssText = `
+                position: fixed; top: 1rem; right: 1rem; z-index: 10002;
+                background: ${type === 'success' ? '#059669' : type === 'warning' ? '#f59e0b' : '#1e40af'};
+                color: white; padding: 1rem 1.5rem; border-radius: 0.5rem;
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+                font-weight: 500; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+                transform: translateX(100%); transition: transform 0.3s ease;
+            `;
+            toast.textContent = message;
+            document.body.appendChild(toast);
+
+            // Animate in
+            setTimeout(() => {
+                toast.style.transform = 'translateX(0)';
+            }, 100);
+
+            // Auto remove
+            setTimeout(() => {
+                toast.style.transform = 'translateX(100%)';
+                setTimeout(() => {
+                    if (toast.parentNode) toast.parentNode.removeChild(toast);
+                }, 300);
+            }, 4000);
         };
         
         // Enhanced Demo Functions

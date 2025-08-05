@@ -93,22 +93,68 @@ export default async function handler(req, res) {
   } catch (error) {
     console.error('❌ Stripe checkout session creation failed:', error);
     
-    // Return user-friendly error messages
+    // Enhanced error handling with detailed responses
+    const errorId = Date.now().toString(36).toUpperCase();
+    let statusCode = 500;
+    let errorMessage = 'An unexpected error occurred';
+    let errorType = 'api_error';
+    let userMessage = 'Please try again or contact support if the issue persists.';
+    
     if (error.type === 'StripeCardError') {
-      res.status(400).json({ error: 'Your card was declined.' });
+      statusCode = 400;
+      errorMessage = 'Your card was declined';
+      errorType = 'card_error';
+      userMessage = 'Please try a different payment method or contact your bank.';
     } else if (error.type === 'StripeRateLimitError') {
-      res.status(429).json({ error: 'Too many requests made to the API too quickly.' });
+      statusCode = 429;
+      errorMessage = 'Too many requests made to the API too quickly';
+      errorType = 'rate_limit';
+      userMessage = 'Please wait a moment before trying again.';
     } else if (error.type === 'StripeInvalidRequestError') {
-      res.status(400).json({ error: 'Invalid parameters were supplied to Stripe.' });
+      statusCode = 400;
+      errorMessage = 'Invalid payment request';
+      errorType = 'invalid_request';
+      userMessage = 'Please check your payment details and try again.';
     } else if (error.type === 'StripeAPIError') {
-      res.status(500).json({ error: 'An error occurred with Stripe API.' });
+      statusCode = 502;
+      errorMessage = 'Payment service temporarily unavailable';
+      errorType = 'api_error';
+      userMessage = 'Our payment service is temporarily unavailable. Please try again in a few moments.';
     } else if (error.type === 'StripeConnectionError') {
-      res.status(500).json({ error: 'A network error occurred.' });
+      statusCode = 503;
+      errorMessage = 'Unable to connect to payment services';
+      errorType = 'network';
+      userMessage = 'Unable to connect to payment services. Please check your connection and try again.';
     } else if (error.type === 'StripeAuthenticationError') {
-      res.status(401).json({ error: 'Authentication with Stripe failed.' });
-    } else {
-      res.status(500).json({ error: 'An unexpected error occurred.' });
+      statusCode = 401;
+      errorMessage = 'Payment authentication failed';
+      errorType = 'authentication_error';
+      userMessage = 'There was an authentication error. Please refresh the page and try again.';
     }
+    
+    // Log detailed error information for monitoring
+    console.error(`[${errorId}] Error Details:`, {
+      type: errorType,
+      statusCode,
+      stripeErrorType: error.type,
+      stripeErrorCode: error.code,
+      message: error.message,
+      requestId: req.headers['x-request-id'],
+      tier,
+      priceId,
+      timestamp: new Date().toISOString()
+    });
+    
+    // Return comprehensive error response
+    res.status(statusCode).json({ 
+      error: errorMessage,
+      type: errorType,
+      message: userMessage,
+      errorId: errorId,
+      timestamp: new Date().toISOString(),
+      retryable: ['rate_limit', 'network', 'api_error'].includes(errorType),
+      supportContact: errorType === 'authentication_error' ? 'support@biasguards.ai' : null
+    });
   }
 }
 

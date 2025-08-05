@@ -383,7 +383,25 @@ class StripeSubscriptionHandler {
 
         } catch (error) {
             console.error('❌ Failed to create checkout session:', error);
-            throw error;
+            
+            // Enhanced error handling for subscription creation
+            let enhancedError = new Error(error.message || 'Payment processing failed');
+            enhancedError.type = error.type || 'network';
+            enhancedError.originalError = error;
+            
+            // Add user-friendly messages based on error type
+            if (error.message?.includes('network') || error.message?.includes('fetch')) {
+                enhancedError.type = 'network';
+                enhancedError.message = 'Unable to connect to payment services. Please check your internet connection and try again.';
+            } else if (error.message?.includes('invalid') || error.message?.includes('parameter')) {
+                enhancedError.type = 'invalid_request';
+                enhancedError.message = 'There was an issue processing your request. Please try again.';
+            } else if (error.message?.includes('rate') || error.message?.includes('limit')) {
+                enhancedError.type = 'rate_limit';
+                enhancedError.message = 'Too many requests. Please wait a moment before trying again.';
+            }
+            
+            throw enhancedError;
         }
     }
 
