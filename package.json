@@ -1,38 +1,33 @@
 {
   "name": "biasguard-landing",
   "version": "1.0.0",
-  "description": "BiasGuard Code landing page - Ultra-lightweight AI bias detection born from fighting for justice",
+  "description": "BiasGuard Code landing page - Lightweight AI bias detection tool supporting justice reform",
   "main": "index.html",
   "type": "module",
   "scripts": {
     "dev": "node dev-server.js",
     "start": "npm run dev",
-    "serve": "npx serve -s . -l 3000",
-    "serve:python": "python3 -m http.server 3000 || python -m http.server 3000",
+    "serve": "npx serve -s . -l 3009",
+    "serve:python": "python3 -m http.server 3009 || python -m http.server 3009",
     "preview": "npx serve -s . -l 4173",
-    "build": "echo 'No build step required for static HTML' && exit 0",
+    "build": "echo 'Static HTML build' && exit 0",
     "deploy": "vercel --prod",
     "deploy:preview": "vercel",
     "validate": "npx html-validate index.html",
-    "lighthouse": "npx lighthouse http://localhost:3000 --output=json --output-path=./lighthouse-report.json",
-    "lighthouse:mobile": "npx lighthouse http://localhost:3000 --preset=perf --form-factor=mobile --throttling-method=devtools --output=json --output-path=./lighthouse-mobile.json",
+    "lighthouse": "npx lighthouse http://localhost:3009 --output=json",
+    "lighthouse:mobile": "npx lighthouse http://localhost:3009 --preset=perf --form-factor=mobile --output=json",
     "test": "npm run validate && npm run lighthouse",
     "test:mobile": "npm run lighthouse:mobile",
-    "clean": "rm -rf .vercel lighthouse-report.json lighthouse-mobile.json",
-    "setup": "echo 'Setting up BiasGuard Code development environment...' && npm install ws --save-dev",
+    "clean": "rm -rf .vercel *.json",
+    "setup": "echo 'Installing dependencies...' && npm install ws --save-dev",
     "precommit": "npm run validate"
   },
   "keywords": [
     "ai",
     "bias-detection",
-    "machine-learning",
     "fairness",
     "justice",
-    "algorithmic-bias",
-    "landing-page",
-    "static-site",
-    "biasguard",
-    "criminal-justice-reform"
+    "biasguard"
   ],
   "author": {
     "name": "BiasGuards.ai",
@@ -49,27 +44,23 @@
   },
   "homepage": "https://biasguards.ai",
   "engines": {
-    "node": ">=16.0.0",
-    "npm": ">=8.0.0"
+    "node": "^16.0.0 || ^18.0.0 || ^20.0.0"
   },
   "devDependencies": {
-    "ws": "^8.14.2"
+    "ws": "^8.18.3"
   },
-  "dependencies": {},
   "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not dead",
-    "not ie 11"
+    "> 2%",
+    "last 3 versions"
   ],
   "config": {
     "domain": "biasguards.ai",
     "title": "BiasGuard Code - AI Bias Detection",
-    "description": "17KB AI bias detection tool born from fighting for justice"
+    "description": "AI bias detection tool supporting justice reform"
   },
   "funding": {
     "type": "individual",
     "url": "https://buy.stripe.com/5kQeVeeX7AzbXm1GdI1A00"
   },
   "private": false
-} 
+}

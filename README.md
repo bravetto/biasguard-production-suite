@@ -1,411 +1,145 @@
-# BiasGuard Code Landing Page
+# BiasGuard Code - AI Bias Detection Landing Page
 
-> **17KB AI Bias Detection Born from Fighting for Justice**
-
-Ultra-lightweight AI bias detection tool landing page built with pure HTML, CSS (Tailwind), and JavaScript. Born from the Jahmere Webb Freedom Portal mission to fight algorithmic injustice.
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/biasguards/biasguard-landing)
-[![Live Site](https://img.shields.io/badge/Live-biasguards.ai-blue)](https://biasguards.ai)
-
-## 🎯 Project Overview
-
-**BiasGuard Code** is a production-ready landing page for an AI bias detection tool that:
-
-- **17KB Package Size** - Ultra-lightweight for maximum performance
-- **<10ms Detection** - Real-time bias analysis
-- **84.9% Accuracy** - Peer-reviewed validation
-- **Zero Dependencies** - Pure JavaScript implementation
-- **Justice Mission** - 15% revenue supports criminal justice reform
-
-### Key Features
-
-- ✅ **Conversion Optimized** - Single CTA focus with social proof
-- ✅ **Mobile Responsive** - Perfect on all devices
-- ✅ **SEO Optimized** - Complete meta tags and structured data
-- ✅ **Performance First** - 100/100 Lighthouse scores
-- ✅ **Security Hardened** - CSP headers and XSS protection
-- ✅ **Analytics Ready** - Google Analytics 4 integration
+> Ultra-lightweight AI bias detection tool for identifying bias patterns. Born from the JAHmere Webb Freedom Portal mission to fight justice injustice.
 
 ## 🚀 Quick Start
 
 ### Prerequisites
+- Node.js 16+ for development
+- Modern web browser
+- Mobile devices for testing
 
-- Node.js 16+ (for development tools)
-- Python 3+ (alternative local server)
-- Git
+### Development Setup
+```bash
+# Navigate to project directory
+cd biasguard-landing
 
-### Local Development
+# Install dependencies:
+npm run setup
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/biasguards/biasguard-landing.git
-   cd biasguard-landing
-   ```
+# Start development server:
+npm run dev
 
-2. **Install development tools** (optional)
-   ```bash
-   npm install -g serve html-validate lighthouse
-   ```
+# Open in browser:
+# Local: http://localhost:3009
+# Network: http://[your-ip]:3009 (for mobile testing)
+```
 
-3. **Start development server**
-   ```bash
-   npm run dev
-   # or
-   python3 -m http.server 3000
-   # or
-   npx serve -s . -l 3000
-   ```
-
-4. **Open in browser**
-   ```
-   http://localhost:3000
-   ```
-
-### Available Scripts
+## 📋 Commands
 
 | Command | Description |
 |---------|-------------|
-| `npm run dev` | Start local development server |
-| `npm run deploy` | Deploy to Vercel production |
-| `npm run deploy:preview` | Deploy preview version |
+| `npm run dev` | Start development server with live reload |
+| `npm start` | Alias for `npm run dev` |
+| `npm run serve` | Static server without live reload |
 | `npm run validate` | Validate HTML markup |
 | `npm run lighthouse` | Run performance audit |
-| `npm test` | Run validation tests |
-| `npm run clean` | Clean build artifacts |
+| `npm test` | Run validation and performance tests |
 
-## 🌐 Deployment
+## 🔧 Development Features
 
-### Vercel Deployment (Recommended)
+- **Live Reload** - Page refreshes when files change
+- **WebSocket Connection** - Real-time communication
+- **Mobile Testing** - Network access for device testing
+- **Performance Monitoring** - Lighthouse integration
+- **HTML Validation** - Markup quality checks
 
-1. **Install Vercel CLI**
+## 📱 Mobile Testing
+
+1. **Network Access Setup:**
    ```bash
-   npm install -g vercel
+   # Dev server displays your network IP
+   npm run dev
+   # Look for: 🌐 Network: http://192.168.1.XXX:3009
    ```
 
-2. **Login to Vercel**
-   ```bash
-   vercel login
-   ```
+2. **Mobile Device Connection:**
+   - Ensure mobile device is on same WiFi network
+   - Use the network URL displayed in terminal
+   - Test on multiple devices
 
-3. **Deploy to production**
-   ```bash
-   npm run deploy
-   ```
+## 🎯 Mission Context
 
-4. **Custom Domain Setup**
-   - Add `biasguards.ai` in Vercel dashboard
-   - Configure DNS A record: `76.76.19.61`
-   - Add CNAME for `www`: `cname.vercel-dns.com`
+This project supports the JAHmere Webb Freedom Portal mission:
+- **Court Date:** August 25, 2025
+- **Mission:** Fighting algorithmic bias in criminal justice
+- **Impact:** 15% of revenue could support legal aid and reform
 
-### Alternative Deployment Options
+## 📊 Technical Specifications
 
-**Netlify:**
+Consider these performance characteristics:
+- **Package Size:** 17KB (ultra-lightweight)
+- **Detection Speed:** <10ms (real-time capable)
+- **Accuracy Rate:** 84.9% (peer-reviewed)
+- **Dependencies:** Zero (pure JavaScript)
+- **Bias Patterns:** 7 types detected
+
+## 🔍 Bias Detection Patterns
+
+The tool might identify these bias types:
+1. **Demographic Parity** - Equal prediction rates across groups
+2. **Equal Opportunity** - Balanced true positive rates
+3. **Equalized Odds** - Both true/false positive balance
+4. **Calibration** - Prediction probability accuracy
+5. **Individual Fairness** - Similar treatment for similar cases
+6. **Counterfactual Fairness** - Consistent across attributes
+7. **Intersectional Bias** - Multi-attribute discrimination
+
+## 🚀 Deployment Options
+
+You might consider these deployment approaches:
+
+### Vercel (Recommended)
 ```bash
-# Drag and drop the project folder to Netlify dashboard
-# or use Netlify CLI
-netlify deploy --prod --dir .
+# You could try:
+npm run deploy
+
+# Or for preview:
+npm run deploy:preview
 ```
 
-**GitHub Pages:**
-```bash
-# Enable GitHub Pages in repository settings
-# Select source: Deploy from a branch (main)
-```
+### Alternative Hosting
+- **Netlify** - Could work well for static hosting
+- **GitHub Pages** - Might be suitable for open source
+- **AWS S3** - Could provide scalable hosting
+- **Cloudflare Pages** - Might offer good performance
 
-**Firebase Hosting:**
-```bash
-firebase init hosting
-firebase deploy
-```
+## 📈 Analytics & Tracking
 
-## 🔧 Environment Variables
+Consider these monitoring features:
+- **Google Analytics 4** - Enhanced ecommerce tracking
+- **Hotjar** - User behavior analysis
+- **Core Web Vitals** - Performance monitoring
+- **Conversion Tracking** - Purchase funnel analysis
 
-### Google Analytics Setup
+## 🛡️ Security Considerations
 
-1. **Create GA4 Property**
-   - Go to [Google Analytics](https://analytics.google.com)
-   - Create new GA4 property for `biasguards.ai`
-   - Copy Measurement ID (format: `G-XXXXXXXXXX`)
-
-2. **Update HTML File**
-   ```html
-   <!-- Replace GA_MEASUREMENT_ID with your actual ID -->
-   <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-   <script>
-     window.dataLayer = window.dataLayer || [];
-     function gtag(){dataLayer.push(arguments);}
-     gtag('js', new Date());
-     gtag('config', 'G-XXXXXXXXXX');
-   </script>
-   ```
-
-3. **Vercel Environment Variables**
-   ```bash
-   # Add in Vercel dashboard or CLI
-   vercel env add GA_MEASUREMENT_ID
-   # Enter your G-XXXXXXXXXX value
-   ```
-
-### Additional Environment Variables
-
-| Variable | Description | Example |
-|----------|-------------|---------|
-| `GA_MEASUREMENT_ID` | Google Analytics 4 ID | `G-XXXXXXXXXX` |
-| `STRIPE_PAYMENT_LINK` | Stripe checkout URL | `https://buy.stripe.com/...` |
-| `NODE_ENV` | Environment mode | `production` |
-
-## ⚡ Performance Optimization
-
-### Current Performance Metrics
-
-- **Lighthouse Score**: 100/100/100/100 (Performance/Accessibility/Best Practices/SEO)
-- **First Contentful Paint**: <1.2s
-- **Largest Contentful Paint**: <2.5s
-- **Cumulative Layout Shift**: <0.1
-- **Total Bundle Size**: ~50KB (including Tailwind CDN)
-
-### Optimization Techniques Applied
-
-1. **Critical Resource Optimization**
-   ```html
-   <!-- Preload critical resources -->
-   <link rel="preload" href="https://cdn.tailwindcss.com" as="script">
-   <link rel="dns-prefetch" href="//www.googletagmanager.com">
-   ```
-
-2. **Image Optimization**
-   - Use WebP format with fallbacks
-   - Implement lazy loading
-   - Optimize hero images for different viewports
-
-3. **Caching Strategy**
-   ```json
-   // vercel.json caching rules
-   "Cache-Control": "public, max-age=31536000, immutable" // Static assets
-   "Cache-Control": "public, max-age=3600, s-maxage=86400" // HTML
-   ```
-
-4. **Bundle Size Monitoring**
-   ```bash
-   # Check bundle size
-   npm run lighthouse
-   # Monitor with bundlephobia for any dependencies
-   ```
-
-### Performance Monitoring
-
-**Setup Core Web Vitals tracking:**
-```javascript
-// Add to Google Analytics
-gtag('config', 'GA_MEASUREMENT_ID', {
-  custom_map: {
-    'custom_parameter_1': 'CLS',
-    'custom_parameter_2': 'FCP',
-    'custom_parameter_3': 'LCP'
-  }
-});
-```
-
-## 🧪 A/B Testing Recommendations
-
-### Testing Framework Setup
-
-1. **Google Optimize Integration**
-   ```html
-   <!-- Add after GA script -->
-   <script src="https://www.googleoptimize.com/optimize.js?id=OPT-XXXXXXX"></script>
-   ```
-
-2. **Simple A/B Testing with JavaScript**
-   ```javascript
-   // Variant assignment
-   const variant = Math.random() < 0.5 ? 'A' : 'B';
-   
-   // Track variant
-   gtag('event', 'experiment_impression', {
-     experiment_id: 'hero_cta_test',
-     variant_id: variant
-   });
-   ```
-
-### Recommended Tests
-
-| Test | Element | Variants | Success Metric |
-|------|---------|----------|----------------|
-| **Hero CTA** | Primary button text | "Start Detecting Bias Now" vs "Get BiasGuard Code" | Click-through rate |
-| **Pricing** | Plan highlight | Professional vs Individual | Conversion rate |
-| **Social Proof** | Testimonial order | Justice-focused vs Technical | Time on page |
-| **Value Prop** | Hero headline | Technical specs vs Justice mission | Scroll depth |
-| **Demo Section** | F12 vs Live demo | Interactive vs Static | Engagement rate |
-
-### A/B Testing Implementation
-
-```javascript
-// Example: Hero CTA Test
-function initCTATest() {
-  const variant = localStorage.getItem('cta_variant') || 
-    (Math.random() < 0.5 ? 'original' : 'variant');
-  
-  localStorage.setItem('cta_variant', variant);
-  
-  if (variant === 'variant') {
-    document.querySelector('.hero-cta').textContent = 'Get BiasGuard Code';
-  }
-  
-  // Track impression
-  gtag('event', 'experiment_impression', {
-    experiment_id: 'hero_cta_test',
-    variant_id: variant
-  });
-}
-
-// Track conversions
-document.querySelectorAll('a[href*="stripe.com"]').forEach(link => {
-  link.addEventListener('click', () => {
-    gtag('event', 'conversion', {
-      experiment_id: 'hero_cta_test',
-      variant_id: localStorage.getItem('cta_variant')
-    });
-  });
-});
-```
-
-## 📊 Analytics Setup
-
-### Google Analytics 4 Events
-
-**Automatic Events Tracked:**
-- Page views
-- Scroll depth (25%, 50%, 75%, 100%)
-- File downloads
-- Outbound clicks
-- Site search
-
-**Custom Events Setup:**
-```javascript
-// CTA clicks
-gtag('event', 'cta_click', {
-  event_category: 'engagement',
-  event_label: 'stripe_checkout',
-  value: 1
-});
-
-// Demo interactions
-gtag('event', 'demo_view', {
-  event_category: 'engagement',
-  event_label: 'f12_demo',
-  value: 1
-});
-
-// Pricing plan views
-gtag('event', 'pricing_view', {
-  event_category: 'conversion',
-  event_label: 'professional_plan',
-  value: 99
-});
-```
-
-### Conversion Tracking
-
-1. **Setup Enhanced Ecommerce**
-   ```javascript
-   // Track purchase intent
-   gtag('event', 'begin_checkout', {
-     currency: 'USD',
-     value: 19.00,
-     items: [{
-       item_id: 'biasguard_individual',
-       item_name: 'BiasGuard Code - Individual',
-       category: 'Software',
-       quantity: 1,
-       price: 19.00
-     }]
-   });
-   ```
-
-2. **Goal Setup in GA4**
-   - Conversion 1: Stripe checkout click
-   - Conversion 2: Demo interaction
-   - Conversion 3: Pricing page scroll
-   - Conversion 4: Contact form submission
-
-### Analytics Dashboard KPIs
-
-| Metric | Target | Description |
-|--------|---------|-------------|
-| **Conversion Rate** | >3% | Stripe checkout clicks / total visitors |
-| **Bounce Rate** | <40% | Single-page sessions |
-| **Time on Page** | >2min | Average session duration |
-| **Demo Engagement** | >15% | F12 demo interactions |
-| **Mobile Traffic** | >60% | Mobile vs desktop split |
-
-## 🔒 Security Features
-
-### Content Security Policy
-```
-default-src 'self';
-script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://www.googletagmanager.com;
-style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com;
-form-action 'self' https://buy.stripe.com;
-```
-
-### Security Headers Applied
-- `X-Content-Type-Options: nosniff`
-- `X-Frame-Options: DENY`
-- `X-XSS-Protection: 1; mode=block`
-- `Strict-Transport-Security: max-age=31536000`
-- `Referrer-Policy: strict-origin-when-cross-origin`
-
-## 🎨 Design System
-
-### Color Palette
-```css
-:root {
-  --justice: #1e40af;   /* Primary blue */
-  --freedom: #059669;   /* Success green */
-  --truth: #dc2626;     /* Alert red */
-  --warning: #f59e0b;   /* Warning amber */
-}
-```
-
-### Typography
-- **Headings**: System font stack (San Francisco, Segoe UI, Roboto)
-- **Body**: System font stack
-- **Code**: SF Mono, Monaco, Consolas
-
-### Responsive Breakpoints
-- **Mobile**: <640px
-- **Tablet**: 640px - 1024px  
-- **Desktop**: >1024px
+You might want to review:
+- **Content Security Policy** - XSS protection
+- **HTTPS Enforcement** - Secure connections
+- **Input Validation** - Form security
+- **Rate Limiting** - API protection
 
 ## 🤝 Contributing
 
-1. Fork the repository
-2. Create feature branch: `git checkout -b feature/amazing-feature`
-3. Commit changes: `git commit -m 'Add amazing feature'`
-4. Push to branch: `git push origin feature/amazing-feature`
-5. Open Pull Request
+Consider these ways to contribute:
+- **Bug Reports** - Help improve the tool
+- **Feature Suggestions** - Share your ideas
+- **Documentation** - Improve clarity
+- **Testing** - Cross-browser validation
 
-### Code Style
-- Use semantic HTML5 elements
-- Follow BEM CSS methodology for custom styles
-- Maintain 100/100/100/100 Lighthouse scores
-- Test on multiple devices and browsers
+## 📄 License
 
-## 📝 License
+This project uses MIT License - you might find it suitable for most use cases.
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+## 🔗 Links
 
-## 🌟 Mission Statement
-
-**BiasGuard Code** represents more than just a landing page—it's a commitment to fighting algorithmic bias through technology and justice. Born from the Jahmere Webb Freedom Portal mission, every conversion supports criminal justice reform.
-
-**15% of all revenue directly funds criminal justice reform initiatives.**
+You could explore these resources:
+- **Live Demo:** [biasguards.ai](https://biasguards.ai)
+- **Documentation:** [docs.biasguards.ai](https://docs.biasguards.ai)
+- **API Reference:** [api.biasguards.ai](https://api.biasguards.ai)
+- **Justice Mission:** [JAHmere Webb Freedom Portal](https://biasguards.ai/#justice-story)
 
 ---
 
-**Live Site**: [biasguards.ai](https://biasguards.ai)  
-**Contact**: [contact@biasguards.ai](mailto:contact@biasguards.ai)  
-**Support the Mission**: [Stripe Checkout](https://buy.stripe.com/5kQeVeeX7AzbXm1GdI1A00)
-
-*Fighting algorithmic bias, one detection at a time.* ⚖️ 
+*Every algorithm protected brings us closer to JAHmere's freedom on August 25, 2025.* 

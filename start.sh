@@ -71,17 +71,17 @@ else
     # Try npx serve
     if command -v npx &> /dev/null; then
         echo -e "${BLUE}🔄 Trying npx serve...${NC}"
-        npx serve -s . -l 3000
+        npx serve -s . -l 3009
     # Try Python 3
     elif command -v python3 &> /dev/null; then
         echo -e "${BLUE}🔄 Trying Python 3 server...${NC}"
         echo -e "${YELLOW}⚠️  Live reload not available with Python server${NC}"
-        python3 -m http.server 3000
+        python3 -m http.server 3009
     # Try Python 2
     elif command -v python &> /dev/null; then
         echo -e "${BLUE}🔄 Trying Python 2 server...${NC}"
         echo -e "${YELLOW}⚠️  Live reload not available with Python server${NC}"
-        python -m SimpleHTTPServer 3000
+        python -m SimpleHTTPServer 3009
     else
         echo -e "${RED}❌ No suitable server found${NC}"
         echo "Please install Node.js, Python, or serve globally:"

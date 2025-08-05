@@ -1,12 +1,11 @@
 {
   "version": 2,
-  "name": "biasguards-ai",
-  "alias": ["biasguards.ai", "www.biasguards.ai"],
-  "regions": ["iad1", "sfo1", "lhr1"],
-  "public": true,
-  "github": {
-    "silent": true
+  "functions": {
+    "app/api/**/*.js": {
+      "runtime": "nodejs18.x"
+    }
   },
+  "buildCommand": "echo 'Static build optimized for performance'",
   "redirects": [
     {
       "source": "/(.*)",
@@ -21,6 +20,32 @@
     }
   ],
   "headers": [
+    {
+      "source": "/(.*\\.(js|css|svg|png|jpg|jpeg|gif|ico|woff|woff2|ttf|eot))",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        }
+      ]
+    },
+    {
+      "source": "/sw.js",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-cache, no-store, must-revalidate"
+        },
+        {
+          "key": "Service-Worker-Allowed",
+          "value": "/"
+        }
+      ]
+    },
     {
       "source": "/(.*)",
       "headers": [
@@ -41,63 +66,34 @@
           "value": "strict-origin-when-cross-origin"
         },
         {
-          "key": "Permissions-Policy",
-          "value": "camera=(), microphone=(), geolocation=(), interest-cohort=()"
-        },
-        {
           "key": "Strict-Transport-Security",
           "value": "max-age=31536000; includeSubDomains; preload"
         },
         {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        },
+        {
+          "key": "Accept-Encoding",
+          "value": "br, gzip, deflate"
+        },
+        {
+          "key": "Alt-Svc",
+          "value": "h3=\":443\"; ma=86400, h2=\":443\"; ma=86400"
+        },
+        {
+          "key": "Link",
+          "value": "</favicon.svg>; rel=preload; as=image; type=image/svg+xml, </site.webmanifest>; rel=preload; as=manifest"
+        },
+        {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://www.googletagmanager.com https://cdn.biasguards.ai; style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://www.google-analytics.com https://api.biasguards.ai; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https://buy.stripe.com;"
-        }
-      ]
-    },
-    {
-      "source": "/(.*\\.(html|css|js|json|xml|txt))",
-      "headers": [
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://unpkg.com https://buy.stripe.com; style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com; img-src 'self' data: https:; connect-src 'self' https:; font-src 'self' https:; manifest-src 'self'; worker-src 'self';"
+        },
         {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        }
-      ]
-    },
-    {
-      "source": "/index.html",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=3600, s-maxage=86400, stale-while-revalidate=604800"
-        }
-      ]
-    },
-    {
-      "source": "/(.*\\.(ico|png|jpg|jpeg|gif|svg|webp))",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
+          "key": "Permissions-Policy",
+          "value": "geolocation=(), microphone=(), camera=(), payment=(self), usb=(), magnetometer=(), gyroscope=(), speaker=()"
         }
       ]
     }
-  ],
-  "rewrites": [
-    {
-      "source": "/",
-      "destination": "/index.html"
-    }
-  ],
-  "trailingSlash": false,
-  "cleanUrls": true,
-  "functions": {
-    "app/api/**/*.js": {
-      "runtime": "nodejs18.x"
-    }
-  },
-  "build": {
-    "env": {
-      "NODE_ENV": "production"
-    }
-  }
+  ]
 } 
