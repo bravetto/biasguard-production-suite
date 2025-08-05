@@ -117,14 +117,23 @@ class StripeSubscriptionHandler {
      */
     async initialize() {
         try {
-            // Load current subscription from localStorage or API
-            this.currentSubscription = this.loadCurrentSubscription();
+            // Check for session ID from successful checkout
+            const sessionId = this.getSessionIdFromUrl();
+            const storedCustomerId = localStorage.getItem('biasguard_customer_id');
             
-            // Check trial status
-            this.checkTrialStatus();
+            if (sessionId) {
+                console.log('📋 Found session ID, loading subscription status...');
+                await this.loadSubscriptionFromAPI(null, sessionId);
+            } else if (storedCustomerId) {
+                console.log('📋 Found stored customer ID, loading subscription status...');
+                await this.loadSubscriptionFromAPI(storedCustomerId);
+            } else {
+                console.log('📋 No existing subscription found, using trial status');
+                this.setTrialDefaults();
+            }
             
-            // Update usage tracking
-            this.updateUsageTracking();
+            // Update UI with current status
+            this.updateSubscriptionUI();
             
             this.isInitialized = true;
             console.log('✅ Stripe Subscription Handler initialized');
@@ -132,7 +141,205 @@ class StripeSubscriptionHandler {
             return true;
         } catch (error) {
             console.error('❌ Failed to initialize Stripe Subscription Handler:', error);
+            this.setTrialDefaults(); // Fallback to trial
             return false;
+        }
+    }
+
+    /**
+     * Load subscription status from API
+     */
+    async loadSubscriptionFromAPI(customerId = null, sessionId = null) {
+        try {
+            const params = new URLSearchParams();
+            if (customerId) params.append('customerId', customerId);
+            if (sessionId) params.append('sessionId', sessionId);
+            
+            const response = await fetch(`/api/subscription-status?${params.toString()}`);
+            const data = await response.json();
+            
+            if (response.ok) {
+                this.subscriptionStatus = data.subscriptionStatus;
+                this.currentTier = data.tier;
+                this.currentUsage = data.usage;
+                this.tierLimits = data.limits;
+                this.tierFeatures = data.features;
+                this.customerId = data.customerId;
+                this.subscriptionId = data.subscriptionId;
+                this.trialEndDate = data.trialEnd ? new Date(data.trialEnd) : null;
+                
+                // Store customer ID for future use
+                if (data.customerId) {
+                    localStorage.setItem('biasguard_customer_id', data.customerId);
+                }
+                
+                console.log('✅ Subscription status loaded:', data);
+                return data;
+            } else {
+                throw new Error(data.error || 'Failed to load subscription status');
+            }
+        } catch (error) {
+            console.error('❌ Failed to load subscription from API:', error);
+            throw error;
+        }
+    }
+
+    /**
+     * Track analysis usage via API
+     */
+    async trackAnalysisUsage(analysisType) {
+        try {
+            const customerId = this.customerId || localStorage.getItem('biasguard_customer_id');
+            
+            const response = await fetch('/api/track-usage', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    customerId: customerId,
+                    analysisType: analysisType
+                })
+            });
+            
+            const data = await response.json();
+            
+            if (response.ok) {
+                // Update local usage data
+                this.currentUsage = data.currentUsage;
+                this.tierLimits = data.limits;
+                
+                // Show warnings if approaching limits
+                if (data.warnings && data.warnings.length > 0) {
+                    this.showUsageWarnings(data.warnings);
+                }
+                
+                console.log(`✅ Usage tracked: ${analysisType}`, data);
+                return data;
+            } else {
+                console.warn('⚠️ Failed to track usage:', data.error);
+                return null;
+            }
+        } catch (error) {
+            console.error('❌ Usage tracking failed:', error);
+            return null;
+        }
+    }
+
+    /**
+     * Set trial defaults for new users
+     */
+    setTrialDefaults() {
+        this.subscriptionStatus = 'trial';
+        this.currentTier = 'starter';
+        this.currentUsage = { basic: 0, counterfactual: 0, neural_howlround: 0 };
+        this.tierLimits = { basic: 100, counterfactual: 5, neural_howlround: 0 };
+        this.tierFeatures = ['basic_analysis'];
+        this.trialEndDate = new Date(Date.now() + 14 * 24 * 60 * 60 * 1000);
+        this.customerId = null;
+        this.subscriptionId = null;
+    }
+
+    /**
+     * Get session ID from URL parameters
+     */
+    getSessionIdFromUrl() {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get('session_id');
+    }
+
+    /**
+     * Update subscription UI elements
+     */
+    updateSubscriptionUI() {
+        const statusDisplay = document.getElementById('usage-display');
+        const subscriptionStatus = document.getElementById('subscription-status');
+        
+        if (statusDisplay) {
+            const basicRemaining = this.tierLimits.basic === Infinity ? '∞' : 
+                Math.max(0, this.tierLimits.basic - this.currentUsage.basic);
+            
+            statusDisplay.innerHTML = `
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <strong>${this.currentTier.charAt(0).toUpperCase() + this.currentTier.slice(1)} Plan</strong>
+                        ${this.subscriptionStatus === 'trial' ? '(Trial)' : ''}
+                    </div>
+                    <div style="font-size: 0.8rem;">
+                        ${basicRemaining} analyses remaining
+                    </div>
+                </div>
+            `;
+        }
+        
+        if (subscriptionStatus && this.subscriptionStatus !== 'trial') {
+            const upgradeBtn = subscriptionStatus.querySelector('button');
+            if (upgradeBtn && this.customerId) {
+                upgradeBtn.textContent = '⚙️ Manage Subscription';
+                upgradeBtn.onclick = () => this.openCustomerPortal();
+            }
+        }
+    }
+
+    /**
+     * Show usage warnings when approaching limits
+     */
+    showUsageWarnings(warnings) {
+        warnings.forEach(warning => {
+            const message = `You've used ${warning.percent}% of your ${warning.type} analyses (${warning.usage}/${warning.limit}). Consider upgrading to avoid service interruption.`;
+            
+            // Show as a toast notification
+            this.showToast(message, 'warning');
+        });
+    }
+
+    /**
+     * Show toast notification
+     */
+    showToast(message, type = 'info') {
+        const toast = document.createElement('div');
+        toast.style.cssText = `
+            position: fixed; top: 20px; right: 20px; z-index: 10000;
+            background: ${type === 'warning' ? '#f59e0b' : '#1e40af'};
+            color: white; padding: 1rem; border-radius: 0.5rem;
+            max-width: 300px; font-size: 0.9rem; line-height: 1.4;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+        `;
+        toast.textContent = message;
+        
+        document.body.appendChild(toast);
+        
+        setTimeout(() => {
+            toast.remove();
+        }, 5000);
+    }
+
+    /**
+     * Open Stripe customer portal
+     */
+    async openCustomerPortal() {
+        try {
+            if (!this.customerId) {
+                throw new Error('No customer ID available');
+            }
+            
+            const response = await fetch('/api/customer-portal', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    customerId: this.customerId,
+                    returnUrl: window.location.href
+                })
+            });
+            
+            const data = await response.json();
+            
+            if (response.ok) {
+                window.location.href = data.url;
+            } else {
+                throw new Error(data.error || 'Failed to create portal session');
+            }
+        } catch (error) {
+            console.error('❌ Failed to open customer portal:', error);
+            alert('Unable to open billing portal. Please contact support.');
         }
     }
 
