@@ -1,38 +1,15 @@
 {
   "version": 2,
-  "functions": {
-    "app/api/**/*.js": {
-      "runtime": "nodejs18.x"
-    }
-  },
   "buildCommand": "echo 'Static build optimized for performance'",
+  "outputDirectory": ".",
   "redirects": [
     {
-      "source": "/(.*)",
-      "has": [
-        {
-          "type": "host",
-          "value": "www.biasguards.ai"
-        }
-      ],
-      "destination": "https://biasguards.ai/$1",
+      "source": "/www/(.*)",
+      "destination": "/$1",
       "permanent": true
     }
   ],
   "headers": [
-    {
-      "source": "/(.*\\.(js|css|svg|png|jpg|jpeg|gif|ico|woff|woff2|ttf|eot))",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        },
-        {
-          "key": "X-Content-Type-Options",
-          "value": "nosniff"
-        }
-      ]
-    },
     {
       "source": "/sw.js",
       "headers": [
@@ -68,32 +45,8 @@
         {
           "key": "Strict-Transport-Security",
           "value": "max-age=31536000; includeSubDomains; preload"
-        },
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        },
-        {
-          "key": "Accept-Encoding",
-          "value": "br, gzip, deflate"
-        },
-        {
-          "key": "Alt-Svc",
-          "value": "h3=\":443\"; ma=86400, h2=\":443\"; ma=86400"
-        },
-        {
-          "key": "Link",
-          "value": "</favicon.svg>; rel=preload; as=image; type=image/svg+xml, </site.webmanifest>; rel=preload; as=manifest"
-        },
-        {
-          "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://unpkg.com https://buy.stripe.com; style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com; img-src 'self' data: https:; connect-src 'self' https:; font-src 'self' https:; manifest-src 'self'; worker-src 'self';"
-        },
-        {
-          "key": "Permissions-Policy",
-          "value": "geolocation=(), microphone=(), camera=(), payment=(self), usb=(), magnetometer=(), gyroscope=(), speaker=()"
         }
       ]
     }
   ]
-} 
+}

@@ -16,6 +16,11 @@
     <!-- Preload critical resources with priority hints -->
     <link rel="preload" href="/favicon.svg" as="image" type="image/svg+xml" fetchpriority="high">
     <link rel="modulepreload" href="https://unpkg.com/web-vitals@3/dist/web-vitals.js" fetchpriority="high">
+    <link rel="preload" href="/code-bias-detection-engine.js" as="script" fetchpriority="high">
+    <link rel="preload" href="/unified-pattern-engine.js" as="script" fetchpriority="high">
+    <link rel="preload" href="/counterfactual-analysis-engine.js" as="script" fetchpriority="high">
+    <link rel="preload" href="/neural-howlround-prevention.js" as="script" fetchpriority="high">
+    <link rel="preload" href="/stripe-subscription-handler.js" as="script" fetchpriority="high">
     
     <!-- Google Analytics 4 (placeholder - replace with actual GA4 ID) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
@@ -482,7 +487,7 @@
                 "url": "https://biasguards.ai/contact"
             },
             "sameAs": [
-                "https://github.com/biasguards",
+                "https://github.com/bravetto/biasguard-production-suite",
                 "https://twitter.com/biasguards"
             ]
         },
@@ -525,7 +530,7 @@
             "addressCountry": "US"
         },
         "sameAs": [
-            "https://github.com/biasguards",
+            "https://github.com/bravetto/biasguard-production-suite",
             "https://twitter.com/biasguards"
         ],
         "makesOffer": {
@@ -836,12 +841,14 @@
                     
                     <!-- GitHub & Community Stats -->
                     <div class="community-badges" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem; margin-bottom: 2rem;">
-                        <div style="display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; background: rgba(0, 0, 0, 0.9); border-radius: 0.5rem; color: white;">
-                            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                            </svg>
-                            <span style="font-weight: 600;">GitHub Repository</span>
-                        </div>
+                        <a href="https://github.com/bravetto/biasguard-production-suite" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit; transition: all 0.2s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 25px rgba(0,0,0,0.15)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                            <div style="display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; background: rgba(0, 0, 0, 0.9); border-radius: 0.5rem; color: white; cursor: pointer;">
+                                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                                </svg>
+                                <span style="font-weight: 600;">GitHub Repository</span>
+                            </div>
+                        </a>
                         <div style="display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; background: rgba(29, 161, 242, 0.1); border: 1px solid rgba(29, 161, 242, 0.2); border-radius: 0.5rem; color: #1da1f2;">
                             <span style="font-weight: 600;">🐦 Follow Our Journey</span>
                         </div>
@@ -1106,7 +1113,7 @@
                                 <div style="margin-top: 0.75rem; color: #1e40af; font-weight: 600; font-size: 0.9rem;">📊 Expected: 8% bias score</div>
                             </div>
                             
-                            <!-- Example 4: Real Code (Your Dashboard API) -->
+                            <!-- Example 4: Real Code Analysis -->
                             <div class="example-card" onclick="loadExample(4)" style="background: white; padding: 1.5rem; border-radius: 0.75rem; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); cursor: pointer; border-left: 4px solid #7c3aed; transition: all 0.2s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 10px 15px -3px rgb(0 0 0 / 0.15)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 6px -1px rgb(0 0 0 / 0.1)'">
                                 <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem;">
                                     <div style="font-weight: bold; color: #111827;">Real Code Analysis</div>
@@ -1114,6 +1121,39 @@
                                 </div>
                                 <div style="color: #6b7280; font-size: 0.9rem; line-height: 1.4;">Actual dashboard-api.js code from this project (849 lines of complex API logic)</div>
                                 <div style="margin-top: 0.75rem; color: #1e40af; font-weight: 600; font-size: 0.9rem;">📊 Actual result: 45% bias score</div>
+                            </div>
+                            
+                            <!-- Code Examples (Hidden by default) -->
+                            <div id="code-examples" style="display: none;">
+                                <!-- Code Example 1: Discriminatory Logic -->
+                                <div class="example-card" onclick="loadCodeExample(1)" style="background: white; padding: 1.5rem; border-radius: 0.75rem; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); cursor: pointer; border-left: 4px solid #dc2626; transition: all 0.2s; margin-bottom: 1rem;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 10px 15px -3px rgb(0 0 0 / 0.15)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 6px -1px rgb(0 0 0 / 0.1)'">
+                                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem;">
+                                        <div style="font-weight: bold; color: #111827;">Discriminatory Logic</div>
+                                        <div style="background: #fee2e2; color: #dc2626; padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.8rem; font-weight: 600;">CRITICAL</div>
+                                    </div>
+                                    <div style="color: #6b7280; font-size: 0.9rem; line-height: 1.4;">Loan approval function with name-based discrimination</div>
+                                    <div style="margin-top: 0.75rem; color: #1e40af; font-weight: 600; font-size: 0.9rem;">💻 Expected: 85% bias score</div>
+                                </div>
+                                
+                                <!-- Code Example 2: Biased Variables -->
+                                <div class="example-card" onclick="loadCodeExample(2)" style="background: white; padding: 1.5rem; border-radius: 0.75rem; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); cursor: pointer; border-left: 4px solid #f59e0b; transition: all 0.2s; margin-bottom: 1rem;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 10px 15px -3px rgb(0 0 0 / 0.15)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 6px -1px rgb(0 0 0 / 0.1)'">
+                                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem;">
+                                        <div style="font-weight: bold; color: #111827;">Biased Variable Names</div>
+                                        <div style="background: #fef3c7; color: #f59e0b; padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.8rem; font-weight: 600;">MEDIUM</div>
+                                    </div>
+                                    <div style="color: #6b7280; font-size: 0.9rem; line-height: 1.4;">Code with problematic variable naming conventions</div>
+                                    <div style="margin-top: 0.75rem; color: #1e40af; font-weight: 600; font-size: 0.9rem;">💻 Expected: 45% bias score</div>
+                                </div>
+                                
+                                <!-- Code Example 3: Clean Code -->
+                                <div class="example-card" onclick="loadCodeExample(3)" style="background: white; padding: 1.5rem; border-radius: 0.75rem; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); cursor: pointer; border-left: 4px solid #059669; transition: all 0.2s; margin-bottom: 1rem;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 10px 15px -3px rgb(0 0 0 / 0.15)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 6px -1px rgb(0 0 0 / 0.1)'">
+                                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem;">
+                                        <div style="font-weight: bold; color: #111827;">Clean Code Example</div>
+                                        <div style="background: #d1fae5; color: #059669; padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.8rem; font-weight: 600;">CLEAN</div>
+                                    </div>
+                                    <div style="color: #6b7280; font-size: 0.9rem; line-height: 1.4;">Fair and unbiased salary calculation function</div>
+                                    <div style="margin-top: 0.75rem; color: #1e40af; font-weight: 600; font-size: 0.9rem;">💻 Expected: 5% bias score</div>
+                                </div>
                             </div>
                         </div>
                         
@@ -1126,9 +1166,34 @@
                     <!-- Right Column: Interactive Demo -->
                     <div class="demo-interface">
                         <div style="background: white; border-radius: 1rem; box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1); padding: 2rem;">
-                            <h3 style="font-size: 1.5rem; font-weight: bold; color: #111827; margin-bottom: 1.5rem; text-align: center;">
+                            <h3 style="font-size: 1.5rem; font-weight: bold; color: #111827; margin-bottom: 1rem; text-align: center;">
                                 Interactive Analysis
                             </h3>
+                            
+                            <!-- Analysis Type Selector -->
+                            <div style="display: flex; justify-content: center; margin-bottom: 1.5rem; background: #f3f4f6; border-radius: 0.5rem; padding: 0.25rem;">
+                                <button id="text-mode-btn" onclick="switchAnalysisMode('text')" 
+                                        style="flex: 1; padding: 0.75rem 1rem; border: none; border-radius: 0.25rem; font-weight: 600; cursor: pointer; transition: all 0.2s; background: #1e40af; color: white;">
+                                    📝 Text Analysis
+                                    <div id="text-engine-status" style="font-size: 0.7rem; opacity: 0.8; margin-top: 0.25rem;">✅ Ready</div>
+                                </button>
+                                <button id="code-mode-btn" onclick="switchAnalysisMode('code')" 
+                                        style="flex: 1; padding: 0.75rem 1rem; border: none; border-radius: 0.25rem; font-weight: 600; cursor: pointer; transition: all 0.2s; background: transparent; color: #6b7280;">
+                                    💻 Code Analysis
+                                    <div id="code-engine-status" style="font-size: 0.7rem; opacity: 0.8; margin-top: 0.25rem;">⏳ Loading...</div>
+                                </button>
+                            </div>
+                            
+                            <!-- Subscription Status Display -->
+                            <div id="subscription-status" style="text-align: center; margin-bottom: 1rem; padding: 0.75rem; background: rgba(59, 130, 246, 0.1); border-radius: 0.5rem; border: 1px solid rgba(59, 130, 246, 0.2);">
+                                <div id="usage-display" style="font-size: 0.9rem; color: #1e40af; margin-bottom: 0.5rem;">
+                                    Loading subscription status...
+                                </div>
+                                <button onclick="if(window.stripeHandler) stripeHandler.showPricingModal()" 
+                                        style="padding: 0.5rem 1rem; background: #1e40af; color: white; border: none; border-radius: 0.25rem; cursor: pointer; font-size: 0.8rem; font-weight: 600;">
+                                    🚀 Upgrade for Advanced Features
+                                </button>
+                            </div>
                             
                     <textarea id="demo-input" 
                                       placeholder="Click an example on the left, or paste your own text here..."
@@ -2062,7 +2127,7 @@
                         <li style="margin-bottom: 0.75rem;"><a href="/api-docs" style="color: #9ca3af; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#fbbf24'" onmouseout="this.style.color='#9ca3af'">API Documentation</a></li>
                         <li style="margin-bottom: 0.75rem;"><a href="/integrations" style="color: #9ca3af; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#fbbf24'" onmouseout="this.style.color='#9ca3af'">Integrations</a></li>
                         <li style="margin-bottom: 0.75rem;"><a href="/changelog" style="color: #9ca3af; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#fbbf24'" onmouseout="this.style.color='#9ca3af'">Changelog</a></li>
-                        <li><a href="https://github.com/biasguards" style="color: #9ca3af; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#fbbf24'" onmouseout="this.style.color='#9ca3af'">Open Source</a></li>
+                        <li><a href="https://github.com/bravetto/biasguard-production-suite" style="color: #9ca3af; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#fbbf24'" onmouseout="this.style.color='#9ca3af'">Open Source</a></li>
                     </ul>
                 </div>
                 
@@ -2683,11 +2748,16 @@
         // Load Advanced WebAssembly ML Engine
         let BiasMLEngine;
         let mlEngine;
+        let codeBiasEngine;
+        let unifiedPatternEngine;
+        let counterfactualAnalysisEngine;
+        let neuralHowlroundPrevention;
+        let stripeHandler;
         
         // Initialize Advanced AI Bias Detection Engine
         async function initializeAdvancedMLEngine() {
             try {
-                console.log('🚀 Loading Advanced WebAssembly ML Engine...');
+                console.log('🚀 Loading Advanced WebAssembly ML Engine and Code Bias Detection...');
                 
                 // Load the WebAssembly ML engine (try multiple paths)
                 let engineCode;
@@ -2726,6 +2796,102 @@
                 const initialized = await mlEngine.initialize();
                 if (initialized) {
                     console.log('✅ Advanced ML Engine ready for JAHmere Webb Freedom Portal');
+                    
+                    // Initialize Unified Pattern Engine (Step 1 of ML System Improvement)
+                    try {
+                        const unifiedEngineResponse = await fetch('/unified-pattern-engine.js');
+                        if (unifiedEngineResponse.ok) {
+                            const unifiedEngineCode = await unifiedEngineResponse.text();
+                            eval(unifiedEngineCode);
+                            unifiedPatternEngine = new UnifiedPatternEngine();
+                            console.log('✅ Unified Pattern Engine ready - Multi-layer detection active');
+                            
+                            // Run validation tests
+                            await unifiedPatternEngine.runValidationTests();
+                        }
+                    } catch (unifiedError) {
+                        console.warn('⚠️ Unified Pattern Engine failed to load:', unifiedError.message);
+                    }
+                    
+                    // Initialize Counterfactual Analysis Engine (Step 3 of ML System Improvement)
+                    try {
+                        const counterfactualEngineResponse = await fetch('/counterfactual-analysis-engine.js');
+                        if (counterfactualEngineResponse.ok) {
+                            const counterfactualEngineCode = await counterfactualEngineResponse.text();
+                            eval(counterfactualEngineCode);
+                            counterfactualAnalysisEngine = new CounterfactualAnalysisEngine();
+                            console.log('✅ Counterfactual Analysis Engine ready - Intersectional bias detection active');
+                        }
+                    } catch (counterfactualError) {
+                        console.warn('⚠️ Counterfactual Analysis Engine failed to load:', counterfactualError.message);
+                    }
+                    
+                    // Initialize Neural Howlround Prevention (Step 4 of ML System Improvement)
+                    try {
+                        const neuralHowlroundResponse = await fetch('/neural-howlround-prevention.js');
+                        if (neuralHowlroundResponse.ok) {
+                            const neuralHowlroundCode = await neuralHowlroundResponse.text();
+                            eval(neuralHowlroundCode);
+                            neuralHowlroundPrevention = new NeuralHowlroundPrevention();
+                            console.log('✅ Neural Howlround Prevention ready - Real-time bias attenuation active');
+                            
+                            // Run validation tests
+                            await neuralHowlroundPrevention.runValidationTests();
+                        }
+                    } catch (neuralError) {
+                        console.warn('⚠️ Neural Howlround Prevention failed to load:', neuralError.message);
+                    }
+                    
+                    // Initialize Stripe Subscription Handler
+                    try {
+                        const stripeResponse = await fetch('/stripe-subscription-handler.js');
+                        if (stripeResponse.ok) {
+                            const stripeCode = await stripeResponse.text();
+                            eval(stripeCode);
+                            stripeHandler = new StripeSubscriptionHandler();
+                            await stripeHandler.initialize();
+                            console.log('✅ Stripe Subscription Handler ready - Monetization active');
+                        }
+                    } catch (stripeError) {
+                        console.warn('⚠️ Stripe Subscription Handler failed to load:', stripeError.message);
+                    }
+                    
+                    // Initialize Code Bias Detection Engine
+                    try {
+                        const codeEngineResponse = await fetch('/code-bias-detection-engine.js');
+                        if (codeEngineResponse.ok) {
+                            const codeEngineCode = await codeEngineResponse.text();
+                            eval(codeEngineCode);
+                            codeBiasEngine = new CodeBiasDetectionEngine();
+                            console.log('✅ Code Bias Detection Engine ready');
+                            
+                            // Update UI status indicator
+                            const codeStatus = document.getElementById('code-engine-status');
+                            if (codeStatus) {
+                                codeStatus.textContent = '✅ Ready';
+                                codeStatus.style.color = '#059669';
+                            }
+                        } else {
+                            throw new Error('Failed to fetch code engine');
+                        }
+                    } catch (codeError) {
+                        console.warn('⚠️ Code Bias Engine failed to load:', codeError.message);
+                        
+                        // Update UI status indicator
+                        const codeStatus = document.getElementById('code-engine-status');
+                        if (codeStatus) {
+                            codeStatus.textContent = '❌ Unavailable';
+                            codeStatus.style.color = '#dc2626';
+                        }
+                        
+                        // Disable code mode button
+                        const codeBtn = document.getElementById('code-mode-btn');
+                        if (codeBtn) {
+                            codeBtn.style.opacity = '0.6';
+                            codeBtn.style.cursor = 'not-allowed';
+                            codeBtn.title = 'Code analysis engine failed to load';
+                        }
+                    }
                     
                     // Update UI to show advanced features are available
                     const scanBtn = document.getElementById('scan-btn');
@@ -3159,10 +3325,56 @@
                 </div>
             `).join('');
             
-            // Display recommendations
-            recommendations.innerHTML = analysis.recommendations.map(rec => 
-                `<div style="margin-bottom: 0.5rem;">• ${rec}</div>`
-            ).join('');
+            // Display recommendations (including counterfactual analysis)
+            let allRecommendations = analysis.recommendations || [];
+            
+            // Add counterfactual recommendations if available
+            if (counterfactualAnalysis && counterfactualAnalysis.hasCounterfactuals) {
+                const cfRecommendations = counterfactualAnalysis.recommendations || [];
+                allRecommendations = [...allRecommendations, ...cfRecommendations].slice(0, 8);
+            }
+            
+            recommendations.innerHTML = allRecommendations.map(rec => {
+                const recText = typeof rec === 'string' ? rec : rec.message || rec;
+                const priority = typeof rec === 'object' ? rec.priority : 'medium';
+                const priorityColor = priority === 'high' ? '#ef4444' : priority === 'medium' ? '#f59e0b' : '#6b7280';
+                return `<div style="margin-bottom: 0.5rem; border-left: 2px solid ${priorityColor}; padding-left: 0.5rem;">• ${recText}</div>`;
+            }).join('');
+            
+            // Display counterfactual analysis results if available
+            if (counterfactualAnalysis && counterfactualAnalysis.hasCounterfactuals) {
+                const counterfactualSection = document.createElement('div');
+                counterfactualSection.style.cssText = 'margin-top: 1.5rem; padding: 1rem; background: rgba(59, 130, 246, 0.1); border-radius: 0.5rem; border-left: 4px solid #3b82f6;';
+                
+                const cfTitle = document.createElement('div');
+                cfTitle.style.cssText = 'font-weight: 600; margin-bottom: 0.75rem; color: #1e40af; font-size: 1.1rem;';
+                cfTitle.textContent = '🔄 Counterfactual Analysis Results';
+                
+                const cfContent = document.createElement('div');
+                cfContent.innerHTML = `
+                    <div style="margin-bottom: 0.5rem;">
+                        <strong>Demographic Groups Detected:</strong> ${counterfactualAnalysis.detectedDemographics.length}
+                    </div>
+                    <div style="margin-bottom: 0.5rem;">
+                        <strong>Counterfactual Variations:</strong> ${counterfactualAnalysis.counterfactualVariations}
+                    </div>
+                    ${counterfactualAnalysis.statisticalAnalysis?.isStatisticallySignificant ? 
+                        '<div style="color: #ef4444; font-weight: 600; margin-bottom: 0.5rem;">⚠️ Statistically significant bias detected</div>' : 
+                        '<div style="color: #059669; margin-bottom: 0.5rem;">✅ No statistically significant bias detected</div>'
+                    }
+                    ${counterfactualAnalysis.intersectionalAnalysis?.intersectionalBiasDetected > 0 ? 
+                        `<div style="color: #f59e0b; font-weight: 600; margin-bottom: 0.5rem;">📊 Intersectional bias detected in ${counterfactualAnalysis.intersectionalAnalysis.intersectionalBiasDetected} categories</div>` : 
+                        ''
+                    }
+                    <div style="margin-top: 0.75rem; font-size: 0.9rem; opacity: 0.8;">
+                        Overall Bias Assessment: <strong>${counterfactualAnalysis.overallBiasAssessment.score}% (${counterfactualAnalysis.overallBiasAssessment.level})</strong>
+                    </div>
+                `;
+                
+                counterfactualSection.appendChild(cfTitle);
+                counterfactualSection.appendChild(cfContent);
+                resultsDiv.appendChild(counterfactualSection);
+            }
             
             resultsDiv.style.display = 'block';
             resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
@@ -3554,6 +3766,8 @@
         window.prefetchOnHover = prefetchOnHover;
         
         // Enhanced Demo Functions
+        let currentAnalysisMode = 'text'; // 'text' or 'code'
+        
         const demoExamples = {
             1: {
                 text: "Women are typically worse at technical roles because they lack the logical thinking required for programming. Studies show that men's brains are naturally better suited for mathematical and analytical tasks, which is why most successful engineers and developers are male.",
@@ -3816,7 +4030,11 @@ class BiasGuardDashboardAPI {
             
             // Track demo interaction start
             const trackingStartTime = performance.now();
-            trackConversionFunnel('demo_started', { textLength: text.length });
+            trackConversionFunnel('demo_started', { 
+                textLength: text.length, 
+                analysisMode: currentAnalysisMode,
+                isCodeAnalysis: currentAnalysisMode === 'code'
+            });
             
             // Instant button feedback
             btn.disabled = true;
@@ -3843,12 +4061,123 @@ class BiasGuardDashboardAPI {
             // Track start time for processing display
             const startTime = performance.now();
             
+            // Check subscription limits before analysis
+            if (stripeHandler && !stripeHandler.canPerformAnalysis('basic')) {
+                stripeHandler.showUpgradeModal('usage_limit');
+                return;
+            }
+            
             // Optimized for cash flow - faster response
             await new Promise(resolve => setTimeout(resolve, 300));
             
             try {
-                // Use existing ML engine
-                const analysis = await mlEngine.analyzeAdvanced(text);
+                let analysis;
+                
+                // Determine analysis type based on current mode
+                if (currentAnalysisMode === 'code' && codeBiasEngine) {
+                    try {
+                        // Use code bias detection engine
+                        analysis = await codeBiasEngine.analyzeCode(text, { filename: 'user_input.js' });
+                        console.log('🔍 Code bias analysis completed:', analysis);
+                    } catch (codeError) {
+                        console.warn('⚠️ Code analysis failed, falling back to unified engine:', codeError);
+                        // Fallback to unified pattern engine
+                        if (unifiedPatternEngine) {
+                            analysis = await unifiedPatternEngine.analyzeUnified(text);
+                            analysis.fallbackUsed = true;
+                            analysis.fallbackReason = 'Code analysis engine error';
+                        } else {
+                            analysis = await mlEngine.analyzeAdvanced(text);
+                            analysis.fallbackUsed = true;
+                            analysis.fallbackReason = 'Code analysis engine error, unified engine unavailable';
+                        }
+                    }
+                } else if (currentAnalysisMode === 'code' && !codeBiasEngine) {
+                    console.warn('⚠️ Code bias engine not available, using unified pattern engine');
+                    // Use unified pattern engine as fallback
+                    if (unifiedPatternEngine) {
+                        analysis = await unifiedPatternEngine.analyzeUnified(text);
+                        analysis.fallbackUsed = true;
+                        analysis.fallbackReason = 'Code analysis engine not loaded';
+                    } else {
+                        analysis = await mlEngine.analyzeAdvanced(text);
+                        analysis.fallbackUsed = true;
+                        analysis.fallbackReason = 'Code analysis and unified engines not available';
+                    }
+                } else {
+                    // Use unified pattern engine as primary for text analysis (Step 1 improvement)
+                    if (unifiedPatternEngine) {
+                        try {
+                            analysis = await unifiedPatternEngine.analyzeUnified(text);
+                            console.log('🔧 Unified pattern analysis completed:', analysis);
+                        } catch (unifiedError) {
+                            console.warn('⚠️ Unified engine failed, falling back to WebAssembly engine:', unifiedError);
+                            analysis = await mlEngine.analyzeAdvanced(text);
+                            analysis.fallbackUsed = true;
+                            analysis.fallbackReason = 'Unified pattern engine error';
+                        }
+                    } else {
+                        // Fallback to original WebAssembly engine
+                        analysis = await mlEngine.analyzeAdvanced(text);
+                        console.log('📝 WebAssembly ML analysis completed:', analysis);
+                    }
+                }
+                
+                // Step 3: Advanced Counterfactual Analysis (if available and subscription allows)
+                let counterfactualAnalysis = null;
+                if (counterfactualAnalysisEngine && currentAnalysisMode === 'text') {
+                    if (!stripeHandler || stripeHandler.canPerformAnalysis('counterfactual')) {
+                        try {
+                            console.log('🔄 Running counterfactual analysis...');
+                            counterfactualAnalysis = await counterfactualAnalysisEngine.analyzeCounterfactual(
+                                text, 
+                                { unifiedEngine: unifiedPatternEngine }
+                            );
+                            console.log('✅ Counterfactual analysis completed:', counterfactualAnalysis);
+                            
+                            // Track usage
+                            if (stripeHandler) stripeHandler.trackAnalysisUsage('counterfactual');
+                        } catch (cfError) {
+                            console.warn('⚠️ Counterfactual analysis failed:', cfError);
+                        }
+                    } else {
+                        console.log('🔒 Counterfactual analysis requires subscription upgrade');
+                    }
+                }
+                
+                // Step 4: Neural Howlround Prevention (Enterprise feature)
+                if (neuralHowlroundPrevention && analysis.overallScore > 60) {
+                    if (!stripeHandler || stripeHandler.canPerformAnalysis('neural_howlround')) {
+                        try {
+                            console.log('🧠 Applying neural howlround prevention...');
+                            
+                            // Update bias history for howlround detection
+                            neuralHowlroundPrevention.updateBiasHistory(analysis);
+                            
+                            // Detect howlround patterns
+                            const howlroundDetection = neuralHowlroundPrevention.detectNeuralHowlround(
+                                neuralHowlroundPrevention.biasHistory
+                            );
+                            
+                            // Apply attenuation if needed
+                            if (howlroundDetection.detected || analysis.overallScore > 75) {
+                                analysis = await neuralHowlroundPrevention.applyBiasAttenuation(
+                                    analysis.overallScore, 
+                                    analysis
+                                );
+                                console.log('✅ Neural howlround prevention applied');
+                            }
+                        } catch (neuralError) {
+                            console.warn('⚠️ Neural howlround prevention failed:', neuralError);
+                        }
+                    }
+                }
+                
+                // Track basic analysis usage
+                if (stripeHandler) {
+                    stripeHandler.trackAnalysisUsage('basic');
+                }
+                
                 const processingTime = Math.round(performance.now() - startTime);
                 
                 // Display results with conversion focus
@@ -3859,29 +4188,67 @@ class BiasGuardDashboardAPI {
                     { level: 'LOW', color: '#059669', emoji: '✅' };
                 
                 results.innerHTML = `
+                    ${analysis.fallbackUsed ? `
+                        <div style="background: #fef3c7; border: 1px solid #f59e0b; border-radius: 0.5rem; padding: 1rem; margin-bottom: 1rem;">
+                            <div style="display: flex; align-items: center;">
+                                <span style="font-size: 1.2rem; margin-right: 0.5rem;">⚠️</span>
+                                <div>
+                                    <strong style="color: #92400e;">Fallback Analysis Used</strong>
+                                    <p style="margin: 0.25rem 0 0 0; color: #92400e; font-size: 0.9rem;">${analysis.fallbackReason}</p>
+                                </div>
+                            </div>
+                        </div>
+                    ` : ''}
+                    
                     <div style="border-left: 4px solid ${riskLevel.color}; padding-left: 1rem; margin-bottom: 2rem;">
                         <h3 style="color: ${riskLevel.color}; font-size: 1.5rem; margin: 0 0 0.5rem 0;">
                             ${riskLevel.emoji} ${riskLevel.level} BIAS RISK
+                            ${currentAnalysisMode === 'code' && !analysis.fallbackUsed ? ' (CODE)' : ''}
                         </h3>
                         <p style="font-size: 1.25rem; font-weight: 600; color: #111827; margin: 0;">
                             Bias Score: ${Math.round(analysis.overallScore)}%
+                            ${analysis.language && analysis.language !== 'text' ? ` • Language: ${analysis.language.toUpperCase()}` : ''}
                         </p>
                     </div>
                     
-                    ${analysis.patterns.length > 0 ? `
+                    ${analysis.patterns && analysis.patterns.length > 0 ? `
                         <div style="margin-bottom: 2rem;">
                             <h4 style="color: #111827; margin-bottom: 1rem;">🔍 Detected Patterns:</h4>
-                            ${analysis.patterns.map(pattern => `
+                            ${analysis.patterns.map(pattern => {
+                                const patternTitle = currentAnalysisMode === 'code' ? 
+                                    pattern.type.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase()) :
+                                    pattern.type.replace(/([A-Z])/g, ' $1');
+                                
+                                const matchDisplay = currentAnalysisMode === 'code' && pattern.matches ? 
+                                    pattern.matches.map(match => `Line ${match.line}: ${match.text.substring(0, 80)}${match.text.length > 80 ? '...' : ''}`).join('<br>') :
+                                    Array.isArray(pattern.matches) ? pattern.matches.join(', ') : 
+                                    typeof pattern.matches === 'string' ? pattern.matches : 'Pattern detected';
+                                
+                                return `
                                 <div style="background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 0.5rem; padding: 1rem; margin-bottom: 0.5rem;">
-                                    <strong style="color: ${pattern.severity === 'high' ? '#dc2626' : pattern.severity === 'medium' ? '#f59e0b' : '#6b7280'};">
-                                        ${pattern.type.replace(/([A-Z])/g, ' $1')} Bias (${pattern.severity})
+                                    <div style="display: flex; align-items: center; margin-bottom: 0.5rem;">
+                                        <span style="font-size: 1.2rem; margin-right: 0.5rem;">${pattern.icon || '⚠️'}</span>
+                                        <strong style="color: ${pattern.severity === 'critical' || pattern.severity === 'high' ? '#dc2626' : pattern.severity === 'medium' ? '#f59e0b' : '#6b7280'};">
+                                            ${patternTitle} (${pattern.severity})
                                     </strong>
-                                    <p style="margin: 0.5rem 0 0 0; color: #6b7280;">${pattern.description}</p>
-                                    <p style="margin: 0.5rem 0 0 0; font-size: 0.875rem; color: #9ca3af;">
-                                        Found: ${pattern.matches.join(', ')}
-                                    </p>
                                 </div>
-                            `).join('')}
+                                    <p style="margin: 0.5rem 0; color: #6b7280;">${pattern.description}</p>
+                                    ${matchDisplay ? `
+                                        <div style="background: #f3f4f6; padding: 0.75rem; border-radius: 0.25rem; margin-top: 0.5rem; font-family: monospace; font-size: 0.8rem; color: #374151; line-height: 1.4;">
+                                            ${matchDisplay}
+                                        </div>
+                                    ` : ''}
+                                    ${pattern.recommendations && pattern.recommendations.length > 0 ? `
+                                        <div style="margin-top: 0.75rem;">
+                                            <strong style="color: #059669; font-size: 0.9rem;">💡 Recommendations:</strong>
+                                            <ul style="margin: 0.25rem 0 0 1rem; padding: 0; color: #6b7280; font-size: 0.85rem;">
+                                                ${pattern.recommendations.slice(0, 3).map(rec => `<li style="margin-bottom: 0.25rem;">${rec}</li>`).join('')}
+                                            </ul>
+                                        </div>
+                                    ` : ''}
+                                </div>
+                            `;
+                            }).join('')}
                         </div>
                     ` : ''}
                     
@@ -3923,7 +4290,10 @@ class BiasGuardDashboardAPI {
                     analysisTime: processingTime,
                     biasScore: Math.round(analysis.overallScore),
                     category: riskLevel.level.toLowerCase(),
-                    patternsFound: analysis.patterns.length
+                    patternsFound: analysis.patterns ? analysis.patterns.length : 0,
+                    analysisMode: currentAnalysisMode,
+                    isCodeAnalysis: currentAnalysisMode === 'code',
+                    language: analysis.language || 'text'
                 });
                 
                 // Show post-demo conversion after a delay
@@ -3992,6 +4362,182 @@ class BiasGuardDashboardAPI {
                 }, 500);
             };
         }
+        
+        // Code Examples for Code Analysis Mode
+        const codeExamples = {
+            1: {
+                code: `function calculateLoanApproval(applicant) {
+    // Discriminatory logic based on name
+    if (applicant.name.includes('Chang') || applicant.name.includes('Rodriguez')) {
+        return false; // Reject based on ethnicity-associated names
+    }
+    
+    // Wealth-based discrimination
+    if (applicant.zipCode.startsWith('90210')) {
+        return true; // Rich neighborhood auto-approve
+    }
+    
+    // Age discrimination
+    if (applicant.age > 65) {
+        return false; // Reject elderly applicants
+    }
+    
+    return evaluateCredit(applicant);
+}`,
+                expectedScore: 85,
+                category: "discriminatory-logic",
+                language: "javascript"
+            },
+            2: {
+                code: `// This system works better for men than women
+// because women are generally bad at math
+function calculateSalary(employee) {
+    let baseSalary = employee.experience * 1000;
+    
+    // Use blacklist for certain departments
+    const blackList = ['diversity', 'inclusion'];
+    if (blackList.includes(employee.department)) {
+        baseSalary *= 0.8; // Reduce salary
+    }
+    
+    // Male employees get bonus (biased logic)
+    if (employee.gender === 'male') {
+        baseSalary *= 1.2;
+    }
+    
+    // manHours calculation (biased variable naming)
+    const manHours = employee.hoursWorked;
+    
+    return baseSalary;
+}`,
+                expectedScore: 45,
+                category: "biased-variables",
+                language: "javascript"
+            },
+            3: {
+                code: `function calculateSalary(employee) {
+    const baseSalary = employee.experience * 1000;
+    const performanceMultiplier = employee.performanceScore / 100;
+    const skillBonus = employee.certifications * 500;
+    
+    return baseSalary * performanceMultiplier + skillBonus;
+}
+
+function evaluateCandidate(candidate) {
+    const skills = candidate.technicalSkills;
+    const experience = candidate.yearsExperience;
+    const portfolio = candidate.portfolioQuality;
+    
+    return (skills * 0.4) + (experience * 0.3) + (portfolio * 0.3);
+}`,
+                expectedScore: 5,
+                category: "clean-code",
+                language: "javascript"
+            }
+        };
+        
+        // Analysis Mode Switching with Architecture Optimization
+        window.switchAnalysisMode = function(mode) {
+            // Validate mode
+            if (!['text', 'code'].includes(mode)) {
+                console.warn('Invalid analysis mode:', mode);
+                return;
+            }
+            
+            currentAnalysisMode = mode;
+            
+            // Get UI elements with error checking
+            const textBtn = document.getElementById('text-mode-btn');
+            const codeBtn = document.getElementById('code-mode-btn');
+            const textExamples = document.querySelector('.demo-examples > div:not(#code-examples)');
+            const codeExamplesDiv = document.getElementById('code-examples');
+            const input = document.getElementById('demo-input');
+            
+            // Check if required elements exist
+            if (!textBtn || !codeBtn || !input) {
+                console.error('Required UI elements not found for mode switching');
+                return;
+            }
+            
+            if (mode === 'text') {
+                // Update button styles
+                textBtn.style.background = '#1e40af';
+                textBtn.style.color = 'white';
+                codeBtn.style.background = 'transparent';
+                codeBtn.style.color = '#6b7280';
+                
+                // Show text examples, hide code examples
+                if (textExamples) textExamples.style.display = 'block';
+                if (codeExamplesDiv) codeExamplesDiv.style.display = 'none';
+                
+                // Update placeholder
+                input.placeholder = "Click an example on the left, or paste your own text here...";
+                input.style.fontFamily = "'Inter', system-ui, -apple-system, sans-serif";
+                
+            } else if (mode === 'code') {
+                // Check if code engine is available
+                if (!codeBiasEngine) {
+                    console.warn('Code analysis engine not available, staying in text mode');
+                    // Show user notification
+                    const notification = document.createElement('div');
+                    notification.style.cssText = 'position: fixed; top: 20px; right: 20px; background: #fef3c7; border: 1px solid #f59e0b; color: #92400e; padding: 1rem; border-radius: 0.5rem; z-index: 1000; max-width: 300px;';
+                    notification.innerHTML = '⚠️ Code analysis engine is not available. Using text analysis mode.';
+                    document.body.appendChild(notification);
+                    setTimeout(() => notification.remove(), 4000);
+                    return;
+                }
+                
+                // Update button styles
+                codeBtn.style.background = '#1e40af';
+                codeBtn.style.color = 'white';
+                textBtn.style.background = 'transparent';
+                textBtn.style.color = '#6b7280';
+                
+                // Show code examples, hide text examples
+                if (textExamples) textExamples.style.display = 'none';
+                if (codeExamplesDiv) codeExamplesDiv.style.display = 'block';
+                
+                // Update placeholder and font
+                input.placeholder = "Click a code example on the left, or paste your own code here...";
+                input.style.fontFamily = "'Fira Code', 'Monaco', 'Consolas', monospace";
+            }
+            
+            // Clear current input and results
+            if (typeof clearDemo === 'function') {
+                clearDemo();
+            } else {
+                // Fallback clear functionality
+                const input = document.getElementById('demo-input');
+                const results = document.getElementById('demo-results');
+                if (input) input.value = '';
+                if (results) results.style.display = 'none';
+            }
+        };
+        
+        // Load Code Example
+        window.loadCodeExample = function(exampleId) {
+            const example = codeExamples[exampleId];
+            if (!example) return;
+            
+            const input = document.getElementById('demo-input');
+            const results = document.getElementById('demo-results');
+            
+            // Clear previous results
+            results.style.display = 'none';
+            
+            // Load example code
+            input.value = example.code;
+            input.style.height = 'auto';
+            input.style.height = Math.max(200, input.scrollHeight) + 'px';
+            
+            // Update analyze button
+            updateAnalyzeButton();
+            
+            // Track example loading
+            if (typeof trackEvent !== 'undefined') {
+                trackEvent('demo', 'code_example_loaded', null, `code_example_${exampleId}`);
+            }
+        };
         
         // Reset demo function
         window.resetDemo = function() {
