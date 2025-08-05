@@ -139,58 +139,78 @@ class StripeSubscriptionHandler {
     /**
      * Create Stripe checkout session for subscription
      */
-    async createCheckoutSession(tier, options = {}) {
+    async createCheckoutSession(tier, _options = {}) {
         const pricingTier = this.pricingTiers[tier];
         if (!pricingTier) {
             throw new Error(`Invalid pricing tier: ${tier}`);
         }
 
         try {
-            // In a real implementation, this would call your backend API
-            const checkoutData = {
-                mode: 'subscription',
-                line_items: [{
-                    price: pricingTier.priceId,
-                    quantity: 1
-                }],
-                success_url: `${window.location.origin}/subscription-success?tier=${tier}`,
-                cancel_url: `${window.location.origin}/pricing`,
-                allow_promotion_codes: true,
-                billing_address_collection: 'required',
-                customer_email: options.email || null,
-                metadata: {
+            console.log('🔄 Creating Stripe checkout session for tier:', tier);
+            
+            // Call the backend API to create a real Stripe checkout session
+            const response = await fetch('/api/create-checkout-session', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    priceId: pricingTier.priceId,
                     tier: tier,
-                    source: 'biasguard_landing',
-                    features: JSON.stringify(pricingTier.features)
-                },
-                subscription_data: {
-                    trial_period_days: 14,
-                    metadata: {
-                        tier: tier,
-                        limits: JSON.stringify(pricingTier.limits)
-                    }
-                }
-            };
+                    mode: 'subscription',
+                    successPath: '/subscription-success',
+                    cancelPath: '/pricing'
+                })
+            });
 
-            // Simulate API call (replace with actual Stripe API call)
-            console.log('🔄 Creating Stripe checkout session:', checkoutData);
-            
-            // In production, this would be:
-            // const response = await fetch('/api/create-checkout-session', {
-            //     method: 'POST',
-            //     headers: { 'Content-Type': 'application/json' },
-            //     body: JSON.stringify(checkoutData)
-            // });
-            // const session = await response.json();
-            // window.location.href = session.url;
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.error || 'Failed to create checkout session');
+            }
 
-            // For demo purposes, show subscription modal
-            this.showSubscriptionModal(tier, pricingTier);
+            const session = await response.json();
+            console.log('✅ Checkout session created:', session.sessionId);
             
-            return { success: true, tier, pricing: pricingTier };
+            // Redirect to Stripe checkout
+            window.location.href = session.url;
+            
+            return { success: true, sessionId: session.sessionId, tier, pricing: pricingTier };
 
         } catch (error) {
             console.error('❌ Failed to create checkout session:', error);
+            throw error;
+        }
+    }
+
+    /**
+     * Create customer portal session for subscription management
+     */
+    async createCustomerPortalSession(customerId, returnUrl = null) {
+        try {
+            console.log('🔄 Creating customer portal session for:', customerId);
+            
+            const response = await fetch('/api/customer-portal', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    customerId: customerId,
+                    returnUrl: returnUrl || `${window.location.origin}/account`
+                })
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.error || 'Failed to create customer portal session');
+            }
+
+            const session = await response.json();
+            console.log('✅ Customer portal session created');
+            
+            // Redirect to Stripe customer portal
+            window.location.href = session.url;
+            
+            return { success: true, url: session.url };
+
+        } catch (error) {
+            console.error('❌ Failed to create customer portal session:', error);
             throw error;
         }
     }
