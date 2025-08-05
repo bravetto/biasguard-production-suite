@@ -4,9 +4,9 @@
  * Integrates with advanced bias detection system
  * 
  * Pricing Tiers:
- * - Starter: $19.99/month (price_1RsDxiL7UMRowhrwAa7Zimok)
- * - Professional: $99/month (price_1RsDyVL7UMRowhrw9XnqUl2W)
- * - Enterprise: $299/month (price_1RsDz8L7UMRowhrwqqKW2tV7)
+ * - Starter: $19/mo (price_1RsDxiL7UMRowhrwAa7Zimok)
+ * - Professional: $99/mo (price_1RsDyVL7UMRowhrw9XnqUl2W)
+ * - Enterprise: $299/mo (price_1RsDz8L7UMRowhrwqqKW2tV7)
  */
 
 class StripeSubscriptionHandler {

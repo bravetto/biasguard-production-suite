@@ -597,7 +597,7 @@
                 "name": "What are the pricing plans?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "We offer three plans: Basic ($19/month) with 1,000 scans, Pro ($99/month) with 100,000 scans and API access, and Enterprise ($299/month) with unlimited scans and custom integration."
+                    "text": "We offer three plans: Basic ($19/mo) with 1,000 scans, Pro ($99/mo) with 100,000 scans and API access, and Enterprise ($299/mo) with unlimited scans and custom integration."
                 }
             },
             {
@@ -1242,7 +1242,7 @@
                                    style="background: #fbbf24; color: #111827; padding: 1rem 2rem; border-radius: 0.75rem; text-decoration: none; font-weight: bold; transition: all 0.2s; display: inline-block;"
                                    onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 10px 15px -3px rgba(0,0,0,0.2)'"
                                    onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
-                                    🚀 Start at $19/month
+                                    🚀 Start at $19/mo
                                 </a>
                                 <a href="#features" 
                                    style="background: rgba(255,255,255,0.2); color: white; padding: 1rem 2rem; border-radius: 0.75rem; text-decoration: none; font-weight: bold; transition: all 0.2s; display: inline-block; border: 1px solid rgba(255,255,255,0.3);"
@@ -1783,9 +1783,13 @@
                             <li style="margin-bottom: 0.5rem;"><span aria-hidden="true">✓</span> <span>Community support</span></li>
                         </ul>
                         <a href="#" onclick="initiateStripeCheckout('starter', 'price_1RsDxiL7UMRowhrwAa7Zimok'); return false;" 
-                           style="display: block; width: 100%; background: #1e40af; color: white; padding: 0.75rem; border-radius: 0.5rem; font-weight: 600; text-align: center; text-decoration: none; transition: background-color 0.2s;"
+                           style="display: block; width: 100%; background: #1e40af; color: white; padding: 0.75rem; border-radius: 0.5rem; font-weight: 600; text-align: center; text-decoration: none; transition: all 0.2s; cursor: pointer;"
                            rel="noopener"
-                           aria-label="Get started with Basic plan for $19 per month">
+                           aria-label="Get started with Basic plan for $19/mo"
+                           onmouseover="this.style.background='#1d4ed8'; this.style.transform='translateY(-1px)'; this.style.boxShadow='0 4px 12px rgba(30, 64, 175, 0.3)'"
+                           onmouseout="this.style.background='#1e40af'; this.style.transform='translateY(0)'; this.style.boxShadow='none'"
+                           onmousedown="this.style.transform='translateY(0)'"
+                           onmouseup="this.style.transform='translateY(-1px)'">
                             Get Started
                         </a>
                     </article>
@@ -1804,9 +1808,13 @@
                             <li style="margin-bottom: 0.5rem;"><span aria-hidden="true">✓</span> <span>Priority support</span></li>
                         </ul>
                         <a href="#" onclick="initiateStripeCheckout('professional', 'price_1RsDyVL7UMRowhrw9XnqUl2W'); return false;" 
-                           style="display: block; width: 100%; background: #1e40af; color: white; padding: 0.75rem; border-radius: 0.5rem; font-weight: 600; text-align: center; text-decoration: none; transition: background-color 0.2s;"
+                           style="display: block; width: 100%; background: #1e40af; color: white; padding: 0.75rem; border-radius: 0.5rem; font-weight: 600; text-align: center; text-decoration: none; transition: all 0.2s; cursor: pointer;"
                            rel="noopener"
-                           aria-label="Get started with Pro plan for $99 per month">
+                           aria-label="Get started with Pro plan for $99/mo"
+                           onmouseover="this.style.background='#1d4ed8'; this.style.transform='translateY(-1px)'; this.style.boxShadow='0 4px 12px rgba(30, 64, 175, 0.3)'"
+                           onmouseout="this.style.background='#1e40af'; this.style.transform='translateY(0)'; this.style.boxShadow='none'"
+                           onmousedown="this.style.transform='translateY(0)'"
+                           onmouseup="this.style.transform='translateY(-1px)'">
                             Get Started
                         </a>
                     </article>
@@ -1822,9 +1830,13 @@
                             <li style="margin-bottom: 0.5rem;"><span aria-hidden="true">✓</span> <span>Dedicated support</span></li>
                         </ul>
                         <a href="#" onclick="initiateStripeCheckout('enterprise', 'price_1RsDz8L7UMRowhrwqqKW2tV7'); return false;" 
-                           style="display: block; width: 100%; background: #1e40af; color: white; padding: 0.75rem; border-radius: 0.5rem; font-weight: 600; text-align: center; text-decoration: none; transition: background-color 0.2s;"
+                           style="display: block; width: 100%; background: #1e40af; color: white; padding: 0.75rem; border-radius: 0.5rem; font-weight: 600; text-align: center; text-decoration: none; transition: all 0.2s; cursor: pointer;"
                            rel="noopener"
-                           aria-label="Get started with Enterprise plan for $299 per month">
+                           aria-label="Get started with Enterprise plan for $299/mo"
+                           onmouseover="this.style.background='#1d4ed8'; this.style.transform='translateY(-1px)'; this.style.boxShadow='0 4px 12px rgba(30, 64, 175, 0.3)'"
+                           onmouseout="this.style.background='#1e40af'; this.style.transform='translateY(0)'; this.style.boxShadow='none'"
+                           onmousedown="this.style.transform='translateY(0)'"
+                           onmouseup="this.style.transform='translateY(-1px)'">
                             Get Started
                         </a>
                     </article>
@@ -3770,18 +3782,20 @@
             try {
                 console.log(`🔄 Initiating Stripe checkout for ${tier} tier...`);
                 
-                // Show loading state
+                // Show enhanced loading state
                 const loadingOverlay = document.createElement('div');
                 loadingOverlay.id = 'stripe-loading';
                 loadingOverlay.style.cssText = `
                     position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-                    background: rgba(0,0,0,0.8); display: flex; align-items: center; 
-                    justify-content: center; z-index: 10000; color: white; font-size: 1.2rem;
+                    background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(8px);
+                    display: flex; align-items: center; justify-content: center; 
+                    z-index: 10000; color: white; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
                 `;
                 loadingOverlay.innerHTML = `
-                    <div style="text-align: center;">
-                        <div style="animation: spin 1s linear infinite; width: 40px; height: 40px; border: 3px solid #f3f3f3; border-top: 3px solid #1e40af; border-radius: 50%; margin: 0 auto 1rem;"></div>
-                        <div>Redirecting to secure checkout...</div>
+                    <div style="text-align: center; padding: 2rem; background: rgba(255,255,255,0.1); border-radius: 1rem; border: 1px solid rgba(255,255,255,0.2); backdrop-filter: blur(10px);">
+                        <div style="animation: spin 1s linear infinite; width: 48px; height: 48px; border: 3px solid rgba(255,255,255,0.3); border-top: 3px solid #fbbf24; border-radius: 50%; margin: 0 auto 1.5rem;"></div>
+                        <div style="font-size: 1.1rem; font-weight: 500; margin-bottom: 0.5rem;">Preparing Secure Checkout</div>
+                        <div style="font-size: 0.9rem; opacity: 0.8;">Redirecting to Stripe...</div>
                     </div>
                 `;
                 document.body.appendChild(loadingOverlay);

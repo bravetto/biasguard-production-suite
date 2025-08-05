@@ -204,30 +204,34 @@ async function handleTrialEnding(subscription) {
 async function provisionSubscriptionAccess(customerId, subscription, tier) {
   console.log(`🔑 Provisioning ${tier} access for customer: ${customerId}`);
   
-  // This would integrate with your user management system
-  // For now, we'll log the access provisioning
-  
-  const features = getTierFeatures(tier);
-  const limits = getTierLimits(tier);
-  
-  // Store subscription info (this would integrate with your database)
-  const subscriptionRecord = {
-    customerId,
-    subscriptionId: subscription.id,
-    tier,
-    status: subscription.status,
-    features,
-    limits,
-    currentPeriodStart: new Date(subscription.current_period_start * 1000),
-    currentPeriodEnd: new Date(subscription.current_period_end * 1000),
-    trialEnd: subscription.trial_end ? new Date(subscription.trial_end * 1000) : null,
-    updatedAt: new Date()
-  };
-  
-  console.log('📊 Subscription record:', subscriptionRecord);
-  
-  // TODO: Store in your database
-  // await storeSubscriptionRecord(subscriptionRecord);
+  try {
+    const features = getTierFeatures(tier);
+    const limits = getTierLimits(tier);
+    
+    // Update customer metadata in Stripe for persistence
+    await stripe.customers.update(customerId, {
+      metadata: {
+        subscription_tier: tier,
+        subscription_id: subscription.id,
+        subscription_status: subscription.status,
+        features: JSON.stringify(features),
+        limits: JSON.stringify(limits),
+        current_period_start: subscription.current_period_start.toString(),
+        current_period_end: subscription.current_period_end.toString(),
+        trial_end: subscription.trial_end?.toString() || '',
+        access_provisioned: new Date().toISOString(),
+        usage_basic: '0',
+        usage_counterfactual: '0',
+        usage_neural_howlround: '0'
+      }
+    });
+    
+    console.log(`✅ Access provisioned and stored in Stripe metadata for ${tier} tier`);
+    
+  } catch (error) {
+    console.error(`❌ Error provisioning access: ${error.message}`);
+    throw error;
+  }
 }
 
 /**
@@ -236,8 +240,21 @@ async function provisionSubscriptionAccess(customerId, subscription, tier) {
 async function suspendAccess(customerId) {
   console.log(`⏸️ Suspending access for customer: ${customerId}`);
   
-  // TODO: Update user access in your database
-  // await updateUserAccess(customerId, { suspended: true });
+  try {
+    // Update customer metadata to suspend access
+    await stripe.customers.update(customerId, {
+      metadata: {
+        subscription_status: 'suspended',
+        access_suspended: new Date().toISOString()
+      }
+    });
+    
+    console.log(`✅ Access suspended for customer: ${customerId}`);
+    
+  } catch (error) {
+    console.error(`❌ Error suspending access: ${error.message}`);
+    throw error;
+  }
 }
 
 /**
@@ -246,8 +263,24 @@ async function suspendAccess(customerId) {
 async function revokeAccess(customerId) {
   console.log(`🚫 Revoking access for customer: ${customerId}`);
   
-  // TODO: Update user access in your database
-  // await updateUserAccess(customerId, { active: false });
+  try {
+    // Update customer metadata to revoke access
+    await stripe.customers.update(customerId, {
+      metadata: {
+        subscription_status: 'cancelled',
+        subscription_tier: 'none',
+        access_revoked: new Date().toISOString(),
+        features: JSON.stringify([]),
+        limits: JSON.stringify({ analyses: 0, api_calls: 0 })
+      }
+    });
+    
+    console.log(`✅ Access revoked for customer: ${customerId}`);
+    
+  } catch (error) {
+    console.error(`❌ Error revoking access: ${error.message}`);
+    throw error;
+  }
 }
 
 /**
@@ -256,10 +289,24 @@ async function revokeAccess(customerId) {
 async function resetUsageCounters(customerId, tier) {
   console.log(`🔄 Resetting usage counters for customer: ${customerId}`);
   
-  // const limits = getTierLimits(tier);
-  
-  // TODO: Reset usage in your database
-  // await resetUserUsage(customerId, limits);
+  try {
+    // Reset usage counters in customer metadata
+    await stripe.customers.update(customerId, {
+      metadata: {
+        usage_basic: '0',
+        usage_counterfactual: '0',
+        usage_neural_howlround: '0',
+        usage_reset_date: new Date().toISOString(),
+        current_billing_period: new Date().toISOString()
+      }
+    });
+    
+    console.log(`✅ Usage counters reset for customer: ${customerId} (${tier} tier)`);
+    
+  } catch (error) {
+    console.error(`❌ Error resetting usage counters: ${error.message}`);
+    throw error;
+  }
 }
 
 /**
