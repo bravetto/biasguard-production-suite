@@ -12,6 +12,34 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
+  // Validate required environment variables
+  if (!process.env.STRIPE_SECRET_KEY) {
+    console.error('❌ STRIPE_SECRET_KEY environment variable is not configured');
+    return res.status(500).json({ 
+      error: 'Server configuration error: Missing Stripe credentials',
+      type: 'configuration_error'
+    });
+  }
+
+  const requiredPriceIds = {
+    'STRIPE_PRICE_ID_STARTER': process.env.STRIPE_PRICE_ID_STARTER,
+    'STRIPE_PRICE_ID_PROFESSIONAL': process.env.STRIPE_PRICE_ID_PROFESSIONAL,
+    'STRIPE_PRICE_ID_ENTERPRISE': process.env.STRIPE_PRICE_ID_ENTERPRISE
+  };
+
+  const missingPriceIds = Object.entries(requiredPriceIds)
+    .filter(([, value]) => !value)
+    .map(([key]) => key);
+
+  if (missingPriceIds.length > 0) {
+    console.error('❌ Missing required price ID environment variables:', missingPriceIds);
+    return res.status(500).json({
+      error: 'Server configuration error: Missing price configuration',
+      type: 'configuration_error',
+      missingVariables: missingPriceIds
+    });
+  }
+
   try {
     const { priceId, tier, mode = 'subscription', successPath = '/subscription-success', cancelPath = '/pricing' } = req.body;
 

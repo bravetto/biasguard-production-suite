@@ -31,7 +31,7 @@ class StripeSubscriptionHandler {
             starter: {
                 name: 'BiasGuard Starter',
                 price: 19.99,
-                priceId: 'price_1RsDxiL7UMRowhrwAa7Zimok',
+                priceId: process.env.STRIPE_PRICE_ID_STARTER || 'price_1RsDxiL7UMRowhrwAa7Zimok',
                 features: [
                     '1,000 bias analyses per month',
                     'Basic text bias detection',
@@ -49,7 +49,7 @@ class StripeSubscriptionHandler {
             professional: {
                 name: 'BiasGuard Professional',
                 price: 99,
-                priceId: 'price_1RsDyVL7UMRowhrw9XnqUl2W',
+                priceId: process.env.STRIPE_PRICE_ID_PROFESSIONAL || 'price_1RsDyVL7UMRowhrw9XnqUl2W',
                 features: [
                     '10,000 bias analyses per month',
                     'Advanced counterfactual analysis',
@@ -69,7 +69,7 @@ class StripeSubscriptionHandler {
             enterprise: {
                 name: 'BiasGuard Enterprise',
                 price: 299,
-                priceId: 'price_1RsDz8L7UMRowhrwqqKW2tV7',
+                priceId: process.env.STRIPE_PRICE_ID_ENTERPRISE || 'price_1RsDz8L7UMRowhrwqqKW2tV7',
                 features: [
                     'Unlimited bias analyses',
                     'Full counterfactual analysis suite',
