@@ -6,28 +6,23 @@
   "functions": {
     "api/create-checkout-session.js": {
       "memory": 1024,
-      "maxDuration": 30,
-      "runtime": "nodejs18.x"
+      "maxDuration": 30
     },
     "api/webhooks.js": {
       "memory": 1024,
-      "maxDuration": 30,
-      "runtime": "nodejs18.x"
+      "maxDuration": 30
     },
     "api/subscription-status.js": {
       "memory": 512,
-      "maxDuration": 15,
-      "runtime": "nodejs18.x"
+      "maxDuration": 15
     },
     "api/customer-portal.js": {
       "memory": 512,
-      "maxDuration": 15,
-      "runtime": "nodejs18.x"
+      "maxDuration": 15
     },
     "api/track-usage.js": {
       "memory": 512,
-      "maxDuration": 15,
-      "runtime": "nodejs18.x"
+      "maxDuration": 15
     }
   },
   "redirects": [
