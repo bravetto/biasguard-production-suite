@@ -603,7 +603,9 @@ class BiasMLEngine {
                 id: analysisId,
                 timestamp: Date.now(),
                 processingTime: processingTime,
-                text: text.substring(0, 100) + (text.length > 100 ? '...' : ''),
+                text: (text && typeof text === 'string') ? 
+                    text.substring(0, 100) + (text.length > 100 ? '...' : '') : 
+                    '[Invalid or empty input]',
                 overallScore: scores.overall,
                 riskLevel: this.calculateRiskLevel(scores.overall),
                 patterns: combinedResults,
@@ -643,12 +645,18 @@ class BiasMLEngine {
         // Simulate WASM preprocessing with realistic timing
         const startTime = performance.now();
         
+        // Defensive programming: Handle null/undefined text input
+        if (!text || typeof text !== 'string') {
+            console.warn('⚠️ wasmPreprocess: Invalid text input, using empty string fallback');
+            text = '';
+        }
+        
         const processed = {
             original: text,
             normalized: text.toLowerCase().trim(),
-            tokens: text.toLowerCase().split(/\s+/),
+            tokens: text.toLowerCase().split(/\s+/).filter(token => token.length > 0),
             sentences: text.split(/[.!?]+/).filter(s => s.trim()),
-            wordCount: text.split(/\s+/).length,
+            wordCount: text.split(/\s+/).filter(word => word.length > 0).length,
             characterCount: text.length
         };
 
@@ -1099,39 +1107,76 @@ class BiasMLEngine {
      * Calculate advanced scores with multiple metrics including Impact Ratio and Counterfactual Analysis
      */
     async calculateAdvancedScores(patterns, counterfactualAnalysis = null, intersectionalAnalysis = null) {
-        if (patterns.length === 0) {
+        // Defensive programming: Handle invalid patterns input
+        if (!patterns || !Array.isArray(patterns) || patterns.length === 0) {
+            console.warn('⚠️ calculateAdvancedScores: Invalid or empty patterns array');
             return {
                 overall: 0,
                 weighted: 0,
                 confidence: 1.0,
                 breakdown: {},
                 impactRatio: null,
-                statisticalBias: false
+                statisticalBias: false,
+                statisticalAnalysis: {
+                    confidence: 0,
+                    confidenceInterval: { lower: 0, upper: 0 },
+                    pValue: 1.0,
+                    statisticallySignificant: false,
+                    standardError: 0,
+                    validation: 'No patterns provided for analysis'
+                }
             };
         }
 
-        // Calculate weighted overall score
-        const totalWeightedScore = patterns.reduce((sum, pattern) => 
+        // Filter out invalid patterns
+        const validPatterns = patterns.filter(pattern => 
+            pattern && typeof pattern === 'object' && 
+            typeof pattern.score === 'number' && !isNaN(pattern.score) &&
+            typeof pattern.mlWeight === 'number' && !isNaN(pattern.mlWeight)
+        );
+
+        if (validPatterns.length === 0) {
+            console.warn('⚠️ calculateAdvancedScores: No valid patterns found');
+            return {
+                overall: 0,
+                weighted: 0,
+                confidence: 1.0,
+                breakdown: {},
+                impactRatio: null,
+                statisticalBias: false,
+                statisticalAnalysis: {
+                    confidence: 0,
+                    confidenceInterval: { lower: 0, upper: 0 },
+                    pValue: 1.0,
+                    statisticallySignificant: false,
+                    standardError: 0,
+                    validation: 'No valid patterns for analysis'
+                }
+            };
+        }
+
+        // Calculate weighted overall score using valid patterns
+        const totalWeightedScore = validPatterns.reduce((sum, pattern) => 
             sum + (pattern.score * pattern.mlWeight), 0);
-        const totalWeight = patterns.reduce((sum, pattern) => sum + pattern.mlWeight, 0);
-        const weightedScore = totalWeightedScore / totalWeight;
+        const totalWeight = validPatterns.reduce((sum, pattern) => sum + pattern.mlWeight, 0);
+        const weightedScore = totalWeight > 0 ? totalWeightedScore / totalWeight : 0;
 
         // Calculate simple average
-        const averageScore = patterns.reduce((sum, pattern) => sum + pattern.score, 0) / patterns.length;
+        const averageScore = validPatterns.reduce((sum, pattern) => sum + pattern.score, 0) / validPatterns.length;
 
         // Calculate statistical confidence and significance
-        const scores = patterns.map(p => p.score);
-        const statisticalAnalysis = this.calculateStatisticalSignificance(scores, patterns);
+        const scores = validPatterns.map(p => p.score);
+        const statisticalAnalysis = this.calculateStatisticalSignificance(scores, validPatterns);
 
         // Calculate Impact Ratio for statistical bias validation
-        const impactAnalysis = this.calculateImpactRatio(patterns);
+        const impactAnalysis = this.calculateImpactRatio(validPatterns);
 
         // Calculate Advanced Bias Concentration Metrics
-        const concentrationAnalysis = this.calculateBiasConcentrationMetrics(scores, patterns);
+        const concentrationAnalysis = this.calculateBiasConcentrationMetrics(scores, validPatterns);
 
         // Create breakdown by pattern type
         const breakdown = {};
-        patterns.forEach(pattern => {
+        validPatterns.forEach(pattern => {
             breakdown[pattern.type] = {
                 score: pattern.score,
                 weight: pattern.mlWeight,
@@ -1593,7 +1638,9 @@ class BiasMLEngine {
      * Implements academic standards for bias research validation
      */
     calculateStatisticalSignificance(scores, patterns) {
-        if (scores.length === 0) {
+        // Defensive programming: Handle invalid inputs
+        if (!scores || !Array.isArray(scores) || scores.length === 0) {
+            console.warn('⚠️ calculateStatisticalSignificance: Invalid or empty scores array');
             return {
                 confidence: 0,
                 confidenceInterval: { lower: 0, upper: 0 },
@@ -1603,11 +1650,29 @@ class BiasMLEngine {
                 validation: 'No data for statistical analysis'
             };
         }
+
+        // Filter out invalid scores and ensure numeric values
+        const validScores = scores.filter(score => 
+            score !== null && score !== undefined && 
+            typeof score === 'number' && !isNaN(score)
+        );
+
+        if (validScores.length === 0) {
+            console.warn('⚠️ calculateStatisticalSignificance: No valid numeric scores found');
+            return {
+                confidence: 0,
+                confidenceInterval: { lower: 0, upper: 0 },
+                pValue: 1.0,
+                statisticallySignificant: false,
+                standardError: 0,
+                validation: 'No valid numeric data for statistical analysis'
+            };
+        }
         
-        // Basic statistical measures
-        const n = scores.length;
-        const mean = scores.reduce((sum, score) => sum + score, 0) / n;
-        const variance = this.calculateVariance(scores);
+        // Basic statistical measures using valid scores
+        const n = validScores.length;
+        const mean = validScores.reduce((sum, score) => sum + score, 0) / n;
+        const variance = this.calculateVariance(validScores);
         const standardDeviation = Math.sqrt(variance);
         const standardError = standardDeviation / Math.sqrt(n);
         
@@ -1669,6 +1734,17 @@ class BiasMLEngine {
      * Get t-critical value for confidence intervals
      */
     getTCriticalValue(df, alpha) {
+        // Defensive programming: Handle invalid inputs
+        if (typeof df !== 'number' || isNaN(df) || df < 1) {
+            console.warn(`⚠️ getTCriticalValue: Invalid degrees of freedom (${df}), using default`);
+            df = 1;
+        }
+        
+        if (typeof alpha !== 'number' || isNaN(alpha) || alpha <= 0 || alpha >= 1) {
+            console.warn(`⚠️ getTCriticalValue: Invalid alpha (${alpha}), using 0.05`);
+            alpha = 0.05;
+        }
+
         // Simplified t-table for common degrees of freedom
         // In production, would use more comprehensive statistical library
         const tTable = {
@@ -1684,13 +1760,21 @@ class BiasMLEngine {
             'infinity': { 0.05: 1.960, 0.01: 2.576 }
         };
         
-        // Find closest df or use approximation
-        if (df <= 5) return tTable[Math.min(df, 5)][alpha] || 2.571;
-        if (df <= 10) return tTable[10][alpha] || 2.228;
-        if (df <= 15) return tTable[15][alpha] || 2.131;
-        if (df <= 20) return tTable[20][alpha] || 2.086;
-        if (df <= 30) return tTable[30][alpha] || 2.042;
-        return tTable['infinity'][alpha] || 1.960;
+        // Find closest df or use approximation with safe access
+        try {
+            if (df <= 5) {
+                const key = Math.min(Math.max(1, Math.floor(df)), 5);
+                return tTable[key] && tTable[key][alpha] ? tTable[key][alpha] : 2.571;
+            }
+            if (df <= 10) return tTable[10] && tTable[10][alpha] ? tTable[10][alpha] : 2.228;
+            if (df <= 15) return tTable[15] && tTable[15][alpha] ? tTable[15][alpha] : 2.131;
+            if (df <= 20) return tTable[20] && tTable[20][alpha] ? tTable[20][alpha] : 2.086;
+            if (df <= 30) return tTable[30] && tTable[30][alpha] ? tTable[30][alpha] : 2.042;
+            return tTable['infinity'] && tTable['infinity'][alpha] ? tTable['infinity'][alpha] : 1.960;
+        } catch (error) {
+            console.error('⚠️ getTCriticalValue: Error accessing t-table, using fallback', error);
+            return alpha === 0.01 ? 2.576 : 1.960; // Safe fallback values
+        }
     }
     
     /**

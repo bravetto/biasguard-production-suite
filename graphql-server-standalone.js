@@ -4,8 +4,11 @@
  * Version 2.0.0
  */
 
-const BiasGuardDashboardAPI = require('./dashboard-api.js');
-const BiasGuardGraphQLServer = require('./graphql-server.js');
+import('./dashboard-api.js').then(module => {
+    const BiasGuardDashboardAPI = module.default || module;
+    return import('./graphql-server.js');
+}).then(module => {
+    const BiasGuardGraphQLServer = module.default || module;
 
 class StandaloneLauncher {
     constructor() {

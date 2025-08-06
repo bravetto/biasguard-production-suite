@@ -1,7 +1,7 @@
 /**
  * BiasGuards.ai Stripe Checkout Session API
  * Creates secure server-side checkout sessions for subscription payments
- * Supports all three tiers: Starter ($19.99), Professional ($99), Enterprise ($299)
+ * Supports all three tiers: Starter ($19/mo), Professional ($99/mo), Enterprise ($299/mo)
  */
 
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);

@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Subscription Successful - BiasGuards.ai</title>
+    <title>Subscription Success - BiasGuard</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <style>
         * {
             margin: 0;
@@ -18,309 +19,260 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #333;
+            color: white;
         }
         
         .success-container {
-            background: white;
-            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.95);
+            color: #2d3748;
             padding: 3rem;
-            max-width: 600px;
-            width: 90%;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
             text-align: center;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            max-width: 500px;
+            margin: 2rem;
         }
         
         .success-icon {
-            width: 80px;
-            height: 80px;
-            background: #10b981;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 2rem;
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-        
-        .checkmark {
-            color: white;
-            font-size: 2rem;
-            font-weight: bold;
-        }
-        
-        h1 {
-            font-size: 2.5rem;
-            color: #1f2937;
+            font-size: 4rem;
             margin-bottom: 1rem;
         }
         
-        .subtitle {
-            font-size: 1.2rem;
-            color: #6b7280;
-            margin-bottom: 2rem;
-        }
-        
-        .tier-info {
-            background: #f3f4f6;
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin: 2rem 0;
-            border-left: 4px solid #10b981;
-        }
-        
-        .tier-name {
-            font-size: 1.5rem;
+        .success-title {
+            font-size: 2rem;
             font-weight: bold;
-            color: #1f2937;
+            margin-bottom: 1rem;
+            color: #2d3748;
+        }
+        
+        .success-message {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            color: #4a5568;
+        }
+        
+        .court-date-banner {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 1rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+            font-weight: bold;
+        }
+        
+        .mission-context {
+            background: #f7fafc;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+            border-left: 4px solid #667eea;
+        }
+        
+        .mission-context h3 {
+            color: #2d3748;
             margin-bottom: 0.5rem;
         }
         
-        .tier-features {
-            list-style: none;
-            text-align: left;
-        }
-        
-        .tier-features li {
-            padding: 0.5rem 0;
-            position: relative;
-            padding-left: 2rem;
-        }
-        
-        .tier-features li::before {
-            content: "✓";
-            position: absolute;
-            left: 0;
-            color: #10b981;
-            font-weight: bold;
-        }
-        
-        .trial-info {
-            background: #fef3c7;
-            border: 1px solid #f59e0b;
-            border-radius: 8px;
-            padding: 1rem;
-            margin: 1.5rem 0;
-            color: #92400e;
+        .mission-context p {
+            color: #4a5568;
+            font-size: 0.95rem;
         }
         
         .action-buttons {
             display: flex;
             gap: 1rem;
             justify-content: center;
-            flex-wrap: wrap;
             margin-top: 2rem;
+            flex-wrap: wrap;
         }
         
         .btn {
             padding: 0.75rem 1.5rem;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.2s;
-            cursor: pointer;
             border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
             font-size: 1rem;
         }
         
         .btn-primary {
-            background: #1e40af;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-        }
-        
-        .btn-primary:hover {
-            background: #1d4ed8;
-            transform: translateY(-2px);
         }
         
         .btn-secondary {
-            background: transparent;
-            color: #1e40af;
-            border: 2px solid #1e40af;
+            background: #e2e8f0;
+            color: #2d3748;
         }
         
-        .btn-secondary:hover {
-            background: #1e40af;
-            color: white;
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         }
         
-        .support-info {
-            margin-top: 2rem;
-            padding-top: 2rem;
-            border-top: 1px solid #e5e7eb;
-            color: #6b7280;
+        .dev-notice {
+            background: #fff3cd;
+            color: #856404;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+            border: 1px solid #ffeaa7;
             font-size: 0.9rem;
         }
         
-        .loading {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid #f3f3f3;
-            border-top: 3px solid #1e40af;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-right: 0.5rem;
+        .countdown {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #e53e3e;
         }
         
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        @media (max-width: 768px) {
+            .success-container {
+                margin: 1rem;
+                padding: 2rem;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+            }
         }
     </style>
 </head>
 <body>
     <div class="success-container">
-        <div class="success-icon">
-            <span class="checkmark">✓</span>
+        <div class="success-icon">✅</div>
+        <h1 class="success-title">Subscription Successful!</h1>
+        <p class="success-message">
+            Thank you for supporting the JAHmere Webb Freedom Portal mission. 
+            Your contribution helps fight algorithmic bias in criminal justice.
+        </p>
+        
+        <div class="court-date-banner" id="courtDateBanner">
+            <div class="countdown" id="countdown">Loading...</div>
+            <div>Days until JAHmere Webb's court date</div>
         </div>
         
-        <h1>Welcome to BiasGuards!</h1>
-        <p class="subtitle">Your subscription has been successfully activated</p>
-        
-        <div class="trial-info">
-            <strong>🎉 Your 14-day free trial has started!</strong><br>
-            You won't be charged until your trial period ends.
+        <div class="mission-context">
+            <h3>🎯 Your Impact</h3>
+            <p>15% of your subscription directly supports JAHmere Webb's legal defense and criminal justice reform initiatives. You're helping create a more equitable justice system.</p>
         </div>
         
-        <div class="tier-info" id="tier-info">
-            <div class="tier-name" id="tier-name">Loading...</div>
-            <ul class="tier-features" id="tier-features">
-                <li><span class="loading"></span>Loading subscription details...</li>
-            </ul>
+        <div class="dev-notice" id="devNotice" style="display: none;">
+            <strong>Development Mode:</strong> This is a mock subscription for testing. 
+            In production, you would receive email confirmation and access to premium features.
         </div>
         
         <div class="action-buttons">
-            <a href="/" class="btn btn-primary">
-                🛡️ Start Using BiasGuards
-            </a>
-            <button onclick="openCustomerPortal()" class="btn btn-secondary" id="portal-btn">
-                ⚙️ Manage Subscription
-            </button>
-        </div>
-        
-        <div class="support-info">
-            <p><strong>Need help?</strong> Contact us at support@biasguards.ai</p>
-            <p>Your subscription supports JAHmere Webb's legal defense and criminal justice reform.</p>
+            <a href="/" class="btn btn-primary">Return to BiasGuard</a>
+            <a href="/dashboard" class="btn btn-secondary">Access Dashboard</a>
         </div>
     </div>
-
+    
     <script>
-        // Get session ID and tier from URL parameters
+        // Check if this is a mock/development subscription
         const urlParams = new URLSearchParams(window.location.search);
+        const isMock = urlParams.get('mock') === 'true';
+        const tier = urlParams.get('tier') || 'professional';
         const sessionId = urlParams.get('session_id');
-        const tier = urlParams.get('tier') || 'starter';
         
-        // Store customer info for future use
-        if (sessionId) {
-            localStorage.setItem('stripe_session_id', sessionId);
-            localStorage.setItem('subscription_tier', tier);
+        if (isMock) {
+            document.getElementById('devNotice').style.display = 'block';
+            console.log('🧪 Development Mode: Mock subscription success');
+            console.log('📋 Tier:', tier);
+            console.log('🔑 Session ID:', sessionId);
         }
         
-        // Define tier information
-        const tierInfo = {
-            starter: {
-                name: 'Starter Plan - $19/mo',
-                features: [
-                    'Basic bias detection analysis',
-                    '1,000 analyses per month',
-                    'Email support',
-                    'Justice mission support (15% of revenue)',
-                    'Access to core bias detection features'
-                ]
-            },
-            professional: {
-                name: 'Professional Plan - $99/mo',
-                features: [
-                    'Advanced bias detection analysis',
-                    'Counterfactual analysis',
-                    '10,000 analyses per month',
-                    'Priority support',
-                    'API access',
-                    'Advanced reporting',
-                    'Justice mission support (15% of revenue)'
-                ]
-            },
-            enterprise: {
-                name: 'Enterprise Plan - $299/mo',
-                features: [
-                    'Full bias detection suite',
-                    'Neural howlround prevention',
-                    'Unlimited analyses',
-                    'Custom integration support',
-                    'Dedicated account manager',
-                    'White-label options',
-                    'Priority feature requests',
-                    'Justice mission support (15% of revenue)'
-                ]
-            }
-        };
-        
-        // Update tier information
-        function updateTierInfo() {
-            const info = tierInfo[tier] || tierInfo.starter;
-            const tierNameEl = document.getElementById('tier-name');
-            const tierFeaturesEl = document.getElementById('tier-features');
+        // Court date countdown
+        function updateCountdown() {
+            const courtDate = new Date('2025-08-25T09:00:00-04:00');
+            const now = new Date();
+            const timeDiff = courtDate - now;
+            const daysRemaining = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
             
-            tierNameEl.textContent = info.name;
-            tierFeaturesEl.innerHTML = info.features
-                .map(feature => `<li>${feature}</li>`)
-                .join('');
-        }
-        
-        // Open customer portal for subscription management
-        async function openCustomerPortal() {
-            const portalBtn = document.getElementById('portal-btn');
-            const originalText = portalBtn.innerHTML;
+            const countdownEl = document.getElementById('countdown');
+            const bannerEl = document.getElementById('courtDateBanner');
             
-            portalBtn.innerHTML = '<span class="loading"></span>Opening Portal...';
-            portalBtn.disabled = true;
-            
-            try {
-                // This would need the customer ID from the session
-                // For now, we'll redirect to the main page where they can access it
-                alert('Customer portal will be available once you complete your first analysis. This will link your account with your subscription.');
-                window.location.href = '/';
-            } catch (error) {
-                console.error('Failed to open customer portal:', error);
-                alert('Unable to open customer portal. Please try again later.');
-            } finally {
-                portalBtn.innerHTML = originalText;
-                portalBtn.disabled = false;
+            if (daysRemaining > 0) {
+                countdownEl.textContent = daysRemaining;
+                
+                // Update urgency styling based on days remaining
+                if (daysRemaining <= 7) {
+                    bannerEl.style.background = 'linear-gradient(135deg, #e53e3e 0%, #c53030 100%)';
+                } else if (daysRemaining <= 30) {
+                    bannerEl.style.background = 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)';
+                }
+            } else {
+                countdownEl.textContent = 'Court Date Passed';
+                bannerEl.style.background = 'linear-gradient(135deg, #4a5568 0%, #2d3748 100%)';
             }
         }
         
-        // Initialize page
-        document.addEventListener('DOMContentLoaded', function() {
-            updateTierInfo();
-            
-            // Track successful subscription
-            if (typeof gtag !== 'undefined') {
-                gtag('event', 'purchase', {
-                    'event_category': 'subscription',
-                    'event_label': tier,
-                    'value': tier === 'starter' ? 19.99 : tier === 'professional' ? 99 : 299
-                });
-            }
-            
-            // Show success message after a short delay
-            setTimeout(() => {
-                console.log('🎉 Subscription successful for tier:', tier);
-            }, 1000);
-        });
+        // Initialize countdown
+        updateCountdown();
         
-        // Auto-redirect to main app after 30 seconds if user doesn't interact
-        setTimeout(() => {
-            if (confirm('Ready to start using BiasGuards? Click OK to continue or Cancel to stay on this page.')) {
-                window.location.href = '/';
+        // Update countdown every hour
+        setInterval(updateCountdown, 3600000);
+        
+        // Log subscription success for analytics
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'purchase', {
+                transaction_id: sessionId,
+                value: tier === 'starter' ? 19 : tier === 'professional' ? 99 : 299,
+                currency: 'USD',
+                items: [{
+                    item_id: tier,
+                    item_name: `BiasGuard ${tier.charAt(0).toUpperCase() + tier.slice(1)} Plan`,
+                    category: 'subscription',
+                    quantity: 1,
+                    price: tier === 'starter' ? 19 : tier === 'professional' ? 99 : 299
+                }]
+            });
+        }
+        
+        // Celebrate with confetti effect (simple version)
+        function createConfetti() {
+            const colors = ['#667eea', '#764ba2', '#f093fb', '#f5576c'];
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.style.cssText = `
+                        position: fixed;
+                        top: -10px;
+                        left: ${Math.random() * 100}vw;
+                        width: 6px;
+                        height: 6px;
+                        background: ${colors[Math.floor(Math.random() * colors.length)]};
+                        pointer-events: none;
+                        z-index: 1000;
+                        animation: fall 3s linear forwards;
+                    `;
+                    
+                    document.body.appendChild(confetti);
+                    
+                    setTimeout(() => confetti.remove(), 3000);
+                }, i * 50);
             }
-        }, 30000);
+        }
+        
+        // Add CSS animation for confetti
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fall {
+                0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
+                100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Trigger confetti on page load
+        setTimeout(createConfetti, 500);
     </script>
 </body>
 </html>

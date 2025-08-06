@@ -1,10 +1,45 @@
 /**
- * BiasGuards.ai Subscription Status API
+ * BiasGuards.ai Subscription Status API - Enhanced 2024 Version
  * Retrieves current subscription status, usage, and tier information
- * Integrates with Stripe to get real-time subscription data
+ * Integrates with enhanced webhook system for real-time data
+ * Features: Usage tracking, tier validation, access control
  */
 
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+
+// Enhanced status response structure
+const STATUS_TEMPLATES = {
+  active: {
+    message: 'Your subscription is active and ready to use',
+    color: 'success',
+    icon: '✅'
+  },
+  trialing: {
+    message: 'You\'re in your free trial period',
+    color: 'info',
+    icon: '🎯'
+  },
+  past_due: {
+    message: 'Payment required to continue service',
+    color: 'warning',
+    icon: '⚠️'
+  },
+  canceled: {
+    message: 'Your subscription has been canceled',
+    color: 'error',
+    icon: '❌'
+  },
+  temporary: {
+    message: 'You have temporary access',
+    color: 'info',
+    icon: '⏰'
+  },
+  none: {
+    message: 'No active subscription',
+    color: 'neutral',
+    icon: '📝'
+  }
+};
 
 export default async function handler(req, res) {
   if (req.method !== 'GET') {

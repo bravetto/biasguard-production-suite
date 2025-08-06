@@ -720,7 +720,7 @@ class StripeSubscriptionHandler {
             this.usageTracking = { ...this.usageTracking, ...JSON.parse(stored) };
         }
         
-        // Reset usage if new month
+        // Reset usage if new month - using dynamic date awareness
         const lastReset = new Date(this.usageTracking.lastReset);
         const now = new Date();
         if (now.getMonth() !== lastReset.getMonth() || now.getFullYear() !== lastReset.getFullYear()) {
@@ -728,7 +728,9 @@ class StripeSubscriptionHandler {
                 analysesThisMonth: 0,
                 counterfactualAnalyses: 0,
                 codeAnalyses: 0,
-                lastReset: now.toISOString()
+                lastReset: now.toISOString(),
+                // Add court date awareness for mission tracking
+                courtDateProximity: window.missionDateManager ? window.missionDateManager.getDaysRemaining() : null
             };
         }
     }
