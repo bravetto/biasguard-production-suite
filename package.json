@@ -3,6 +3,7 @@
   "version": "2.1.0",
   "description": "BiasGuard AI - Ultimate Expert-Level Bias Detection System with GraphQL API",
   "main": "index.html",
+  "type": "module",
   "scripts": {
     "start": "node dev-server.js",
     "dev": "concurrently \"node dev-server.js\" \"node graphql-server-standalone.js\"",
@@ -41,7 +42,8 @@
     "graphql-subscriptions": "^2.0.0",
     "helmet": "^7.1.0",
     "stripe": "^18.4.0",
-    "subscriptions-transport-ws": "^0.11.0"
+    "subscriptions-transport-ws": "^0.11.0",
+    "ws": "^8.18.3"
   },
   "devDependencies": {
     "nodemon": "^3.0.2"

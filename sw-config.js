@@ -2,13 +2,15 @@
 // Centralized configuration following separation of concerns principles
 
 export const SW_CONFIG = {
-  version: '2.1.0',
+  version: '2.2.0',
   
-  // Cache configuration with clear naming
+  // Enhanced cache configuration with mobile-specific strategies
   caches: {
-    static: 'biasguard-static-v2.1.0',
-    dynamic: 'biasguard-dynamic-v2.1.0',
-    api: 'biasguard-api-v2.1.0'
+    static: 'biasguard-static-v2.2.0',
+    dynamic: 'biasguard-dynamic-v2.2.0',
+    api: 'biasguard-api-v2.2.0',
+    images: 'biasguard-images-v2.2.0',
+    mobile: 'biasguard-mobile-v2.2.0'
   },
   
   // Assets categorized by purpose, not assumption
@@ -26,12 +28,55 @@ export const SW_CONFIG = {
     ]
   },
   
-  // Strategy definitions - declarative, not imperative
+  // Enhanced strategy definitions with mobile-specific optimizations
   strategies: {
     documents: 'networkFirst',
     assets: 'cacheFirst', 
     external: 'staleWhileRevalidate',
-    api: 'networkFirst'
+    api: 'networkFirst',
+    images: 'cacheFirst',
+    mobileOptimized: 'staleWhileRevalidate'
+  },
+
+  // Mobile-specific configuration
+  mobile: {
+    // Cache sizes optimized for mobile storage constraints
+    maxCacheSize: {
+      images: 50 * 1024 * 1024, // 50MB for images
+      static: 25 * 1024 * 1024,  // 25MB for static assets
+      dynamic: 15 * 1024 * 1024  // 15MB for dynamic content
+    },
+    
+    // Connection-aware caching
+    connectionStrategies: {
+      '4g': {
+        preloadDistance: 200,
+        cacheAggressively: true,
+        prefetchImages: true
+      },
+      '3g': {
+        preloadDistance: 100,
+        cacheAggressively: true,
+        prefetchImages: false
+      },
+      '2g': {
+        preloadDistance: 50,
+        cacheAggressively: false,
+        prefetchImages: false
+      },
+      'slow-2g': {
+        preloadDistance: 25,
+        cacheAggressively: false,
+        prefetchImages: false
+      }
+    },
+
+    // Battery-conscious settings
+    batteryOptimizations: {
+      enableWhenBatteryLow: false,
+      backgroundSyncThreshold: 0.2, // Only sync when battery > 20%
+      reduceQualityWhenLowBattery: true
+    }
   },
   
   // Timeout configurations

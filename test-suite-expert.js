@@ -969,6 +969,9 @@ class BiasGuardExpertTestSuite {
 }
 
 // Export for use in other modules
+export default BiasGuardExpertTestSuite;
+
+// Fallback for CommonJS and browser environments
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = BiasGuardExpertTestSuite;
 } else if (typeof window !== 'undefined') {

@@ -4,8 +4,10 @@
  */
 
 // Import required modules
-const BiasMLEngine = require('./bias-ml-engine.wasm.js');
-const BiasGuardExpertTestSuite = require('./test-suite-expert.js');
+import BiasMLEngine from './bias-ml-engine.wasm.js';
+import BiasGuardExpertTestSuite from './test-suite-expert.js';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 
 /**
  * Main test execution function
@@ -263,7 +265,10 @@ async function generateHTMLReport(testResults) {
 }
 
 // Run the expert validation if this file is executed directly
-if (require.main === module) {
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+if (import.meta.url === `file://${process.argv[1]}`) {
     runExpertValidation()
         .then(results => {
             console.log('\n🎉 Expert validation completed successfully!');
@@ -276,7 +281,7 @@ if (require.main === module) {
         });
 }
 
-module.exports = {
+export {
     runExpertValidation,
     runAdditionalAnalysis,
     exportTestResults,

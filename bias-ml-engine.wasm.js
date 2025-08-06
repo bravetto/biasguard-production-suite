@@ -3611,3 +3611,6 @@ if (typeof module !== 'undefined' && module.exports) {
 } else if (typeof window !== 'undefined') {
     window.BiasMLEngine = BiasMLEngine;
 }
+
+// ES module export
+export default BiasMLEngine;

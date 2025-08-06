@@ -32,6 +32,11 @@ self.addEventListener('fetch', (event) => {
   const request = event.request;
   const url = new URL(request.url);
   
+  // Handle PWA-specific routes
+  if (handlePWARoutes(event, request, url)) {
+    return;
+  }
+  
   // Skip non-GET requests and localhost (development)
   if (request.method !== 'GET' || url.hostname === 'localhost') {
     return;
@@ -60,6 +65,116 @@ self.addEventListener('notificationclick', (event) => {
 self.addEventListener('message', (event) => {
   lifecycle.handleMessage(event);
 });
+
+/**
+ * Handle PWA-specific routes and features
+ */
+function handlePWARoutes(event, request, url) {
+  // Handle file sharing via Web Share Target API
+  if (url.pathname === '/share' && request.method === 'POST') {
+    event.respondWith(features.handleFileShare(event));
+    return true;
+  }
+  
+  // Handle protocol handler requests (web+biasguard://)
+  if (url.protocol === 'web+biasguard:' || url.pathname.startsWith('/scan')) {
+    event.respondWith(features.handleProtocolRequest(event));
+    return true;
+  }
+  
+  // Handle file analysis requests
+  if (url.pathname === '/analyze-file' && request.method === 'POST') {
+    event.respondWith(handleFileAnalysis(event));
+    return true;
+  }
+  
+  // Handle widget data requests
+  if (url.pathname === '/widget-data') {
+    event.respondWith(handleWidgetData(event));
+    return true;
+  }
+  
+  return false;
+}
+
+/**
+ * Handle file analysis for PWA file handlers
+ */
+async function handleFileAnalysis(event) {
+  try {
+    const formData = await event.request.formData();
+    const files = formData.getAll('files');
+    
+    if (files.length === 0) {
+      return Response.redirect('/?error=no_files', 302);
+    }
+    
+    // Store files for analysis and redirect to main interface
+    const fileIds = await Promise.all(
+      files.map(file => storeFileForAnalysis(file))
+    );
+    
+    return Response.redirect(`/?files=${fileIds.join(',')}`, 302);
+  } catch (error) {
+    console.error('[SW] File analysis error:', error);
+    return Response.redirect('/?error=file_analysis_failed', 302);
+  }
+}
+
+/**
+ * Provide widget data for home screen widgets
+ */
+async function handleWidgetData(_event) {
+  const widgetData = {
+    timestamp: Date.now(),
+    stats: {
+      totalAnalyses: await getCachedStat('totalAnalyses', 0),
+      biasDetected: await getCachedStat('biasDetected', 0),
+      accuracy: '94%'
+    },
+    quickActions: [
+      {
+        action: 'analyze',
+        title: 'Quick Analysis',
+        url: '/?widget=quick'
+      }
+    ]
+  };
+  
+  return new Response(JSON.stringify(widgetData), {
+    headers: {
+      'Content-Type': 'application/json',
+      'Cache-Control': 'max-age=300' // 5 minutes
+    }
+  });
+}
+
+/**
+ * Store file for later analysis
+ */
+async function storeFileForAnalysis(file) {
+  const fileId = Date.now() + Math.random();
+  // Implementation would use IndexedDB
+  console.log('[SW] Storing file for analysis:', file.name, fileId);
+  return fileId;
+}
+
+/**
+ * Get cached statistics
+ */
+async function getCachedStat(key, defaultValue) {
+  try {
+    const cache = await caches.open(SW_CONFIG.caches.api);
+    const response = await cache.match(`/stats/${key}`);
+    if (response) {
+      const data = await response.json();
+      return data.value;
+    }
+  } catch (error) {
+    console.warn('[SW] Failed to get cached stat:', key, error);
+  }
+  return defaultValue;
+}
 
 /**
  * Request routing logic

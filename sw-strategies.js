@@ -10,6 +10,44 @@ import { SW_CONFIG } from './sw-config.js';
 export class CacheStrategies {
   constructor() {
     this.config = SW_CONFIG;
+    this.mobileOptimizations = this.initMobileOptimizations();
+  }
+
+  initMobileOptimizations() {
+    const isMobile = this.detectMobileDevice();
+    const connection = this.getConnectionInfo();
+    const battery = this.getBatteryInfo();
+
+    return {
+      isMobile,
+      connection,
+      battery,
+      strategy: this.config.mobile.connectionStrategies[connection.effectiveType] || 
+                this.config.mobile.connectionStrategies['3g']
+    };
+  }
+
+  detectMobileDevice() {
+    return /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
+           window.innerWidth <= 768;
+  }
+
+  getConnectionInfo() {
+    const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+    return {
+      effectiveType: connection?.effectiveType || '4g',
+      downlink: connection?.downlink || 10,
+      rtt: connection?.rtt || 100,
+      saveData: connection?.saveData || false
+    };
+  }
+
+  getBatteryInfo() {
+    // Note: Battery API is deprecated but we can still use it where available
+    return {
+      level: 1, // Default to full battery
+      charging: true
+    };
   }
 
   /**
@@ -44,16 +82,18 @@ export class CacheStrategies {
     const cachedResponse = await caches.match(request);
     
     if (cachedResponse) {
-      // Background update for next request
-      this.backgroundUpdate(request, cacheName).catch(() => {
-        // Silent failure for background updates
-      });
+      // Background update for next request (mobile-aware)
+      if (this.shouldBackgroundUpdate()) {
+        this.backgroundUpdate(request, cacheName).catch(() => {
+          // Silent failure for background updates
+        });
+      }
       
       return cachedResponse;
     }
     
     try {
-      const networkResponse = await fetch(request);
+      const networkResponse = await this.fetchWithMobileOptimizations(request);
       
       if (networkResponse?.ok) {
         await this.safeCachePut(cacheName, request, networkResponse.clone());
@@ -63,6 +103,42 @@ export class CacheStrategies {
     } catch {
       return this.createFallbackResponse(request);
     }
+  }
+
+  /**
+   * Mobile-optimized fetch with connection awareness
+   */
+  async fetchWithMobileOptimizations(request) {
+    const { connection } = this.mobileOptimizations;
+    
+    // Use regular fetch for now, but with mobile headers
+    const response = await fetch(request, {
+      headers: {
+        ...request.headers,
+        'Save-Data': connection.saveData ? 'on' : 'off'
+      }
+    });
+    
+    return response;
+  }
+
+  /**
+   * Determine if background update should occur based on mobile conditions
+   */
+  shouldBackgroundUpdate() {
+    const { connection, strategy } = this.mobileOptimizations;
+    
+    // Don't background update on slow connections
+    if (connection.effectiveType === '2g' || connection.effectiveType === 'slow-2g') {
+      return false;
+    }
+    
+    // Don't background update if save-data is enabled
+    if (connection.saveData) {
+      return false;
+    }
+    
+    return strategy.cacheAggressively;
   }
 
   /**
