@@ -7520,6 +7520,11 @@ class BiasGuardDashboardAPI {
                 recognition.interimResults = true;
                 
                 recognition.onresult = (event) => {
+                    // Skip voice processing during payment flows
+                    if (this.isPaymentFlowActive()) {
+                        return;
+                    }
+                    
                     const transcript = event.results[event.results.length - 1][0].transcript.toLowerCase();
                     
                     if (transcript.includes('subscribe') || transcript.includes('support jahmere')) {
@@ -7542,9 +7547,41 @@ class BiasGuardDashboardAPI {
                 // Enable voice control with keyboard shortcut
                 document.addEventListener('keydown', (e) => {
                     if (e.ctrlKey && e.shiftKey && e.key === 'V') {
+                        // Don't activate voice during payment flows
+                        if (this.isPaymentFlowActive()) {
+                            this.announceToScreenReader('Voice control disabled during payment process', 'polite');
+                            return;
+                        }
                         recognition.start();
                         this.announceToScreenReader('Voice control activated. Say "subscribe", "demo", or "court date"');
                     }
+                });
+            }
+            
+            isPaymentFlowActive() {
+                // Check for payment-related modals and overlays
+                const paymentIndicators = [
+                    // Stripe checkout loading states
+                    document.getElementById('stripe-loading'),
+                    document.getElementById('payment-error-modal'),
+                    // Pricing modals
+                    document.querySelector('.transparent-pricing'),
+                    document.querySelector('[id*="pricing"]'),
+                    // Loading overlays during checkout
+                    document.querySelector('[id*="loading"]'),
+                    document.querySelector('.loading-overlay'),
+                    // Any modal with payment-related content
+                    document.querySelector('[class*="checkout"]'),
+                    document.querySelector('[class*="payment"]'),
+                    // Check if any Stripe-related elements are visible
+                    document.querySelector('button[onclick*="Stripe"]')?.closest('.modal')
+                ];
+                
+                // Return true if any payment indicators are present and visible
+                return paymentIndicators.some(element => {
+                    if (!element) return false;
+                    const style = window.getComputedStyle(element);
+                    return style.display !== 'none' && style.visibility !== 'hidden' && style.opacity !== '0';
                 });
             }
             
@@ -7959,6 +7996,12 @@ class BiasGuardDashboardAPI {
                     return;
                 }
                 
+                // Don't activate voice during payment flows
+                if (this.isPaymentFlowActive()) {
+                    this.announceToScreenReader('Voice control disabled during payment process', 'polite');
+                    return;
+                }
+                
                 this.announceToScreenReader('Voice command activated. Speak your command.', 'assertive');
                 
                 try {
@@ -8035,7 +8078,12 @@ class BiasGuardDashboardAPI {
                     const firstFocusable = modal.querySelector('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
                     if (firstFocusable) {
                         firstFocusable.focus();
-                        this.announceToScreenReader('Pricing modal opened. Use Tab to navigate, Alt+C to continue, or Alt+X to cancel.', 'assertive');
+                        // Use less intrusive announcement during payment flows
+                        if (this.isPaymentFlowActive()) {
+                            this.announceToScreenReader('Payment options available', 'polite');
+                        } else {
+                            this.announceToScreenReader('Pricing modal opened. Use Tab to navigate, Alt+C to continue, or Alt+X to cancel.', 'assertive');
+                        }
                     }
                 }, 100);
                 

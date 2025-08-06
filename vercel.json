@@ -1,7 +1,44 @@
 {
+  "$schema": "https://openapi.vercel.sh/vercel.json",
   "version": 2,
   "buildCommand": "echo 'Static build optimized for performance'",
   "outputDirectory": ".",
+  "functions": {
+    "api/create-checkout-session.js": {
+      "memory": 1024,
+      "maxDuration": 30,
+      "runtime": "nodejs18.x"
+    },
+    "api/webhooks.js": {
+      "memory": 1024,
+      "maxDuration": 30,
+      "runtime": "nodejs18.x"
+    },
+    "api/subscription-status.js": {
+      "memory": 512,
+      "maxDuration": 15,
+      "runtime": "nodejs18.x"
+    },
+    "api/customer-portal.js": {
+      "memory": 512,
+      "maxDuration": 15,
+      "runtime": "nodejs18.x"
+    },
+    "api/track-usage.js": {
+      "memory": 512,
+      "maxDuration": 15,
+      "runtime": "nodejs18.x"
+    }
+  },
+  "env": {
+    "STRIPE_SECRET_KEY": "@stripe_secret_key",
+    "STRIPE_WEBHOOK_SECRET": "@stripe_webhook_secret",
+    "STRIPE_PRICE_ID_STARTER": "@stripe_price_id_starter",
+    "STRIPE_PRICE_ID_PROFESSIONAL": "@stripe_price_id_professional",
+    "STRIPE_PRICE_ID_ENTERPRISE": "@stripe_price_id_enterprise",
+    "NEXT_PUBLIC_BASE_URL": "@next_public_base_url",
+    "SUPPORT_EMAIL": "@support_email"
+  },
   "redirects": [
     {
       "source": "/www/(.*)",
@@ -10,6 +47,27 @@
     }
   ],
   "headers": [
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        },
+        {
+          "key": "Access-Control-Allow-Methods",
+          "value": "GET, POST, PUT, DELETE, OPTIONS"
+        },
+        {
+          "key": "Access-Control-Allow-Headers",
+          "value": "Content-Type, Authorization, stripe-signature"
+        },
+        {
+          "key": "Access-Control-Max-Age",
+          "value": "86400"
+        }
+      ]
+    },
     {
       "source": "/sw.js",
       "headers": [
