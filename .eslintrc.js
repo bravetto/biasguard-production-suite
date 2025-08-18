@@ -1,4 +1,6 @@
 module.exports = {
+  parser: '@typescript-eslint/parser',
+  plugins: ['@typescript-eslint'],
   extends: ['eslint:recommended'],
   parserOptions: {
     ecmaVersion: 2020,
@@ -14,8 +16,17 @@ module.exports = {
     'no-var': 'error',
     'no-console': 'off', // Allow console.log for BiasGuard system
     'no-debugger': 'error',
-    'no-unused-vars': 'warn'
+    'no-unused-vars': 'off', // Turn off base rule
+    '@typescript-eslint/no-unused-vars': 'warn'
   },
+  overrides: [
+    {
+      files: ['*.ts', '*.tsx'],
+      rules: {
+        // TypeScript specific rules
+      }
+    }
+  ],
   ignorePatterns: [
     'dist/**/*',
     'production-package/**/*',
